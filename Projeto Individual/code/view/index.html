@@ -11,6 +11,7 @@
   <!-- Imports -->
   <link rel="stylesheet" href="./styles/header.css">
   <link rel="stylesheet" href="./styles/siteInst.css">
+  <script src="./scripts/modal-login.js" defer></script>
   <title>FlashApp</title>
 </head>
 
@@ -19,21 +20,57 @@
     <div class="headerContainer">
       <div class="links">
         <div class="containerLink">
-          <a href="#">Home</a>
+          <a href="#home">Home</a>
         </div>
-        <div class="containerLink"><a href="#">Sobre nós</a></div>
-        <div class="containerLink"><a href="#">Login</a></div>
+        <div class="containerLink" ><a href="#aboutMe">Sobre mim</a></div>
+        <div class="containerLink">
+          <button data-login="modal-login" id="loginBtn">Login</button>
+        </div>
         <div class="containerLink"><a href="#">Cadastro</a></div>
       </div>
     </div>
   </header>
 
   <main>
-    <div class="homePage">
+    <div id="home"  class="homePage">
+      <div class="leftSection">
+        <h1>Aprenda com mais eficiência</h1>
+        <button>Cadastre-se</button>
+      </div>
+    </div>
+
+    <div  id="aboutMe" class="aboutMe">
+      <div class="leftSection">
+        <div class="aboutMeContainer">
+          <h2>Sobre Mim</h2>
+          <img src="./img/foto.jpg" alt="" id="imagemRosto">
+          <h3>Vitor da Silva Almeida</h3>
+        </div>
+      </div>
+
+      <div class="rightSection">
+        <div class="text">
+          <p>Meu nome é Vitor da Silva Almeida, tenho 22 anos e sempre gostei de aprender sobre diferentes assuntos.
+            <br><br>
+            Portanto sempre utilizei flashcards para aprimorar meus estudos, então decidi compartilhar essa ferramenta de estudos maravilhosa por meio de um software.
+            Espero que gostem!</p>
+        </div>
+      </div>
 
     </div>
 
-    <div class="aboutMe"></div>
+
+    <dialog id="modal-login">
+      <div class="modal">
+        <h1>Login</h1>
+        <div><i class="fa-solid fa-xmark"></i></div>
+        <label for="inpEmail">Email</label>
+        <input type="text" id="inpEmail" class="inpEmail">
+        <label for="inpSenha">Senha</label>
+        <input type="text" id="inpSenha" class="inpSenha">
+        <button onclick="logar()">Log in</button>
+      </div>
+    </dialog>
 
   </main>
 

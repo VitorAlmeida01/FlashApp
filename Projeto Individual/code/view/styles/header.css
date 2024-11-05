@@ -49,35 +49,11 @@ a{
   align-items: center;
   padding: 5px;
   background: rgba(255, 255, 255, 0);
-  transition: background 100ms ease-in-out;
+  transition: background 1s ease-in-out;
   border-radius: 20px;
-  width: fit-content;
 }
 
 .containerLink:hover{
-  background-color: #00bfffaf;
-  /* transition: background 1s; */
-  cursor: pointer;
-  /* -webkit-transition: background-color 200ms linear;
-  -ms-transition: background-color 200ms linear; */
-  transition: background-color 2ms linear;
-  
-}
-
-@media (min-width: 1400px) and (max-width: 1800px){
-  .links{
-    width: 25%;
-  }
-}
-
-@media (min-width: 1080px) and (max-width: 1500px){
-  .links{
-    width: 40%;
-  }
-}
-
-@media (min-width: 720px) and (max-width: 1080px){
-  .links{
-    width: 50%;
-  }
+  background: linear-gradient(to right, #0e80d2b6, #00bfffaf);
+  transition: 1s;
 }

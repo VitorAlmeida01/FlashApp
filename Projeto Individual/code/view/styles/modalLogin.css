@@ -117,10 +117,10 @@
     margin-left: 20px;
 }
 
-.mainModal p span{
+.mainModal p a{
     color: #003d6e;
 }
 
-.mainModal p span:hover{
+.mainModal p a:hover{
     cursor: pointer;
 }

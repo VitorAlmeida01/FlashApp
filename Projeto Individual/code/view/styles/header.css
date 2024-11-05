@@ -56,4 +56,5 @@ a{
 .containerLink:hover{
   background: linear-gradient(to right, #0e80d2b6, #00bfffaf);
   transition: 1s;
+  cursor: pointer;
 }

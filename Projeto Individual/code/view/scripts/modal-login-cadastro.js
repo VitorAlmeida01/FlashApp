@@ -1,16 +1,23 @@
-const btnOpen = document.getElementById('loginBtn')
+const btnOpen = document.querySelectorAll('.loginBtn')
 const btnClose = document.getElementById('btnClose')
 
-const btnOpen2 = document.getElementById('cadastroBtn')
+let cadastroClicked
+
+const btnOpen2 = document.querySelectorAll('.cadastroBtn')
 const btnClose2 = document.getElementById('btnClose2')
 
-    btnOpen.addEventListener('click', () => {
-    const modalId = btnOpen.getAttribute('data-login')
+btnOpen.forEach(button => {    
+    button.addEventListener('click', () => {
+    const modalId = button.getAttribute('data-login')
     const modal  = document.getElementById(modalId)
+
+    if(cadastroClicked){
+        cadastroClicked.close()
+    }
     
     modal.showModal()
     })
-
+})
 
 btnClose.addEventListener('click', () => {
     const modalId = btnClose.getAttribute('data-login')
@@ -21,12 +28,19 @@ btnClose.addEventListener('click', () => {
 
 
 // Cadastro
-    btnOpen2.addEventListener('click', () => {
-    const modalId = btnOpen2.getAttribute('data-cadastro')
-    const modal  = document.getElementById(modalId)
+btnOpen2.forEach(button => {
+    button.addEventListener('click', () => {
+        const modalId = button.getAttribute('data-cadastro')
+        const modal  = document.getElementById(modalId)
+        cadastroClicked = modal
+        modal.showModal()
+        console.log(cadastroClicked)
+
+        return cadastroClicked  
+        })
+
+});
     
-    modal.showModal()
-    })
 
 
 btnClose2.addEventListener('click', () => {

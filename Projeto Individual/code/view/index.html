@@ -28,9 +28,9 @@
         </div>
         <div class="containerLink"><a href="#aboutMe">Sobre mim</a></div>
         <div class="containerLink">
-          <a data-login="modal-login" id="loginBtn">Login</a>
+          <a data-login="modal-login" class="loginBtn">Login</a>
         </div>
-        <div class="containerLink"><a data-cadastro="modal-cadastro" id="cadastroBtn">Cadastro</a></div>
+        <div class="containerLink"><a data-cadastro="modal-cadastro" class="cadastroBtn">Cadastro</a></div>
       </div>
     </div>
   </header>
@@ -39,7 +39,7 @@
     <div id="home" class="homePage">
       <div class="leftSection">
         <h1>Aprenda com mais eficiência</h1>
-        <button>Cadastre-se</button>
+        <button data-cadastro="modal-cadastro" class="cadastroBtn">Cadastre-se</button>
       </div>
     </div>
 
@@ -124,7 +124,7 @@
               <label for="inpSenhaCadastroC">Confirmar senha</label>
               <input type="password" id="inpSenhaCadastroC" class="inpSenhaCadastroC" placeholder="*******">
             </div>
-            <p>Ja possui uma conta? <span data-login="modal-login">Entrar</span></p>
+            <p>Ja possui uma conta? <a data-login="modal-login" class="loginBtn">Entrar</a></p>
           </div>
           <div class="containerBtn">
             <button onclick="cadastrar()" class="btnModal">Cadastrar</button>

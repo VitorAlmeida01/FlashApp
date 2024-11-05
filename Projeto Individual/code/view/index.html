@@ -9,9 +9,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital@1&display=swap" rel="stylesheet">
   <!-- Imports -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="./styles/header.css">
   <link rel="stylesheet" href="./styles/siteInst.css">
-  <script src="./scripts/modal-login.js" defer></script>
+  <link rel="stylesheet" href="./styles/modalLogin.css">
+  <script src="./scripts/modal-login-cadastro.js" defer></script>
   <title>FlashApp</title>
 </head>
 
@@ -22,24 +26,24 @@
         <div class="containerLink">
           <a href="#home">Home</a>
         </div>
-        <div class="containerLink" ><a href="#aboutMe">Sobre mim</a></div>
+        <div class="containerLink"><a href="#aboutMe">Sobre mim</a></div>
         <div class="containerLink">
-          <button data-login="modal-login" id="loginBtn">Login</button>
+          <a data-login="modal-login" id="loginBtn">Login</a>
         </div>
-        <div class="containerLink"><a href="#">Cadastro</a></div>
+        <div class="containerLink"><a data-cadastro="modal-cadastro" id="cadastroBtn">Cadastro</a></div>
       </div>
     </div>
   </header>
 
   <main>
-    <div id="home"  class="homePage">
+    <div id="home" class="homePage">
       <div class="leftSection">
         <h1>Aprenda com mais eficiência</h1>
         <button>Cadastre-se</button>
       </div>
     </div>
 
-    <div  id="aboutMe" class="aboutMe">
+    <div id="aboutMe" class="aboutMe">
       <div class="leftSection">
         <div class="aboutMeContainer">
           <h2>Sobre Mim</h2>
@@ -52,8 +56,10 @@
         <div class="text">
           <p>Meu nome é Vitor da Silva Almeida, tenho 22 anos e sempre gostei de aprender sobre diferentes assuntos.
             <br><br>
-            Portanto sempre utilizei flashcards para aprimorar meus estudos, então decidi compartilhar essa ferramenta de estudos maravilhosa por meio de um software.
-            Espero que gostem!</p>
+            Portanto sempre utilizei flashcards para aprimorar meus estudos, então decidi compartilhar essa ferramenta
+            de estudos maravilhosa por meio de um software.
+            Espero que gostem!
+          </p>
         </div>
       </div>
 
@@ -62,13 +68,68 @@
 
     <dialog id="modal-login">
       <div class="modal">
-        <h1>Login</h1>
-        <div><i class="fa-solid fa-xmark"></i></div>
-        <label for="inpEmail">Email</label>
-        <input type="text" id="inpEmail" class="inpEmail">
-        <label for="inpSenha">Senha</label>
-        <input type="text" id="inpSenha" class="inpSenha">
-        <button onclick="logar()">Log in</button>
+        <div class="closeContainer">
+          <button class="btnClose" id="btnClose" data-login="modal-login"><i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+        <div class="headerModal">
+          <h1>Login</h1>
+          
+        </div>
+        <hr>
+        <div class="mainModal">
+          <div class="inputsModal">
+            <div class="containerEmail">
+              <label for="inpEmail">Email</label>
+              <input type="text" id="inpEmail" class="inpEmail" placeholder="email@exemplo.com">
+            </div>
+            <div class="containerSenha">
+              <label for="inpSenha">Senha</label>
+              <input type="password" id="inpSenha" class="inpSenha" placeholder="*******">
+            </div>
+          </div>
+          <div class="containerBtn">
+            <button onclick="logar()" class="btnModal">Log in</button>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog id="modal-cadastro">
+      <div class="modal">
+        <div class="closeContainer">
+          <button class="btnClose" id="btnClose2" data-cadastro="modal-cadastro"><i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+        <div class="headerModal">
+          <h1>Cadastre-se</h1>
+          
+        </div>
+        <hr>
+        <div class="mainModal">
+          <div class="inputsModal">
+            <div class="containerNome">
+              <label for="inpNomeCadastro">Nome</label>
+              <input type="text" id="inpNomeCadastro" class="inpNomeCadastro" placeholder="Joao Silva">
+            </div>
+            <div class="containerEmail">
+              <label for="inpEmailCadastro">Email</label>
+              <input type="text" id="inpEmailCadastro" class="inpEmailCadastro" placeholder="email@exemplo.com">
+            </div>
+            <div class="containerSenha">
+              <label for="inpSenhaCadastro">Senha</label>
+              <input type="password" id="inpSenhaCadastro" class="inpSenhaCadastro" placeholder="*******">
+            </div>
+            <div class="containerSenhaC">
+              <label for="inpSenhaCadastroC">Confirmar senha</label>
+              <input type="password" id="inpSenhaCadastroC" class="inpSenhaCadastroC" placeholder="*******">
+            </div>
+            <p>Ja possui uma conta? <span data-login="modal-login">Entrar</span></p>
+          </div>
+          <div class="containerBtn">
+            <button onclick="cadastrar()" class="btnModal">Cadastrar</button>
+          </div>
+        </div>
       </div>
     </dialog>
 

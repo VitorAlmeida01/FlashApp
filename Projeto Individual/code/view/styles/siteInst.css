@@ -3,6 +3,11 @@
 
 }
 
+hr{
+  border: 1px solid rgba(0, 0, 0, 0.507);
+  width: 80%;
+}
+
 .homePage{
 background-image: linear-gradient(to right bottom,#0e80d28f,#6fa2b896),url(../img/pessoaEstudando.jpeg);
   width: 100%;

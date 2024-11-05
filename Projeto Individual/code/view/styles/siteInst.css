@@ -136,25 +136,7 @@ background-image: linear-gradient(to right bottom,#0e80d28f,#6fa2b896),url(../im
   box-shadow: 15px 15px 14px 5px rgba(0,0,0,0.51);
 }
 
-.containerLink{
-  display: flex;
-  align-items: center;
-  padding: 5px;
-  background: rgba(255, 255, 255, 0);
-  transition: background 100ms ease-in-out;
-  border-radius: 20px;
-  width: fit-content;
-}
 
-.containerLink:hover{
-  background-color: #00bfffaf;
-  /* transition: background 1s; */
-  cursor: pointer;
-  /* -webkit-transition: background-color 200ms linear;
-  -ms-transition: background-color 200ms linear; */
-  transition: background-color 2ms linear;
-  
-}
 
 @media (min-width: 1400px) and (max-width: 1800px){
   .links{

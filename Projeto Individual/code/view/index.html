@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="./styles/siteInst.css">
   <link rel="stylesheet" href="./styles/modalLogin.css">
   <script src="./scripts/modal-login-cadastro.js" defer></script>
+  <script src="./scripts/headerScript.js" defer></script>
   <title>FlashApp</title>
 </head>
 
@@ -23,14 +24,14 @@
   <header>
     <div class="headerContainer">
       <div class="links">
-        <div class="containerLink">
+        <div class="containerLink" id="headerHome">
           <a href="#home">Home</a>
         </div>
-        <div class="containerLink"><a href="#aboutMe">Sobre mim</a></div>
-        <div class="containerLink">
+        <div class="containerLink" id="headerAboutMe"><a href="#aboutMe">Sobre mim</a></div>
+        <div class="containerLink loginBtn" data-login="modal-login">
           <a data-login="modal-login" class="loginBtn">Login</a>
         </div>
-        <div class="containerLink"><a data-cadastro="modal-cadastro" class="cadastroBtn">Cadastro</a></div>
+        <div class="containerLink cadastroBtn" data-cadastro="modal-cadastro" ><a data-cadastro="modal-cadastro" class="cadastroBtn">Cadastro</a></div>
       </div>
     </div>
   </header>

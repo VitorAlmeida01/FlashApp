@@ -6,6 +6,7 @@ let cadastroClicked
 const btnOpen2 = document.querySelectorAll('.cadastroBtn')
 const btnClose2 = document.getElementById('btnClose2')
 
+// Login
 btnOpen.forEach(button => {    
     button.addEventListener('click', () => {
     const modalId = button.getAttribute('data-login')
@@ -34,9 +35,6 @@ btnOpen2.forEach(button => {
         const modal  = document.getElementById(modalId)
         cadastroClicked = modal
         modal.showModal()
-        console.log(cadastroClicked)
-
-        return cadastroClicked  
         })
 
 });

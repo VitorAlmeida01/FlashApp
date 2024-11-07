@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="./styles/modalLogin.css">
   <script src="./scripts/modal-login-cadastro.js" defer></script>
   <script src="./scripts/headerScript.js" defer></script>
+  <script src="./scripts/script.js" defer></script>
   <title>FlashApp</title>
 </head>
 
@@ -28,10 +29,12 @@
           <a href="#home">Home</a>
         </div>
         <div class="containerLink" id="headerAboutMe"><a href="#aboutMe">Sobre mim</a></div>
+        <div class="containerLink" id="headerBenefits"><a href="#benefits">Benefícios</a></div>
         <div class="containerLink loginBtn" data-login="modal-login">
           <a data-login="modal-login" class="loginBtn">Login</a>
         </div>
-        <div class="containerLink cadastroBtn" data-cadastro="modal-cadastro" ><a data-cadastro="modal-cadastro" class="cadastroBtn">Cadastro</a></div>
+        <div class="containerLink cadastroBtn" data-cadastro="modal-cadastro"><a data-cadastro="modal-cadastro"
+            class="cadastroBtn">Cadastro</a></div>
       </div>
     </div>
   </header>
@@ -63,19 +66,46 @@
           </p>
         </div>
       </div>
-
     </div>
 
+    <div id="benefits" class="benefits">
+      <div class="title">
+        <h1>Benefícios</h1>
+      </div>
+      <div class="cards">
+        <div class="books"></div>
+        <div class="guys"></div>
+        <div class="clock"></div>
+        <div class="flashcards"></div>
+        <div class="att">
+          <div class="headerAtt">
+            <p>Receber Atualizações</p>
+          </div>
+          <div class="inputs">
+            <div class="containerNome">
+              <label for="inpNomeAtt">Nome</label>
+              <input type="text" id="inpNomeAtt">
+            </div>
+            <div class="containerEmail">
+              <label for="inpEmailAtt">Email</label>
+              <input type="text" id="inpEmailAtt">
+            </div>
+
+            <div class="containerBtn"><button>Enviar</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <dialog id="modal-login">
       <div class="modal">
         <div class="closeContainer">
           <button class="btnClose" id="btnClose" data-login="modal-login"><i class="fa-solid fa-xmark"></i>
-        </button>
-      </div>
+          </button>
+        </div>
         <div class="headerModal">
           <h1>Login</h1>
-          
+
         </div>
         <hr>
         <div class="mainModal">
@@ -90,7 +120,7 @@
             </div>
           </div>
           <div class="containerBtn">
-            <button onclick="logar()" class="btnModal">Log in</button>
+            <button id="btnLogin" class="btnModal">Log in</button>
           </div>
         </div>
       </div>
@@ -100,11 +130,11 @@
       <div class="modal">
         <div class="closeContainer">
           <button class="btnClose" id="btnClose2" data-cadastro="modal-cadastro"><i class="fa-solid fa-xmark"></i>
-        </button>
-      </div>
+          </button>
+        </div>
         <div class="headerModal">
           <h1>Cadastre-se</h1>
-          
+
         </div>
         <hr>
         <div class="mainModal">
@@ -133,8 +163,10 @@
         </div>
       </div>
     </dialog>
-
   </main>
+  <footer>
+    <p>Todos os direitos reservados <span>FlashApp</span> </p>
+  </footer>
 
 </body>
 

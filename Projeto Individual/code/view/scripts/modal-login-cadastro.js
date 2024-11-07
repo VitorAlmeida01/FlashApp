@@ -36,11 +36,8 @@ btnOpen2.forEach(button => {
         cadastroClicked = modal
         modal.showModal()
         })
-
 });
     
-
-
 btnClose2.addEventListener('click', () => {
     const modalId = btnClose2.getAttribute('data-cadastro')
     const modal = document.getElementById(modalId)

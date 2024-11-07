@@ -14,6 +14,7 @@ body{
 header {
   width: 100%;
   position: absolute;
+  z-index: 999;
 }
 
 header .headerContainer{
@@ -21,19 +22,19 @@ header .headerContainer{
   align-items: center;
   justify-content: center;
   margin: 1%;
-  
+
 }
 
 .links{
   gap: 33px;
-  width: 25%;
+  width: 30%;
   display: flex;
   justify-content: center;
   border-radius: 30px;
   background-color: #fff;
   position: fixed;
   margin-top: 60px;
-
+  border: 1px solid #0e80d2b6;
 }
 
 a{
@@ -62,6 +63,52 @@ a{
   cursor: pointer;
 }
 
+/* Footer */
+
+footer{
+  background-image:url(../img/wave.svg);
+  background-color: #C4DDEC;
+  height: 30vh;
+  width: 100vw;
+  background-size: cover;
+  background-position: center;
+  margin: 0;
+  padding: 0;
+  /* color: #fff; */
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  border-top: 10px solid #3279A5;
+}
+
+footer p {
+  margin-bottom: 60px;
+  color: #fff;
+  cursor: pointer;
+}
+
+footer span {
+  font-weight: 800;
+}
+
+@media (min-width: 1400px) and (max-width: 1800px){
+  .links{
+    width: 30%;
+  }
+}
+
+@media (min-width: 1080px) and (max-width: 1500px){
+  .links{
+    width: 45%;
+  }
+}
+
+@media (min-width: 720px) and (max-width: 1080px){
+  .links{
+    width: 55%;
+  }
+}
 
 /* .containerLink{
   display: flex;

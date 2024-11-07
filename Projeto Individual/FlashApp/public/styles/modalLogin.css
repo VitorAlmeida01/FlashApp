@@ -181,3 +181,8 @@
 .mainModal p a:hover{
     cursor: pointer;
 }
+
+.loading-div {
+    width: 50px;
+    display: none;
+  }

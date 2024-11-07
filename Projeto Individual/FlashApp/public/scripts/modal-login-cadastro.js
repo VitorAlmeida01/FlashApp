@@ -44,3 +44,7 @@ btnClose2.addEventListener('click', () => {
 
     modal.close()
 })
+
+
+
+

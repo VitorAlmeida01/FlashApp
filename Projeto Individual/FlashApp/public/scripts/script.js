@@ -11,3 +11,21 @@ btnLogin.addEventListener('click', () => {
   }
 })
 
+function limparFormulario(){
+
+  let nome =  inpNomeCadastro.value;
+  let email =  inpEmailCadastro.value;
+  let senha =  inpSenhaCadastro.value;
+  let confirmarSenha = inpSenhaCadastroC.value
+
+  if(nome == '' || email == '' || senha == '' || confirmarSenha == ''){
+    alert('Preencha os campos')
+  }else{
+    nomeVar = ''
+    emailVar = ''
+    senhaVar = ''
+    confirmacaoSenhaVar = ''
+  }
+
+
+}

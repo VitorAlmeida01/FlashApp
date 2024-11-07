@@ -157,6 +157,9 @@
             </div>
             <p>Ja possui uma conta? <a data-login="modal-login" class="loginBtn">Entrar</a></p>
           </div>
+          <div id="div_aguardar" class="loading-div">
+            <img src="./img/circle-loading.gif" id="loading-gif" />
+          </div>
           <div class="containerBtn">
             <button onclick="cadastrar()" class="btnModal">Cadastrar</button>
           </div>
@@ -168,6 +171,12 @@
     <p>Todos os direitos reservados <span>FlashApp</span> </p>
   </footer>
 
+  <div class="alerta_erro">
+    <div class="card_erro" id="cardErro">
+      <span id="mensagem_erro"></span>
+    </div>
+  </div>
+
 </body>
 
 </html>
@@ -177,6 +186,7 @@
   let listaEmpresasCadastradas = [];
 
   function cadastrar() {
+    console.log('teste')
     // aguardar();
 
     //Recupere o valor da nova input pelo nome do id
@@ -199,9 +209,10 @@
 
       finalizarAguardar();
       return false;
-    } else {
-      setInterval(sumirMensagem, 5000);
     }
+    // } else {
+    //   setInterval(sumirMensagem, 5000);
+    // }
 
     // Verificando se o código de ativação é de alguma empresa cadastrada
     // for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
@@ -240,7 +251,7 @@
             "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
 
           setTimeout(() => {
-            window.location.href = "#modal-cadastro";
+            window.location.href = "#modal-login";
           }, "2000");
 
           limparFormulario();
@@ -256,3 +267,20 @@
 
     return false;
   }
+
+  function finalizarAguardar(texto) {
+    var divAguardar = document.getElementById("div_aguardar");
+    divAguardar.style.display = "none";
+
+    var divErrosLogin = document.getElementById("div_erros_login");
+    if (texto) {
+        divErrosLogin.style.display = "flex";
+        divErrosLogin.innerHTML = texto;
+    }
+
+
+}
+
+
+
+  </script>

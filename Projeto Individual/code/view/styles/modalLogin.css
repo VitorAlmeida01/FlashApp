@@ -3,9 +3,62 @@
     height: 500px;
     overflow-y: hidden;
     border-color: #000;
-    background-color: #5296bb;
+    background-color: #5296bbaf;
     border-radius: 20px;
     color: #fff;
+    backdrop-filter: blur(10px);
+    animation: fadeIn2    0.5s forwards; 
+}
+
+@keyframes hoverAnimation {
+    from {
+        opacity: 1;
+        transform: translateY(0px);
+        transform: translateX(0px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(-20px);
+        transform: translateX(10px);
+
+    }
+}
+
+@keyframes addAnimation{
+    from{
+        opacity: 1;
+        transform: translateY(-200px);
+        transform: translateX(10px);
+        transition: 0.2s;
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+        transform: translateX(0);
+        transition: 0.2s;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-200px)
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+@keyframes fadeIn2 {
+    from {
+        opacity: 0;
+        transform: translateZ(-200px)
+    }
+    to {
+        opacity: 1;
+        transform: translateZ(0px);
+    }
 }
 
 #modal-cadastro{
@@ -13,9 +66,12 @@
     height: 900px;
     overflow-y: hidden;
     border-color: #000;
-    background-color: #5296bb;
+    background-color: #5296bbaf;
+    backdrop-filter: blur(10px);
     border-radius: 20px;
     color: #fff;
+    animation: fadeIn    0.5s forwards; 
+
 }
 
 .modal{

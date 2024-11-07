@@ -1,0 +1,86 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+  font-family: 'Josefin Sans', sans-serif;
+
+}
+
+.main {
+    display: flex;
+    /* flex-direction: column; */
+    height: 100vh;
+    /* background-color: #5C9CBD; */
+    width: 100vw;
+    height: 100vh;
+}
+
+.sideBar {
+    background-color: #5C9CBD;
+    width: 10%;
+}
+
+.title {
+    text-align: center;
+    font-size: 40px;
+}
+
+.mainContent {
+    width: 90%;
+    margin: 0 2%;
+}
+
+.createDeck {
+    background-color: #5C9CBD;
+    width: 22%;
+    height: 15%;
+    display: flex;
+    flex-direction: column;
+    gap: 40%;
+    padding: 2cqb;
+    border-radius: 10px;
+    margin-top: 5%;
+    border: 1px solid black;
+    box-shadow: #5C9CBD;
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+}
+
+.createDeck p {
+    font-size: 25px;
+    color: #fff;
+}
+
+.createDeck label{
+    font-size: 20px;
+    color: #fff;
+}
+
+.createDeck input{
+    border-radius: 10px;
+    border: none;
+    padding: 5px;
+}
+
+.createDeck input:focus{
+  /* border: 1px solid #3E83AC; */
+    padding: 5px;
+    outline: none;
+}
+
+.bodyCreateDeck i{
+margin-left: 30PX;
+border: 2px solid black;
+border-radius: 50%;
+padding: 5px;
+cursor: pointer;
+color: #fff;
+border-color: #fff;
+
+}
+.bodyCreateDeck i:hover{
+background-color: #229ad6;
+transition: 0.2s;
+}

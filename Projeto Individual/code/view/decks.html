@@ -12,34 +12,40 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <script src="./decks.html" defer></script>
+  <link rel="stylesheet" href="./styles/mainPage.css">
+
+  <script src="./decks.js" defer></script>
   <title>Decks</title>
 </head>
 
 <body>
-  <div class="sideBar">
-    <div class="welcome">
-      <p>Olá, Vitor</p>
+  <main class="main">
+    <div class="sideBar">
+      <div class="welcome">
+        <p>Olá, Vitor</p>
+      </div>
+      <div class="decks"><a href="#">Decks</a></div>
+      <div class="dashboard"><a href="#">Dashboard</a></div>
+      <div class="myAccount"><a href="#">Minha conta</a></div>
+      <div class="exit"><a href="#">Sair</a></div>
     </div>
-    <div class="decks"><a href="#">Decks</a></div>
-    <div class="dashboard"><a href="#">Dashboard</a></div>
-    <div class="myAccount"><a href="#">Minha conta</a></div>
-  </div>
-  <div class="mainContent">
-    <section class="title">
-      <h1>Decks</h1>
-    </section>
-    <p>Nesta página teremos todos os decks de flashcards criados</p>
-
-    <section class="createDeck">
-      <p>Criar um deck</p>
-      <section>
-        <label for="inpDeck">Titulo</label>
-        <input type="text" id="inpDeck">
-
+    <div class="mainContent">
+      <section class="title">
+        <h1>Decks</h1>
       </section>
-    </section>
-  </div>
+      <p>Nesta página teremos todos os decks de flashcards criados</p>
+  
+      <section class="createDeck">
+        <p>Criar um deck</p>
+        <section class="bodyCreateDeck">
+          <label for="inpDeck">Titulo</label>
+          <input type="text" id="inpDeck">
+          <i class="fa-solid fa-plus"></i>
+        </section>
+      </section>
+    </div>
+  </main>
+  
 
 
 </body>

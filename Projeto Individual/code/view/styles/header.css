@@ -67,8 +67,9 @@ a{
 
 footer{
   background-image:url(../img/wave.svg);
-  background-color: #C4DDEC;
-  height: 30vh;
+  /* linear-gradient(to right bottom,#0e80d28f,#6fa2b896) */
+  /* background-color: #C4DDEC; */
+  height: 35vh;
   width: 100vw;
   background-size: cover;
   background-position: center;
@@ -79,7 +80,7 @@ footer{
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  border-top: 10px solid #3279A5;
+  /* border-top: 10px solid #3279A5; */
 }
 
 footer p {
@@ -92,6 +93,8 @@ footer span {
   font-weight: 800;
 }
 
+
+/* Responsiviness */
 @media (min-width: 1400px) and (max-width: 1800px){
   .links{
     width: 30%;

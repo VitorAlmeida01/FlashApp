@@ -1,0 +1,320 @@
+*{
+  overflow-x: hidden;
+
+}
+
+hr{
+  border: 1px solid rgba(0, 0, 0, 0.507);
+  width: 80%;
+}
+
+.homePage{
+background-image: url(../img/pessoaEstudando.jpeg);
+/* linear-gradient(to right bottom,#0e80d28f,#6fa2b896) */
+  width: 100%;
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: inherit;
+}
+
+.aboutMe{
+  height: 100vh;
+  width: 100vw;
+  transition: 0.2s;
+}
+
+.leftSection{
+  height: 100vh;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.leftSection h1, button{
+  margin-left: 10%;
+}
+
+.leftSection button{
+  padding: 20px;
+  border-radius: 20px;
+  border: 2px solid white;
+  background-color: transparent;  
+  color: white;
+  font-weight: 800;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.2s;
+
+}
+
+.leftSection button:hover{
+  /* margin-left: 40px; */
+  background-color: #fff;
+  transition: 0.2s;
+  color: #000;
+}
+
+.leftSection h1{
+  font-size: 85px;
+  color: #fff;
+
+}
+
+
+/* About Me */
+
+.aboutMe{
+  background-image: url(../img/Rectangle\ 51.png);
+  /* linear-gradient(to right bottom,#0e80d28f,#6fa2b896) */
+  background-repeat: round;
+  background-size: contain;
+  display: flex;
+  color: #fff;
+}
+
+.aboutMe .leftSection {
+  width: 50%;
+}
+
+/* Left Container */
+
+.aboutMe .leftSection .aboutMeContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+    gap: 5%;
+    margin-top: 5%;
+}
+
+.aboutMe .leftSection .aboutMeContainer img{
+  width: 30%;
+  border-radius: 40%;
+  border: 5px solid #0BA0FF;
+}
+
+.aboutMeContainer h2{
+  font-size: 60px;
+  border-top: 1px solid #0BA0FF;
+  border-left: 1px solid #0BA0FF;
+  box-shadow: -15px -15px 7px -6px rgba(0,0,0,0.49);  
+  padding: 20px;
+  margin: 30px;
+}
+ .aboutMeContainer h3{
+  font-size: 30px;
+}
+
+/* Right Container */
+
+.aboutMe .rightSection{
+  width: 50%;
+}
+
+.rightSection .text{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: 50px;
+  margin-right: 10%;
+
+}
+
+.rightSection .text p{
+  margin-right: 40px;
+  border-bottom: 1px solid #0BA0FF;
+  border-right: 1px solid #0BA0FF;
+  box-shadow: 15px 15px 14px 5px rgba(0,0,0,0.51);
+}
+
+/* Beneficios */
+.benefits{
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* background: linear-gradient(to right bottom,#0e80d280,#6fa2b841); */
+  /* border-top: 10px solid #3279A5; */
+
+}
+
+.title{
+  background-color: #3E83AC;
+  padding: 2% 15%;
+  font-size: 30px;
+  clip-path: polygon(25% 0%, 100% 0, 75% 100%, 0% 100%);
+  color: #fff;
+  margin: 5% 0 2% 0;
+}
+
+.title h1{
+  margin: 0;
+}
+
+.cards{
+  height: 60%;
+  width: 80%;
+  display: grid;
+  gap: 5px;
+  grid-template-areas:
+  'books clock att'
+  'guys flashcards att';
+  transition: 0.2s;
+
+}
+
+.books{
+  grid-area: books;
+  background-image: url(../img/books-img.png);
+  background-size: cover;
+}
+
+.books:hover{
+  margin: 20px;
+  padding: 20px;
+  border: 2px solid #3E83AC;
+  border-radius: 15px;
+}
+/* Teste para uma grid ocupar o lugar de todas */
+/* .books:hover{
+  grid-area: 1 / 1 / 3 / 3;
+  transition: linear 0.2s;
+} */
+
+/* .books:hover ~ .guys,
+.books:hover ~ .clock,
+.books:hover ~ .flashcards {
+  visibility: hidden;
+  transition: linear 0.2s;
+} */
+/* Fim do teste */
+
+.guys{
+  grid-area: guys;
+  background-image: url(../img/guys-studying.png);
+  background-size: cover;
+  transition: linear 0.2s;
+}
+
+.guys:hover{
+  margin: 20px;
+  padding: 20px;
+  border: 2px solid #3E83AC;
+  border-radius: 15px;
+}
+
+.clock{
+  grid-area: clock;
+  background-image: url(../img/clock-img.png);
+  background-size: cover;
+  transition: linear 0.2s;
+}
+
+.clock:hover{
+  margin: 20px;
+  padding: 20px;
+  border: 2px solid #3E83AC;
+  border-radius: 15px;
+}
+
+.flashcards{
+  grid-area: flashcards;
+  background-image: url(../img/flashcards-img.png);
+  background-size: cover;
+  transition: linear 0.2s;
+}
+
+.flashcards:hover{
+  margin: 20px;
+  padding: 20px;
+  border: 2px solid #3E83AC;
+  border-radius: 15px;
+}
+
+.att{
+  grid-area: att;
+  background-image: linear-gradient(to right bottom,#0e80d28f,#6fa2b896), url(../img/att-img.png);
+  background-size: cover;
+  border-radius: 0 20px 20px 0 ;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #fff;
+}
+
+.att:hover{
+  margin: 20px;
+  padding: 20px;
+  border: 2px solid #3E83AC;
+  border-radius: 15px;
+}
+
+.att .headerAtt{
+  margin-top: 30%;
+  width: 100%;
+}
+
+.headerAtt p{
+  margin: 0;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 800;
+}
+
+.inputs{
+  width: 70%;
+  font-size: 25px;
+}
+
+.inputs input{
+  border-radius: 10px;
+  height: 20px;
+  border: none;
+  padding-left: 5px;
+}
+
+.inputs button{
+  align-self: center;
+  margin: 0;
+  padding: 15px;
+  border-radius: 5px;
+  border: 1px solid #fff;
+  background-color: transparent;
+  color: #fff;
+}
+
+.inputs button:hover{
+  background-color: #fff;
+  color: #000;
+  cursor: pointer;
+}
+
+input:focus{
+  outline: none;
+  border: 3px solid #3E83AC;
+  padding: 10px;
+}
+
+.inputsModal input:focus{
+  outline: none;
+  border: 3px solid #3E83AC;
+  padding: 10px;
+}
+
+
+
+
+
+
+

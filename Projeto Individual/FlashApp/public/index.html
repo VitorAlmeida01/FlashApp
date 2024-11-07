@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital@1&display=swap" rel="stylesheet">
+  <!-- Imports -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="./styles/header.css">
+  <link rel="stylesheet" href="./styles/siteInst.css">
+  <link rel="stylesheet" href="./styles/modalLogin.css">
+  <script src="./scripts/modal-login-cadastro.js" defer></script>
+  <script src="./scripts/headerScript.js" defer></script>
+  <script src="./scripts/script.js" defer></script>
+  <title>FlashApp</title>
+</head>
+
+<body>
+  <header>
+    <div class="headerContainer">
+      <div class="links">
+        <div class="containerLink" id="headerHome">
+          <a href="#home">Home</a>
+        </div>
+        <div class="containerLink" id="headerAboutMe"><a href="#aboutMe">Sobre mim</a></div>
+        <div class="containerLink" id="headerBenefits"><a href="#benefits">Benefícios</a></div>
+        <div class="containerLink loginBtn" data-login="modal-login">
+          <a data-login="modal-login" class="loginBtn">Login</a>
+        </div>
+        <div class="containerLink cadastroBtn" data-cadastro="modal-cadastro"><a data-cadastro="modal-cadastro"
+            class="cadastroBtn">Cadastro</a></div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div id="home" class="homePage">
+      <div class="leftSection">
+        <h1>Aprenda com mais eficiência</h1>
+        <button data-cadastro="modal-cadastro" class="cadastroBtn">Cadastre-se</button>
+      </div>
+    </div>
+
+    <div id="aboutMe" class="aboutMe">
+      <div class="leftSection">
+        <div class="aboutMeContainer">
+          <h2>Sobre Mim</h2>
+          <img src="./img/foto.jpg" alt="" id="imagemRosto">
+          <h3>Vitor da Silva Almeida</h3>
+        </div>
+      </div>
+
+      <div class="rightSection">
+        <div class="text">
+          <p>Meu nome é Vitor da Silva Almeida, tenho 22 anos e sempre gostei de aprender sobre diferentes assuntos.
+            <br><br>
+            Portanto sempre utilizei flashcards para aprimorar meus estudos, então decidi compartilhar essa ferramenta
+            de estudos maravilhosa por meio de um software.
+            Espero que gostem!
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div id="benefits" class="benefits">
+      <div class="title">
+        <h1>Benefícios</h1>
+      </div>
+      <div class="cards">
+        <div class="books"></div>
+        <div class="guys"></div>
+        <div class="clock"></div>
+        <div class="flashcards"></div>
+        <div class="att">
+          <div class="headerAtt">
+            <p>Receber Atualizações</p>
+          </div>
+          <div class="inputs">
+            <div class="containerNome">
+              <label for="inpNomeAtt">Nome</label>
+              <input type="text" id="inpNomeAtt">
+            </div>
+            <div class="containerEmail">
+              <label for="inpEmailAtt">Email</label>
+              <input type="text" id="inpEmailAtt">
+            </div>
+
+            <div class="containerBtn"><button>Enviar</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <dialog id="modal-login">
+      <div class="modal">
+        <div class="closeContainer">
+          <button class="btnClose" id="btnClose" data-login="modal-login"><i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div class="headerModal">
+          <h1>Login</h1>
+
+        </div>
+        <hr>
+        <div class="mainModal">
+          <div class="inputsModal">
+            <div class="containerEmail">
+              <label for="inpEmail">Email</label>
+              <input type="text" id="inpEmail" class="inpEmail" placeholder="email@exemplo.com">
+            </div>
+            <div class="containerSenha">
+              <label for="inpSenha">Senha</label>
+              <input type="password" id="inpSenha" class="inpSenha" placeholder="*******">
+            </div>
+          </div>
+          <div class="containerBtn">
+            <button id="btnLogin" class="btnModal">Log in</button>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog id="modal-cadastro">
+      <div class="modal">
+        <div class="closeContainer">
+          <button class="btnClose" id="btnClose2" data-cadastro="modal-cadastro"><i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div class="headerModal">
+          <h1>Cadastre-se</h1>
+
+        </div>
+        <hr>
+        <div class="mainModal">
+          <div class="inputsModal">
+            <div class="containerNome">
+              <label for="inpNomeCadastro">Nome</label>
+              <input type="text" id="inpNomeCadastro" class="inpNomeCadastro" placeholder="Joao Silva">
+            </div>
+            <div class="containerEmail">
+              <label for="inpEmailCadastro">Email</label>
+              <input type="text" id="inpEmailCadastro" class="inpEmailCadastro" placeholder="email@exemplo.com">
+            </div>
+            <div class="containerSenha">
+              <label for="inpSenhaCadastro">Senha</label>
+              <input type="password" id="inpSenhaCadastro" class="inpSenhaCadastro" placeholder="*******">
+            </div>
+            <div class="containerSenhaC">
+              <label for="inpSenhaCadastroC">Confirmar senha</label>
+              <input type="password" id="inpSenhaCadastroC" class="inpSenhaCadastroC" placeholder="*******">
+            </div>
+            <p>Ja possui uma conta? <a data-login="modal-login" class="loginBtn">Entrar</a></p>
+          </div>
+          <div class="containerBtn">
+            <button onclick="cadastrar()" class="btnModal">Cadastrar</button>
+          </div>
+        </div>
+      </div>
+    </dialog>
+  </main>
+  <footer>
+    <p>Todos os direitos reservados <span>FlashApp</span> </p>
+  </footer>
+
+</body>
+
+</html>
+<script>
+
+  // Array para armazenar empresas cadastradas para validação de código de ativação 
+  let listaEmpresasCadastradas = [];
+
+  function cadastrar() {
+    // aguardar();
+
+    //Recupere o valor da nova input pelo nome do id
+    // Agora vá para o método fetch logo abaixo
+    var nomeVar = inpNomeCadastro.value;
+    var emailVar = inpEmailCadastro.value;
+    var senhaVar = inpSenhaCadastro.value;
+    var confirmacaoSenhaVar = inpSenhaCadastroC.value;
+
+    // Verificando se há algum campo em branco
+    if (
+      nomeVar == "" ||
+      emailVar == "" ||
+      senhaVar == "" ||
+      confirmacaoSenhaVar == ""
+    ) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(Mensagem de erro para todos os campos em branco)";
+
+      finalizarAguardar();
+      return false;
+    } else {
+      setInterval(sumirMensagem, 5000);
+    }
+
+    // Verificando se o código de ativação é de alguma empresa cadastrada
+    // for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
+    //   if (listaEmpresasCadastradas[i].codigo_ativacao == codigoVar) {
+    //     idEmpresaVincular = listaEmpresasCadastradas[i].id
+    //     console.log("Código de ativação válido.");
+    //     break;
+    //   } else {
+    //     cardErro.style.display = "block";
+    //     mensagem_erro.innerHTML = "(Mensagem de erro para código inválido)";
+    //     finalizarAguardar();
+    //   }
+    // }
+
+    // Enviando o valor da nova input
+    fetch("/usuarios/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        nomeServer: nomeVar,
+        emailServer: emailVar,
+        senhaServer: senhaVar,
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          cardErro.style.display = "block";
+
+          mensagem_erro.innerHTML =
+            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+          setTimeout(() => {
+            window.location.href = "#modal-cadastro";
+          }, "2000");
+
+          limparFormulario();
+          finalizarAguardar();
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        finalizarAguardar();
+      });
+
+    return false;
+  }

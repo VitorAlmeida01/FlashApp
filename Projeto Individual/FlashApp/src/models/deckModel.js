@@ -2,7 +2,7 @@ var database = require("../database/config");
 
 function buscarDeckPorUsuario(usuarioId) {
 
-  var instrucaoSql = `SELECT * FROM deck a WHERE fkUsuario = ${usuarioId}`;
+  var instrucaoSql = `SELECT titulo FROM deck WHERE fkUsuario = ${usuarioId}`;
 
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);

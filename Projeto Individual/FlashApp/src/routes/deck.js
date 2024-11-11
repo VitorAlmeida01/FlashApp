@@ -3,7 +3,7 @@ var router = express.Router();
 
 var deckController = require("../controllers/deckController");
 
-router.get("/:empresaId", function (req, res) {
+router.get("/:idUsuario", function (req, res) {
   deckController.buscarDeckPorUsuario(req, res);
 });
 

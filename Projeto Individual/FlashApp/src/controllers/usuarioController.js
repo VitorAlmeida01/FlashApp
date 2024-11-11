@@ -1,5 +1,5 @@
 var usuarioModel = require("../models/usuarioModel");
-var deck = require("../models/aquarioModel"); // Colocar o caminho do deck
+var deck = require("../models/deckModel"); // Colocar o caminho do deck
 
 function autenticar(req, res) {
     var email = req.body.emailServer;
@@ -20,17 +20,17 @@ function autenticar(req, res) {
                     if (resultadoAutenticar.length == 1) {
                         console.log(resultadoAutenticar);
 
-                        deck.buscarAquariosPorEmpresa(resultadoAutenticar[0].empresaId)
-                            .then((resultadoAquarios) => {
-                                if (resultadoAquarios.length > 0) {
+                        deck.buscarDeckPorUsuario(resultadoAutenticar[0].usuarioId)
+                            .then((resultadoDecks) => {
+                                if (resultadoDecks.length > 0) {
                                     res.json({
-                                        id: resultadoAutenticar[0].id,
+                                        id: resultadoAutenticar[0].idUsuario,
                                         nome: resultadoAutenticar[0].nome,
                                         email: resultadoAutenticar[0].email,
                                         senha: resultadoAutenticar[0].senha
                                     });
                                 } else {
-                                    res.status(204).json({ aquarios: [] });
+                                    res.status(204).json({ decks: [] });
                                 }
                             })
                     } else if (resultadoAutenticar.length == 0) {

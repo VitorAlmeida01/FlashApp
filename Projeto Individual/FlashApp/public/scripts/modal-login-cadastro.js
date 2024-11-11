@@ -35,6 +35,7 @@ btnOpen2.forEach(button => {
         const modal  = document.getElementById(modalId)
         cadastroClicked = modal
         modal.showModal()
+        return cadastroClicked
         })
 });
     
@@ -45,6 +46,38 @@ btnClose2.addEventListener('click', () => {
     modal.close()
 })
 
+function cadastroTransform(){
+    let btnCadastro = document.getElementById('btnModal')
+    
+        btnCadastro.setAttribute('data-login', 'modal-login')
 
+        const modalId = btnCadastro.getAttribute('data-login')
+        const modal  = document.getElementById(modalId)
 
+        if(cadastroClicked){
+            cadastroClicked.close()
+        }
 
+        modal.showModal()
+}
+
+// function cadastroTransform() {
+//     let btnCadastro = document.getElementsByClassName('btnModal');
+
+//     // Itera sobre todos os elementos com a classe 'btnModal'
+//     Array.from(btnCadastro).forEach(button => {
+//         // Adiciona o atributo data-login com o valor 'modal-login'
+//         button.setAttribute('data-login', 'modal-login');
+
+//         button.addEventListener('click', () => {
+//             const modalId = button.getAttribute('data-login');
+//             const modal = document.getElementById(modalId);
+
+//             if(cadastroClicked){
+//                 cadastroClicked.close()
+//             }
+
+//             modal.showModal();
+//         });
+//     });
+// }

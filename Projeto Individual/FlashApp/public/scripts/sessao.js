@@ -2,14 +2,14 @@
 function validarSessao() {
     var email = sessionStorage.EMAIL_USUARIO;
     var nome = sessionStorage.NOME_USUARIO;
-    var cpf = sessionStorage.CPF_USUARIO
+    // var cpf = sessionStorage.CPF_USUARIO
 
 
 
     var b_usuario = document.getElementById("b_usuario");
-    var c_cpf = document.getElementById("c_cpf");
+    // var c_cpf = document.getElementById("c_cpf");
 
-    c_cpf.innerHTML = cpf;  
+    // c_cpf.innerHTML = cpf;  
 
     if (email != null && nome != null) {
         b_usuario.innerHTML = nome;

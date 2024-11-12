@@ -1,5 +1,5 @@
 var usuarioModel = require("../models/usuarioModel");
-var deck = require("../models/deckModel"); // Colocar o caminho do deck
+var deckModel = require("../models/deckModel"); // Colocar o caminho do deck
 
 function autenticar(req, res) {
     var email = req.body.emailServer;
@@ -20,14 +20,15 @@ function autenticar(req, res) {
                     if (resultadoAutenticar.length == 1) {
                         console.log(resultadoAutenticar);
 
-                        deck.buscarDeckPorUsuario(resultadoAutenticar[0].usuarioId)
+                        deckModel.buscarDeckPorUsuario(resultadoAutenticar[0].idUsuario)
                             .then((resultadoDecks) => {
                                 if (resultadoDecks.length > 0) {
                                     res.json({
-                                        id: resultadoAutenticar[0].idUsuario,
+                                        idUsuario: resultadoAutenticar[0].idUsuario,
                                         nome: resultadoAutenticar[0].nome,
                                         email: resultadoAutenticar[0].email,
-                                        senha: resultadoAutenticar[0].senha
+                                        senha: resultadoAutenticar[0].senha,
+                                        decks: resultadoDecks
                                     });
                                 } else {
                                     res.status(204).json({ decks: [] });

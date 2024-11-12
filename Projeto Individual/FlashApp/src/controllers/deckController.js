@@ -1,6 +1,5 @@
 var deckModel = require("../models/deckModel");
 
-
 function buscarDeckPorUsuario(req, res) {
   var idUsuario = req.params.idUsuario;
 
@@ -23,33 +22,34 @@ function buscarDeckPorUsuario(req, res) {
 }
 
 
-// function cadastrar(req, res) {
-//   var descricao = req.body.descricao;
-//   var idUsuario = req.body.idUsuario;
+function cadastrar(req, res) {
+  var titulo = req.body.titulo;
+  // var idUsuario = req.body.idUsuario;
+  var idUsuario = req.body.idUsuario
 
-//   if (descricao == undefined) {
-//     res.status(400).send("descricao está undefined!");
-//   } else if (idUsuario == undefined) {
-//     res.status(400).send("idUsuario está undefined!");
-//   } else {
+  if (titulo == undefined) {
+    res.status(400).send("descricao está undefined!");
+  } else if (idUsuario == undefined) {
+    res.status(400).send("idUsuario está undefined!");
+  } else {
 
 
-//     aquarioModel.cadastrar(descricao, idUsuario)
-//       .then((resultado) => {
-//         res.status(201).json(resultado);
-//       }
-//       ).catch((erro) => {
-//         console.log(erro);
-//         console.log(
-//           "\nHouve um erro ao realizar o cadastro! Erro: ",
-//           erro.sqlMessage
-//         );
-//         res.status(500).json(erro.sqlMessage);
-//       });
-//   }
-// }
+    deckModel.cadastrar(idUsuario,titulo)
+      .then((resultado) => {
+        res.status(201).json(resultado);
+      }
+      ).catch((erro) => {
+        console.log(erro);
+        console.log(
+          "\nHouve um erro ao realizar o cadastro! Erro: ",
+          erro.sqlMessage
+        );
+        res.status(500).json(erro.sqlMessage);
+      });
+  }
+}
 
 module.exports = {
-  buscarDeckPorUsuario
-  // cadastrar
+  buscarDeckPorUsuario,
+  cadastrar
 }

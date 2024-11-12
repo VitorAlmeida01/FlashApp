@@ -11,4 +11,8 @@ router.post("/cadastrar", function (req, res) {
   deckController.cadastrar(req, res);
 })
 
+router.delete("/deletar/:idDeck", function (req, res) {
+  deckController.deletar(req, res);
+})
+
 module.exports = router;

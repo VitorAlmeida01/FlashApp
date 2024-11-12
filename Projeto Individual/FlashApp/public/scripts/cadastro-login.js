@@ -156,7 +156,7 @@
                 sessionStorage.ID_USUARIO = json.idUsuario;
                 sessionStorage.EMAIL_USUARIO = json.email;
                 sessionStorage.NOME_USUARIO = json.nome;
-                sessionStorage.DECKS = JSON.stringify(json.decks)
+                sessionStorage.DECKS = JSON.stringify(json.decks || [])
 
                 setTimeout(function () {
                     window.location = "../decks.html";

@@ -2,7 +2,7 @@ var database = require("../database/config");
 
 function buscarDeckPorUsuario(usuarioId) {
 
-  var instrucaoSql = `SELECT titulo FROM deck WHERE fkUsuario = ${usuarioId}`;
+  var instrucaoSql = `SELECT idDeck, titulo FROM deck WHERE fkUsuario = ${usuarioId}`;
 
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
@@ -18,11 +18,19 @@ function cadastrar(idUsuario, titulo) {
   return database.executar(instrucaoSql);
 }
 
+function deletar(idDeck) {
+  var instrucaoSql = `DELETE FROM deck WHERE idDeck = ${idDeck}`;
+
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+}
+
 
 // INSERT INTO deck (titulo, fkUsuario) VALUES (titulo, idUsuario)
 
 module.exports = {
   buscarDeckPorUsuario,
-  cadastrar
+  cadastrar,
+  deletar
 }
 

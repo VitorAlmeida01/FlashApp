@@ -49,7 +49,30 @@ function cadastrar(req, res) {
   }
 }
 
+
+function deletar(req, res) {
+  var idDeck = req.params.idDeck;
+
+  if (idDeck == undefined) {
+      res.status(400).json({ erro: "ID do deck está undefined!" });
+  } else {
+      deckModel.deletar(idDeck)
+          .then((resultado) => {
+              res.status(200).json(resultado);
+          })
+          .catch((erro) => {
+              console.log(erro);
+              console.log(
+                  "\nHouve um erro ao deletar o deck! Erro: ",
+                  erro.sqlMessage
+              );
+              res.status(500).json({ erro: erro.sqlMessage });
+          });
+  }
+}
+
 module.exports = {
   buscarDeckPorUsuario,
-  cadastrar
+  cadastrar,
+  deletar
 }

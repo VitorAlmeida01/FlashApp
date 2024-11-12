@@ -66,13 +66,13 @@
           </section>
         </section>
         <div id="containerDecks">
-          <div class="containerDeck">
+          <!-- <div class="containerDeck">
             <h2></h2>
             <div>
               <i class="fa-solid fa-pen-to-square"></i>
               <i class="fa-solid fa-trash"></i>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </main>
@@ -111,11 +111,17 @@
               <h2>${item.titulo}</h2>
               <div>
                 <i class="fa-solid fa-pen-to-square"></i>
-                <i class="fa-solid fa-trash"></i>
+                <i class="fa-solid fa-trash" data-id='${item.idDeck}'></i>
               </div>
             </div>
           `;
         });
+
+        document.querySelectorAll('.fa-trash').forEach(button => {
+                button.addEventListener('click', function() {
+                    deletarDecks(this);
+                });
+            });
       })
       .catch(error => {
         console.error("Erro ao buscar decks:", error);
@@ -163,7 +169,7 @@
             <div class="containerDeck">
               <h2>${item.titulo}</h2>
               <div>
-                <i class="fa-solid fa-pen-to-square"></i>
+                <i class="fa-solid fa-pen-to-square" id='updateBtn'></i>
                 <i class="fa-solid fa-trash"></i>
               </div>
             </div>`
@@ -175,8 +181,33 @@
       });
   }
 
+// document.getElementById('deleteBtn').addEventListener('click', function(){
+//   deletarDecks(this)
+// })
 
+function deletarDecks(element) {
+    var idDeck = element.getAttribute('data-id');
 
+    fetch(`/decks/deletar/${idDeck}`, {
+        method: 'DELETE',
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Erro ao deletar deck");
+        }
+        return response.json();
+    })
+    .then(() => {
+        // exibirDecks(); // Atualiza a lista de decks após deletar
+        const deckContainer = element.closest('.containerDeck');
+        if (deckContainer) {
+            deckContainer.remove();
+        }
+    })
+    .catch(error => {
+        console.error("Erro ao deletar deck:", error);
+    });
+}
 
 
 

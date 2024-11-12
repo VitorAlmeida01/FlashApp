@@ -22,17 +22,17 @@ function autenticar(req, res) {
 
                         deckModel.buscarDeckPorUsuario(resultadoAutenticar[0].idUsuario)
                             .then((resultadoDecks) => {
-                                if (resultadoDecks.length > 0) {
+                                // if (resultadoDecks.length > 0) {
                                     res.json({
                                         idUsuario: resultadoAutenticar[0].idUsuario,
                                         nome: resultadoAutenticar[0].nome,
                                         email: resultadoAutenticar[0].email,
                                         senha: resultadoAutenticar[0].senha,
-                                        decks: resultadoDecks
+                                        decks: resultadoDecks.length > 0 ? resultadoDecks : []
                                     });
-                                } else {
-                                    res.status(204).json({ decks: [] });
-                                }
+                                // } else {
+                                //     res.status(204).json({ decks: [] });
+                                // }
                             })
                     } else if (resultadoAutenticar.length == 0) {
                         res.status(403).send("Email e/ou senha inválido(s)");

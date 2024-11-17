@@ -32,7 +32,7 @@
           <a href="#"><i class="fa-regular fa-square"></i>Decks</a>
         </li>
         <li>
-          <a href="#"><i class="fa-solid fa-chart-simple"></i>Dashboard</a>
+          <a href="./dashboard.html"><i class="fa-solid fa-chart-simple"></i>Dashboard</a>
         </li>
         <li>
           <a href="#"><i class="fa-solid fa-user"></i>Minha conta</a>
@@ -54,7 +54,7 @@
         <section class="bodyCreateDeck">
           <label for="inpDeck">Titulo</label>
           <input type="text" id="inpDeck" />
-          <i class="fa-solid fa-plus" id="addDeck" id="addDeck"></i>
+          <i class="fa-solid fa-plus" id="addDeck"></i>
         </section>
       </section>
       <div id="containerDecks">
@@ -160,7 +160,7 @@
       },
       body: JSON.stringify({
         titulo: titulo,
-        idUsuario: idUsuario,
+        idUsuario: idUsuario
       }),
     })
       .then((response) => {
@@ -193,18 +193,19 @@
 
   function deckId(element) {
     var idDeck = element.getAttribute("data-id")
+    var tituloDeck = element.closest('.containerDeck').querySelector('h2').innerText
     // alert('se ta aq')
     // console.log('Voce clicou no deck: ', idDeck)
 
     if (idDeck) {
-      // sessionStorage.setItem('selectedDeckId', idDeck)
+      // sessionStorage.setItem('selectedDeckId', idDeck) -- Outra forma de setar
+      sessionStorage.tituloDeck = tituloDeck
       sessionStorage.selectedDeckId = idDeck
       console.log('armazenado no local storage')
       window.location.href = `./flashcards.html`
     } else {
       console.error('idDeck não econtrado')
     }
-    // window.location.href = "./flashcards.html"
   }
 
   function deletarDecks(element) {

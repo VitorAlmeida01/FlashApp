@@ -44,18 +44,21 @@ function buscarFlashcardsPorDeck(req, res) {
 
 
 function cadastrar(req, res) {
-  var titulo = req.body.titulo;
-  // var idUsuario = req.body.idUsuario;
-  var idUsuario = req.body.idUsuario
+  // var titulo = req.body.titulo;
+  // var idDeck = req.body.idDeck
+  // var pergunta = req.body.pergunta
+  // var resposta = req.body.resposta
+
+  var {titulo, pergunta, resposta, idDeck} = req.body
 
   if (titulo == undefined) {
     res.status(400).send("descricao está undefined!");
-  } else if (idUsuario == undefined) {
+  } else if (pergunta == undefined) {
     res.status(400).send("idUsuario está undefined!");
   } else {
 
 
-    flashcardModel.cadastrar(idUsuario,titulo)
+    flashcardModel.cadastrar(titulo, pergunta, resposta, idDeck)
       .then((resultado) => {
         res.status(201).json(resultado);
       }
@@ -72,12 +75,12 @@ function cadastrar(req, res) {
 
 
 function deletar(req, res) {
-  var idDeck = req.params.idDeck;
+  var idFlashCard = req.params.idFlashcard;
 
-  if (idDeck == undefined) {
-      res.status(400).json({ erro: "ID do deck está undefined!" });
+  if (idFlashCard == undefined) {
+      res.status(400).json({ erro: "ID do flashcard está undefined!" });
   } else {
-      deckModel.deletar(idDeck)
+      flashcardModel.deletar(idFlashCard)
           .then((resultado) => {
               res.status(200).json(resultado);
           })
@@ -116,8 +119,8 @@ function atualizar(req, res){
 }
 
 module.exports = {
-  buscarFlashcardsPorDeck
-  // cadastrar,
-  // deletar,
+  buscarFlashcardsPorDeck,
+  cadastrar,
+  deletar
   // atualizar
 }

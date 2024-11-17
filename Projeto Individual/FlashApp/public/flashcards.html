@@ -30,10 +30,10 @@
 
       <ul>
         <li>
-          <a href="#"><i class="fa-regular fa-square"></i>Decks</a>
+          <a href="./decks.html"><i class="fa-regular fa-square"></i>Decks</a>
         </li>
         <li>
-          <a href="#"><i class="fa-solid fa-chart-simple"></i>Dashboard</a>
+          <a href="./dashboard.html"><i class="fa-solid fa-chart-simple"></i>Dashboard</a>
         </li>
         <li>
           <a href="#"><i class="fa-solid fa-user"></i>Minha conta</a>
@@ -45,7 +45,7 @@
     </div>
     <div class="mainContent">
       <section class="title">
-        <h1>Deck - JavaScript</h1>
+        <h1>Deck - <span id="deckTitle"></span></h1>
         <hr />
       </section>
       <p>Nesta página temos todos os flashcards de acordo com cada deck</p>
@@ -66,13 +66,13 @@
             <input type="text" id="inpResposta">
           </div>
           <div class="createBtnContainer">
-            <button>Criar </button>
+            <button id="createCard">Criar </button>
           </div>
         </section>
       </section>
 
       <div id="containerFlashcards">
-        <div id="containerFlashCards-frente">
+        <!-- <div id="containerFlashCards-frente">
           <div class="containerFlashcard-frente">
             <h2>Nome flashcard</h2>
             <div>
@@ -101,9 +101,9 @@
           <div class="containerBtn-verso">
             <button id="btnBom">Bom</button>
             <button id="btnRuim">Ruim</button>
-          </div>
-        </div>
+          </div> -->
       </div>
+    </div>
 
 
 
@@ -116,16 +116,18 @@
 <script>
 
   document.addEventListener("DOMContentLoaded", function () {
-    const urlParams = new URLSearchParams(window.location.search)
     const idDeck = sessionStorage.getItem('selectedDeckId')
-
+    carregarFlashcards(idDeck)
+    const titulo = sessionStorage.tituloDeck
 
     if (idDeck) {
+      document.getElementById('deckTitle').innerText = titulo
       carregarFlashcards(idDeck)
     } else {
       console.error("ID do deck não encontrado na URL")
     }
   })
+
 
   function carregarFlashcards(idDeck) {
     fetch(`/flashcard/deck/${idDeck}`)
@@ -133,7 +135,8 @@
         if (!response.ok) {
           throw new Error("Erro ao buscar flashcards")
         }
-        return response.json()
+
+        return response.text().then(text => text ? JSON.parse(text) : [])
       })
       .then(flashcards => {
         const flashcardsContainer = document.getElementById("containerFlashcards")
@@ -141,11 +144,65 @@
 
         flashcards.forEach(flashcard => {
           flashcardsContainer.innerHTML += `
-          <div class="flashcard">
+    <div data-idCard="${flashcard.idFlashCard}"  class='flashcards' >
+      <div  id="containerFlashCards-frente">
+          <div class="containerFlashcard-frente">
             <h2>${flashcard.titulo}</h2>
-            <p>${flashcard.pergunta}</p>
+            <div>
+              <i class="fa-solid fa-pen-to-square"></i>
+              <i class="fa-solid fa-trash" data-idCard="${flashcard.idFlashCard}"></i>
+            </div>
           </div>
+          <div>
+            <p>Pergunta: <span id="perguntaContainer">${flashcard.pergunta}</span></p>
+          </div>
+          <div class="containerBtn-frente"><button class="btnResposta">Resposta</button></div>
+        </div>
+
+
+
+        <div id="containerFlashCards-verso">
+          <div class="containerFlashcard-verso">
+            <h2>${flashcard.titulo}</h2>
+            <div>
+              <i class="fa-solid fa-chevron-left btnVoltar"></i>
+              <i class="fa-solid fa-pen-to-square"></i>
+              <i class="fa-solid fa-trash"></i>
+            </div>
+          </div>
+          <div>
+            <p>Resposta: <span id="respostaContainer">${flashcard.resposta}</span></p>
+          </div>
+          <div class="containerBtn-verso">
+            <button id="btnBom">Bom</button>
+            <button id="btnRuim">Ruim</button>
+          </div>
+        </div>
+      </div>
         `
+
+          document.querySelectorAll(".btnResposta").forEach(button => {
+            button.addEventListener("click", function () {
+              const flashcard = this.closest(".flashcards")
+              flashcard.querySelector("#containerFlashCards-frente").style.display = "none"
+              flashcard.querySelector("#containerFlashCards-verso").style.display = "flex"
+            })
+          })
+
+          document.querySelectorAll(".btnVoltar").forEach(button => {
+            button.addEventListener("click", function () {
+              const flashcard = this.closest(".flashcards")
+              flashcard.querySelector("#containerFlashCards-frente").style.display = "flex"
+              flashcard.querySelector("#containerFlashCards-verso").style.display = "none"
+            })
+          })
+        })
+
+
+        document.querySelectorAll(".fa-trash").forEach((button) => {
+          button.addEventListener("click", function () {
+            deletarFlashcards(this)
+          })
         })
       })
       .catch(error => {
@@ -153,19 +210,29 @@
       })
   }
 
+  document.getElementById("createCard").addEventListener("click", function () {
+    cadastrarFlashcards()
+    document.getElementById("inpFlashcard").value = ""
+    document.getElementById("inpPergunta").value = ""
+    document.getElementById("inpResposta").value = ""
+
+  })
+
 
   function cadastrarFlashcards() {
-    var idUsuario = sessionStorage.ID_USUARIO
+    var idDeck = sessionStorage.selectedDeckId
     var titulo = document.getElementById("inpFlashcard").value
     var pergunta = document.getElementById("inpPergunta").value
     var resposta = document.getElementById("inpResposta").value
 
-    if (!idUsuario) {
-      console.error("ID do usuário não encontrado no sessionStorage")
+    console.log(idDeck)
+
+    if (!idDeck) {
+      console.error("ID do deck não encontrado no sessionStorage")
       return
     }
 
-    fetch(`/decks/cadastrar`, {
+    fetch(`/flashcard/cadastrar`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -174,35 +241,90 @@
         titulo: titulo,
         pergunta: pergunta,
         resposta: resposta,
-        idDeck: deck,
-        idUsuario: idUsuario,
+        idDeck: idDeck
       }),
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error("Erro ao cadastrar decks")
+          console.log(response)
+          throw new Error("Erro ao cadastrar flashcards")
         }
         return response.json()
       })
-      .then((decks) => {
-        var containerDecks = document.getElementById("containerDecks")
-        exibirDecks() // Renderiza os decks na tela
+      .then((cards) => {
+        const flashcardsContainer = document.getElementById("containerFlashcards")
+        carregarFlashcards(idDeck) // Renderiza os flashcards na tela
 
-        if (decks.length > 0) {
-          decks.forEach((item) => {
-            containerDecks.innerHTML += `
-            <div class="containerDeck">
-              <h2>${item.titulo}</h2>
-              <div>
-                <i class="fa-solid fa-pen-to-square" id='updateBtn'></i>
-                <i class="fa-solid fa-trash"></i>
-              </div>
-            </div>`
+        if (cards.length > 0) {
+          cards.forEach((item) => {
+            flashcardsContainer.innerHTML += `
+    <div class='flashcards'>
+      <div id="containerFlashCards-frente">
+          <div class="containerFlashcard-frente">
+            <h2>${item.titulo}</h2>
+            <div>
+              <i class="fa-solid fa-pen-to-square"></i>
+              <i class="fa-solid fa-trash"></i>
+            </div>
+          </div>
+          <div>
+            <p>Pergunta: <span id="perguntaContainer">${item.pergunta}</span></p>
+          </div>
+          <div class="containerBtn-frente"><button class="btnResposta">Resposta</button></div>
+        </div>
+
+
+
+        <div id="containerFlashCards-verso">
+          <div class="containerFlashcard-verso">
+            <h2>${item.titulo}</h2>
+            <div>
+              <i class="fa-solid fa-chevron-left btnVoltar"></i>
+              <i class="fa-solid fa-pen-to-square"></i>
+              <i class="fa-solid fa-trash"></i>
+            </div>
+          </div>
+          <div>
+            <p>Resposta: <span id="respostaContainer">${item.resposta}</span></p>
+          </div>
+          <div class="containerBtn-verso">
+            <button id="btnBom">Bom</button>
+            <button id="btnRuim">Ruim</button>
+          </div>
+        </div>
+      </div>`
           })
         }
       })
       .catch((error) => {
         console.error("Erro ao buscar decks:", error)
+      })
+  }
+
+
+  function deletarFlashcards(element) {
+    var idFlashcard = element.getAttribute("data-idCard")
+    var idDeck = sessionStorage.selectedDeckId
+
+    fetch(`/flashcard/deletar/${idFlashcard}`, {
+      method: "DELETE",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Erro ao deletar deck")
+        }
+        return response.json()
+      })
+      .then(() => {
+        // exibirDecks(); // Atualiza a lista de decks após deletar
+        carregarFlashcards(idDeck)
+        const cardContainer = element.closest(".containerFlashcards")
+        if (cardContainer) {
+          cardContainer.remove()
+        }
+      })
+      .catch((error) => {
+        console.error("Erro ao deletar deck:", error)
       })
   }
 

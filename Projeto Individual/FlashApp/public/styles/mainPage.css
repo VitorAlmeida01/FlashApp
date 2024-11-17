@@ -146,6 +146,24 @@ transition: 0.2s;
     border: 1px solid black;
 }
 
+i{
+    transition: 0.2s;
+}
+
+i:hover{
+    color: #fff;
+    transition: 0.2s;
+}
+
+a{
+    transition: 0.2s;
+}
+
+a:hover{
+    color: #535353;
+    transition: 0.2s;
+}
+
 #containerDecks{
     width: 95%;
     max-height: 60%;

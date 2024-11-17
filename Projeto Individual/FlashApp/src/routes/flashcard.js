@@ -15,5 +15,9 @@ router.get("/deck/:idDeck", function (req, res) {
   flashcardController.buscarFlashcardsPorDeck(req, res);
 });
 
+router.delete("/deletar/:idFlashcard", function (req, res) {
+  flashcardController.deletar(req, res);
+})
+
 
 module.exports = router

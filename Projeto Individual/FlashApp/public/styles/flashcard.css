@@ -122,9 +122,29 @@
   color: #fff;
 }
 
-#containerFlashCards-frente, #containerFlashCards-verso{
+.flashcards{
+  height: fit-content;
+}
+
+#containerFlashCards-verso{
   width: 25.5%;
-  min-width: 350px;
+  min-width: fit-content;
+  display: none;
+  flex-direction: column;
+  background-color: #5C9CBD;
+  gap: 10px;
+  height: 20%;
+  padding: 2%;
+  border-radius: 10px;
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  border: 1px solid black;
+  font-size: 20px;
+  margin-bottom: 2%;
+}
+
+#containerFlashCards-frente{
+  width: 25.5%;
+  min-width: fit-content;
   display: flex;
   flex-direction: column;
   background-color: #5C9CBD;

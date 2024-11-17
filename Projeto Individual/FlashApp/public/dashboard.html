@@ -88,11 +88,11 @@
       <div class="graficos">
         <div class="firtSection">
           <div class="lineChart">
-            <h1>Usuarios</h1>
+            <h1>Flashcards criados por dia</h1>
             <canvas id="myChart" height="200" width="600"></canvas>
           </div>
           <div class="pieChart">
-            <h1>Usuarios</h1>
+            <h1>Lembrei X Esqueci</h1>
             <canvas id="doughnutChart" height="100px" width="100"></canvas>
           </div>
 
@@ -122,6 +122,7 @@
   document.addEventListener("DOMContentLoaded", function () {
     var idUsuario = sessionStorage.getItem('ID_USUARIO')
     var nome = sessionStorage.NOME_USUARIO
+    plotChart()
 
 
     var b_usuario = document.getElementById("b_usuario")
@@ -178,26 +179,80 @@
   })
 
 
-  const ctx = document.getElementById('myChart')
+  // const ctx = document.getElementById('myChart')
 
-  new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-      datasets: [{
-        label: '# of Votes',
-        data: [12, 19, 3, 5, 2, 3],
-        borderWidth: 1,
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
+  // var dados = [12, 19, 3, 5, 2, 3]
+  // var labels = ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange']
+
+  // new Chart(ctx, {
+  //   type: 'line',
+  //   data: {
+  //     labels: labels,
+  //     datasets: [{
+  //       label: '# of Votes',
+  //       data: dados,
+  //       borderWidth: 1,
+  //     }]
+  //   },
+  //   options: {
+  //     scales: {
+  //       y: {
+  //         beginAtZero: true
+  //       }
+  //     }
+  //   }
+  // })
+
+
+  // Função para buscar os dados dos flashcards
+  function fetchFlashcardsData() {
+    var idUsuario = sessionStorage.ID_USUARIO
+
+
+    return fetch(`/dashboard/ultimos5dias/${idUsuario}`) // Substitua 1 pelo idUsuario real
+      .then(response => response.json())
+  }
+
+  // Função para plotar o gráfico
+  function plotChart() {
+    fetchFlashcardsData().then(flashcardsData => {
+      // Processar os resultados para gerar labels e dados
+      var labels = flashcardsData.map(item => {
+        const date = new Date(item.dataCriacao) // Converter para objeto Date
+        return date.toLocaleDateString('pt-BR')
+      })
+      var dados = flashcardsData.map(item => item.quantidade)
+
+      console.log(labels, dados)
+
+      const ctx = document.getElementById('myChart').getContext('2d')
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Flashcards Criados',
+            data: dados,
+            borderWidth: 1,
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
         }
-      }
-    }
-  })
+      })
+    }).catch(error => {
+      console.error('Erro ao buscar os dados dos flashcards:', error)
+    })
+  }
+  // Chamar a função para plotar o gráfico
+
+
+
+
 
 
   const ctx2 = document.getElementById('barChart')

@@ -14,8 +14,9 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script src="./scripts/sessao.js"></script>
   <link rel="stylesheet" href="./styles/mainPage.css" />
-  <link rel="stylesheet" href="./styles/flashcard.css">
-
+  <!-- ChartJS -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="./styles/dashboard.css">
   <script src="./scripts/decks.js" defer></script>
   <title>Decks</title>
 </head>
@@ -48,11 +49,64 @@
         <h1>Dashboard<span id="deckTitle"></span></h1>
         <hr />
       </section>
-      <p>Nesta página temos todas os KPIs e métricas para facilitar seu rastreui de atividades.</p>
+      <p>Nesta página temos todas os KPIs e métricas para facilitar seu rastreio de atividades.</p>
 
 
 
-      <div id="containerFlashcards">
+      <div class="containerGraficos">
+        <div class="containerKpis">
+
+          <div class="containerUser kpi">
+            <h2>Total de usuários</h2>
+            <hr>
+            <h3 id="totalUsuarios">103</h3>
+          </div>
+
+          <div class="containerDecksCards">
+            <div>
+              <h2>Decks</h2>
+              <hr>
+              <h3 id="totalDecks"></h3>
+            </div>
+            <div class="linha"></div>
+            <div>
+              <h2>FlashCards</h2>
+              <hr>
+              <h3 id="totalFlashcards"></h3>
+            </div>
+          </div>
+
+          <div class="containerDecks kpi">
+            <h2>Decks Concluídos</h2>
+            <hr>
+            <h3>103</h3>
+          </div>
+
+
+        </div>
+      </div>
+      <div class="graficos">
+        <div class="firtSection">
+          <div class="lineChart">
+            <h1>Usuarios</h1>
+            <canvas id="myChart" height="200" width="600"></canvas>
+          </div>
+          <div class="pieChart">
+            <h1>Usuarios</h1>
+            <canvas id="doughnutChart" height="100px" width="100"></canvas>
+          </div>
+
+        </div>
+
+        <!-- <div class="doughnutChartContainer">
+          <canvas id="doughnutChart" height="50" width="100%"></canvas>
+        </div> -->
+
+
+        <div class="barChartContainer">
+          <h1>Usuarios</h1>
+          <canvas id="barChart" height="45" width="250"></canvas>
+        </div>
 
       </div>
 
@@ -65,6 +119,134 @@
 </html>
 
 <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var idUsuario = sessionStorage.getItem('ID_USUARIO')
+    var nome = sessionStorage.NOME_USUARIO
+
+
+    var b_usuario = document.getElementById("b_usuario")
+    b_usuario.innerText = nome
+
+    fetch('/usuarios/contagem')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("Erro ao buscar contagem de usuários")
+        }
+        return response.json()
+      })
+      .then(data => {
+        document.getElementById('totalUsuarios').innerText = data[0].totalUsuarios
+      })
+      .catch(error => {
+        console.error("Erro ao buscar contagem de usuários:", error)
+      })
+
+    if (idUsuario) {
+      // Buscar contagem de decks
+      fetch(`/decks/contagemDecks/${idUsuario}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error("Erro ao buscar contagem de decks")
+          }
+          return response.json()
+        })
+        .then(data => {
+          document.getElementById('totalDecks').innerText = data[0].totalDecks
+          console.log(`Dados: ${data[0].totalDecks}`)
+        })
+        .catch(error => {
+          console.error("Erro ao buscar contagem de decks:", error)
+        })
+
+      // Buscar contagem de flashcards
+      fetch(`/decks/contagemFlashcards/${idUsuario}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error("Erro ao buscar contagem de flashcards")
+          }
+          return response.json()
+        })
+        .then(data => {
+          document.getElementById('totalFlashcards').innerText = data[0].totalFlashcards
+        })
+        .catch(error => {
+          console.error("Erro ao buscar contagem de flashcards:", error)
+        })
+    } else {
+      console.error("ID do usuário não encontrado no sessionStorage")
+    }
+  })
+
+
+  const ctx = document.getElementById('myChart')
+
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      datasets: [{
+        label: '# of Votes',
+        data: [12, 19, 3, 5, 2, 3],
+        borderWidth: 1,
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  })
+
+
+  const ctx2 = document.getElementById('barChart')
+
+  new Chart(ctx2, {
+    type: 'bar',
+    data: {
+      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      datasets: [{
+        label: '# of Votes',
+        data: [12, 19, 3, 5, 2, 3],
+        borderWidth: 1,
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  })
+
+  const ctx3 = document.getElementById('doughnutChart')
+
+  var data = {
+    data: [12, 19, 3, 5, 2, 3]
+  }
+
+  new Chart(ctx3, {
+    type: 'pie',
+    data: {
+      labels: [
+        'Red',
+        'Blue',
+        'Yellow'
+      ],
+      datasets: [{
+        label: 'My First Dattesteaset',
+        data: [300, 50, 100],
+        backgroundColor: [
+          'rgb(255, 99, 132)',
+          'rgb(54, 162, 235)',
+          'rgb(255, 205, 86)'
+        ],
+        hoverOffset: 4
+      }]
+    }
+  });
 
 
 </script>

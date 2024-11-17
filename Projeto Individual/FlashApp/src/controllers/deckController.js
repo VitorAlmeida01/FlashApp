@@ -94,9 +94,38 @@ function atualizar(req, res){
 
 }
 
+function contarDecks(req, res) {
+  var idUsuario = req.params.idUsuario;
+
+  deckModel.contarDecks(idUsuario)
+    .then(function (resultado) {
+      res.json(resultado);
+    })
+    .catch(function (erro) {
+      console.log(erro);
+      res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function contarFlashcards(req, res) {
+  // var idDeck = req.params.idDeck;
+  var idUsuario = req.params.idUsuario;
+
+  deckModel.contarFlashcards(idUsuario)
+    .then(function (resultado) {
+      res.json(resultado);
+    })
+    .catch(function (erro) {
+      console.log(erro);
+      res.status(500).json(erro.sqlMessage);
+    });
+}
+
 module.exports = {
   buscarDeckPorUsuario,
   cadastrar,
   deletar,
-  atualizar
+  atualizar,
+  contarDecks,
+  contarFlashcards
 }

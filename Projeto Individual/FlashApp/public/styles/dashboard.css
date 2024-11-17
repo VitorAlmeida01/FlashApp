@@ -1,0 +1,124 @@
+.containerGraficos{
+    width: 95%;
+  max-height: 60%;
+  margin-top: 3%;
+  display: flex;
+  gap: 2%;    
+  flex-wrap: wrap;
+}
+
+
+
+.containerKpis{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  gap: 2%;
+}
+
+.kpi{
+  height: 20%;
+  width: 40%;
+  border: 1px solid black;
+  border-radius: 10px;
+  height: fit-content;
+  background-color: #5C9CBD;
+  color: #fff;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+}
+
+.containerDecksCards{
+  height: 20%;
+  width: 40%;
+  border: 1px solid black;
+  height: fit-content;
+  background-color: #5C9CBD;
+  color: #fff;
+  padding: 10px;
+  display: flex;
+  /* flex-direction: column; */
+  gap: 10px;
+  /* align-items: center; */
+  justify-content: space-evenly;
+  border-radius: 10px;
+
+}
+
+.containerDecksCards div:nth-child(1){
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+}
+
+.containerDecksCards div:nth-child(3){
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+}
+
+h3{
+  font-size: 25px;
+}
+
+.linha{
+  border-left: 1px solid #fff;
+  width: 1px;
+  display: flex;
+  flex-direction: column;
+}
+
+hr{
+  width: 100%;
+}
+
+.graficos{
+  width: 95%;
+  max-height: 30%;
+  margin-top: 3%;
+  display: flex;
+  gap: 2%;    
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+
+.firtSection{
+  height: 300px;
+  width: 100%;
+  /* border: 1px solid black; */
+  display: flex;
+  justify-content: space-between;
+}
+
+.lineChart, .pieChart, .barChart{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: fit-content;
+  height: fit-content ;
+}
+
+
+.lineChart{
+  width: 50%;
+  height: 250px;
+}
+
+.pieChart{
+  width: 50%;
+  height: 250px;
+}
+
+.barChartContainer{
+  height: 300px;
+  width: 100%;
+  /* border: 1px solid black; */
+}

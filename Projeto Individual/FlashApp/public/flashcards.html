@@ -120,6 +120,11 @@
     carregarFlashcards(idDeck)
     const titulo = sessionStorage.tituloDeck
 
+    var nome = sessionStorage.NOME_USUARIO
+
+    var b_usuario = document.getElementById("b_usuario")
+    b_usuario.innerText = nome
+
     if (idDeck) {
       document.getElementById('deckTitle').innerText = titulo
       carregarFlashcards(idDeck)

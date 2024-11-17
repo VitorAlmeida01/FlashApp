@@ -1,171 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital@1&display=swap"
-      rel="stylesheet"
-    />
-    <!-- Imports -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <script src="./scripts/sessao.js"></script>
-    <link rel="stylesheet" href="./styles/mainPage.css" />
 
-    <script src="./scripts/decks.js" defer></script>
-    <title>Decks</title>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital@1&display=swap" rel="stylesheet" />
+  <!-- Imports -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="./scripts/sessao.js"></script>
+  <link rel="stylesheet" href="./styles/mainPage.css" />
 
-  <body onload="exibirDecks()">
-    <main class="main">
-      <div class="sideBar">
-        <div class="sideBar-logo"></div>
-        <div class="welcome">
-          <p>Olá, <span id="b_usuario"></span></p>
-        </div>
+  <script src="./scripts/decks.js" defer></script>
+  <title>Decks</title>
+</head>
 
-        <ul>
-          <li>
-            <a href="#"><i class="fa-regular fa-square"></i>Decks</a>
-          </li>
-          <li>
-            <a href="#"><i class="fa-solid fa-chart-simple"></i>Dashboard</a>
-          </li>
-          <li>
-            <a href="#"><i class="fa-solid fa-user"></i>Minha conta</a>
-          </li>
-          <li>
-            <a href="#" id="exitBtn"
-              ><i class="fa-solid fa-right-from-bracket"></i>Sair</a
-            >
-          </li>
-        </ul>
+<body onload="exibirDecks()">
+  <main class="main">
+    <div class="sideBar">
+      <div class="sideBar-logo"></div>
+      <div class="welcome">
+        <p>Olá, <span id="b_usuario"></span></p>
       </div>
-      <div class="mainContent">
-        <section class="title">
-          <h1>Decks</h1>
-          <hr />
-        </section>
-        <p>Nesta página temos todos os decks de flashcards criados</p>
 
-        <section class="createDeck">
-          <p>Criar um deck</p>
-          <section class="bodyCreateDeck">
-            <label for="inpDeck">Titulo</label>
-            <input type="text" id="inpDeck" />
-            <i class="fa-solid fa-plus" id="addDeck" id="addDeck"></i>
-          </section>
+      <ul>
+        <li>
+          <a href="#"><i class="fa-regular fa-square"></i>Decks</a>
+        </li>
+        <li>
+          <a href="#"><i class="fa-solid fa-chart-simple"></i>Dashboard</a>
+        </li>
+        <li>
+          <a href="#"><i class="fa-solid fa-user"></i>Minha conta</a>
+        </li>
+        <li>
+          <a href="#" id="exitBtn"><i class="fa-solid fa-right-from-bracket"></i>Sair</a>
+        </li>
+      </ul>
+    </div>
+    <div class="mainContent">
+      <section class="title">
+        <h1>Decks</h1>
+        <hr />
+      </section>
+      <p>Nesta página temos todos os decks de flashcards criados</p>
+
+      <section class="createDeck">
+        <p>Criar um deck</p>
+        <section class="bodyCreateDeck">
+          <label for="inpDeck">Titulo</label>
+          <input type="text" id="inpDeck" />
+          <i class="fa-solid fa-plus" id="addDeck" id="addDeck"></i>
         </section>
-        <div id="containerDecks">
-          <!-- <div class="containerDeck">
+      </section>
+      <div id="containerDecks">
+        <!-- <div class="containerDeck">
             <h2></h2>
             <div>
               <i class="fa-solid fa-pen-to-square"></i>
               <i class="fa-solid fa-trash"></i>
             </div>
           </div> -->
-        </div>
       </div>
-    </main>
-  </body>
+    </div>
+  </main>
+</body>
+
 </html>
 
 <script>
-  
-  document.addEventListener("DOMContentLoaded", function() {
-    exibirDecks();
+  document.addEventListener("DOMContentLoaded", function () {
+    exibirDecks()
     validarSessao()
-  });
+  })
+
+
+
 
   function exibirDecks() {
-    var idUsuario = sessionStorage.ID_USUARIO;
+    var idUsuario = sessionStorage.ID_USUARIO
 
     if (!idUsuario) {
-      console.error("ID do usuário não encontrado no sessionStorage");
-      return;
+      console.error("ID do usuário não encontrado no sessionStorage")
+      return
     }
 
     fetch(`/decks/${idUsuario}`)
-      .then(response => {
+      .then((response) => {
         if (!response.ok) {
-          throw new Error("Erro ao buscar decks");
+          throw new Error("Erro ao buscar decks")
         }
-        return response.json();
+        return response.json()
       })
-      .then(decks => {
-        var containerDecks = document.getElementById("containerDecks");
-        containerDecks.innerHTML = ""; // Limpa o container antes de adicionar os novos decks
+      .then((decks) => {
+        var containerDecks = document.getElementById("containerDecks")
+        containerDecks.innerHTML = "" // Limpa o container antes de adicionar os novos decks
 
-        decks.forEach(item => {
+        decks.forEach((item) => {
           containerDecks.innerHTML += `
-            <div class="containerDeck">
+            <div class="containerDeck" data-id="${item.idDeck}">
               <h2>${item.titulo}</h2>
               <div>
-                <i class="fa-solid fa-pen-to-square"></i>
+                <i class="fa-solid fa-graduation-cap" data-id='${item.idDeck}'></i>
+                <i class="fa-solid fa-pen-to-square" data-id='${item.idDeck}'></i>
                 <i class="fa-solid fa-trash" data-id='${item.idDeck}'></i>
               </div>
             </div>
-          `;
-        });
+          `
+        })
 
-        document.querySelectorAll('.fa-trash').forEach(button => {
-                button.addEventListener('click', function() {
-                    deletarDecks(this);
-                });
-            });
+        document.querySelectorAll(".fa-pen-to-square").forEach((button) => {
+          button.addEventListener("click", function () {
+            editarDeck(
+              button.getAttribute("data-id"),
+              button.closest(".containerDeck").querySelector("h2").innerText
+            )
+          })
+        })
+
+        document.querySelectorAll(".fa-trash").forEach((button) => {
+          button.addEventListener("click", function () {
+            deletarDecks(this)
+          })
+        })
+
+        document.querySelectorAll(".fa-graduation-cap").forEach((button) => {
+          button.addEventListener("click", function () {
+            deckId(this)
+          })
+        })
       })
-      .catch(error => {
-        console.error("Erro ao buscar decks:", error);
-      });
+      .catch((error) => {
+        console.error("Erro ao buscar decks:", error)
+      })
   }
 
-
-  
-  document.getElementById('addDeck').addEventListener('click', function(){
+  document.getElementById("addDeck").addEventListener("click", function () {
     cadastrarDecks()
-    document.getElementById('inpDeck').value = ''
-  } )
+    document.getElementById("inpDeck").value = ""
+  })
 
   function cadastrarDecks() {
-    var idUsuario = sessionStorage.ID_USUARIO;
-    var titulo = document.getElementById('inpDeck').value
+    var idUsuario = sessionStorage.ID_USUARIO
+    var titulo = document.getElementById("inpDeck").value
 
     if (!idUsuario) {
-      console.error("ID do usuário não encontrado no sessionStorage");
-      return;
+      console.error("ID do usuário não encontrado no sessionStorage")
+      return
     }
 
     fetch(`/decks/cadastrar`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            titulo: titulo,
-            idUsuario: idUsuario
-        })
-    }).then(response => {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        titulo: titulo,
+        idUsuario: idUsuario,
+      }),
+    })
+      .then((response) => {
         if (!response.ok) {
-          throw new Error("Erro ao cadastrar decks");
+          throw new Error("Erro ao cadastrar decks")
         }
-        return response.json();
+        return response.json()
       })
-      .then(decks => {
-        var containerDecks = document.getElementById("containerDecks");
-
+      .then((decks) => {
+        var containerDecks = document.getElementById("containerDecks")
         exibirDecks() // Renderiza os decks na tela
 
-        decks.forEach(item => {
-          containerDecks.innerHTML += `
+        if (decks.length > 0) {
+          decks.forEach((item) => {
+            containerDecks.innerHTML += `
             <div class="containerDeck">
               <h2>${item.titulo}</h2>
               <div>
@@ -173,60 +183,121 @@
                 <i class="fa-solid fa-trash"></i>
               </div>
             </div>`
-        });
-
+          })
+        }
       })
-      .catch(error => {
-        console.error("Erro ao buscar decks:", error);
-      });
+      .catch((error) => {
+        console.error("Erro ao buscar decks:", error)
+      })
   }
 
-// document.getElementById('deleteBtn').addEventListener('click', function(){
-//   deletarDecks(this)
-// })
+  function deckId(element) {
+    var idDeck = element.getAttribute("data-id")
+    // alert('se ta aq')
+    // console.log('Voce clicou no deck: ', idDeck)
 
-function deletarDecks(element) {
-    var idDeck = element.getAttribute('data-id');
+    if (idDeck) {
+      // sessionStorage.setItem('selectedDeckId', idDeck)
+      sessionStorage.selectedDeckId = idDeck
+      console.log('armazenado no local storage')
+      window.location.href = `./flashcards.html`
+    } else {
+      console.error('idDeck não econtrado')
+    }
+    // window.location.href = "./flashcards.html"
+  }
+
+  function deletarDecks(element) {
+    var idDeck = element.getAttribute("data-id")
 
     fetch(`/decks/deletar/${idDeck}`, {
-        method: 'DELETE',
+      method: "DELETE",
     })
-    .then(response => {
+      .then((response) => {
         if (!response.ok) {
-            throw new Error("Erro ao deletar deck");
+          throw new Error("Erro ao deletar deck")
         }
-        return response.json();
-    })
-    .then(() => {
+        return response.json()
+      })
+      .then(() => {
         // exibirDecks(); // Atualiza a lista de decks após deletar
-        const deckContainer = element.closest('.containerDeck');
+        const deckContainer = element.closest(".containerDeck")
         if (deckContainer) {
-            deckContainer.remove();
+          deckContainer.remove()
         }
+      })
+      .catch((error) => {
+        console.error("Erro ao deletar deck:", error)
+      })
+  }
+
+  function editarDeck(idDeck, tituloAtual) {
+    var containerDeck = document.querySelector(`.containerDeck[data-id='${idDeck}']`)
+
+    containerDeck.innerHTML = `
+        <input type="text" id="inpTituloAtt" value="${tituloAtual}">
+        <div>
+            <button id="salvarAttBtn">Salvar</button>
+            <i class="fa-solid fa-trash" data-id="${idDeck}"></i>
+        </div>
+    `
+
+    document.getElementById('salvarAttBtn').addEventListener('click', function () {
+      salvarAtualizacao(idDeck)
     })
-    .catch(error => {
-        console.error("Erro ao deletar deck:", error);
-    });
-}
 
+    // document.querySelector(`.fa-trash[data-id='${idDeck}']`).addEventListener('click', function () {
+    //   deletarDeck(idDeck, this)
+    // })
 
+  }
 
+  function salvarAtualizacao(idDeck) {
+    var novoTitulo = document.getElementById('inpTituloAtt').value
 
+    fetch(`/decks/atualizar/${idDeck}`, {
+      method: 'PUT',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        titulo: novoTitulo
+      })
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("Erro ao atualizar deck")
+        }
+        return response.json()
+      }).then((json) => {
+        // Atualiza o título do deck no sessionStorage
+        let decks = JSON.parse(sessionStorage.DECKS)
+        let deckIndex = decks.findIndex(deck => deck.idDeck == idDeck)
+        if (deckIndex !== -1) {
+          decks[deckIndex].titulo = novoTitulo
+          sessionStorage.DECKS = JSON.stringify(decks)
+        }
+        exibirDecks()
+      })
+      .then(() => {
+        exibirDecks() // Atualiza a lista de decks após a atualização
+      })
+      .catch(error => {
+        console.error("Erro ao atualizar deck:", error)
+      })
+  }
 
-
-
-
-    // function exibirDecks() {
-    //   JSON.parse(sessionStorage.DECKS).forEach(item => {
-    //     document.getElementById("containerDecks").innerHTML += `
-    //                   <div class="containerDeck">
-    //                     <h2>${item.titulo}</h2>
-    //                     <div>
-    //                       <i class="fa-solid fa-pen-to-square"></i>
-    //                       <i class="fa-solid fa-trash"></i>
-    //                     </div>
-    //                   </div>
-    //                   `
-    //   })
-    // 
+  // function exibirDecks() {
+  //   JSON.parse(sessionStorage.DECKS).forEach(item => {
+  //     document.getElementById("containerDecks").innerHTML += `
+  //                   <div class="containerDeck">
+  //                     <h2>${item.titulo}</h2>
+  //                     <div>
+  //                       <i class="fa-solid fa-pen-to-square"></i>
+  //                       <i class="fa-solid fa-trash"></i>
+  //                     </div>
+  //                   </div>
+  //                   `
+  //   })
+  //
 </script>

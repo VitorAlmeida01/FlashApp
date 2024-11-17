@@ -1,0 +1,179 @@
+.createFlashcard{
+  background-color: #5C9CBD;
+  width: 25%;
+  min-width: 350px;
+  height: 20%;
+  margin-bottom: 3%;
+  display: flex;
+  flex-direction: column;
+  gap: 5%;
+  padding: 2cqb;
+  border-radius: 10px;
+  margin-top: 2%;
+  border: 1px solid black;
+  box-shadow: #5C9CBD;
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  transition: 0.2s;
+  color: #fff;
+}
+
+.createFlashcard input{
+  border-radius: 30px;
+  border: 1px solid transparent;
+  width: 65%;
+}
+
+.bodyCreateFlashcard i{
+  /* margin-left: 30PX; */
+  /* border: 2px solid #Fff; */
+  /* border-radius: 50%; */
+  padding: 5px;
+  cursor: pointer;
+  color: #fff;
+
+  }
+
+.createFlashcard p{
+  font-size: 20px;
+  
+}
+
+.bodyCreateFlashcard button{
+  border: 1px solid transparent;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.bodyCreateFlashcard button:hover{
+  border: 1px solid #05293b;
+  transition: 0.2s;
+}
+
+.bodyCreateFlashcard label{
+  font-size: 20px;
+}
+
+.bodyCreateFlashcard input{
+  padding-left: 8px;
+  height: 20px;
+}
+
+.bodyCreateFlashcard input:focus{
+  padding-left: 8px;
+  outline: none;
+}
+
+.createBtnContainer{
+  align-self: center;
+}
+.createBtnContainer button{
+  padding: 5px;
+  width: 100px;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.createBtnContainer button:hover{
+  border: 1px solid #05293b;
+  transition: 0.2s;
+}
+
+.bodyCreateFlashcard{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#containerFlashcards{
+  width: 95%;
+  max-height: 60%;
+  margin-top: 3%;
+  display: flex;
+  gap: 2%;    
+  flex-wrap: wrap;
+}
+
+.containerFlashcard-frente, .containerFlashcard-verso{
+  width: 26.5%;
+  min-width: 350px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #5C9CBD;
+  height: 40%;
+  padding: 2%;
+  font-size: 20px;
+  border-radius: 10px;
+  margin-bottom: 2%;
+}
+
+.containerFlashcard-frente i, .containerFlashcard-verso i{
+  transition: 0.2s;
+  cursor: pointer;
+  font-size: 22px;
+}
+
+.containerFlashcard-frente i:hover, .containerFlashcard-verso i:hover{
+  color: #fff;
+  transition: 0.2s;
+}
+
+#containerFlashCards-frente p, h2, #containerFlashCards-verso p, h2{
+  color: #fff;
+}
+
+#containerFlashCards-frente, #containerFlashCards-verso{
+  width: 25.5%;
+  min-width: 350px;
+  display: flex;
+  flex-direction: column;
+  background-color: #5C9CBD;
+  gap: 10px;
+  /* margin: 2%; */
+  height: 20%;
+  padding: 2%;
+  border-radius: 10px;
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  border: 1px solid black;
+  font-size: 20px;
+  margin-bottom: 2%;
+}
+
+#containerFlashCards-frente button {
+  background-color: #5C9CBD;
+  padding: 10px;
+  border-radius: 10px;
+  border: 2px solid #fff;
+  transition: 0.2s;
+  color: #fff;
+  cursor: pointer;
+}
+
+.containerBtn-verso button{
+  background-color: #5C9CBD;
+  border: 2px solid #fff;
+  padding: 10px;
+  color: #fff;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+#containerFlashCards-frente button:hover{
+  border: 2px solid #000;
+  color: #000;
+  background-color: #fff;
+  transition: 0.2s;
+}
+
+.containerBtn-verso > button:nth-child(1):hover{
+  background-color: rgb(65, 199, 65);
+  color: #fff;
+  border-color: #fff;
+}
+
+.containerBtn-verso > button:nth-child(2):hover{
+  background-color: rgb(219, 71, 71);
+  color: #fff;
+  border-color: #fff;
+}

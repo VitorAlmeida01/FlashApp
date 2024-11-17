@@ -25,12 +25,21 @@ function deletar(idDeck) {
   return database.executar(instrucaoSql);
 }
 
+function atualizar(idDeck, titulo){
+
+  var instrucaoSql = `UPDATE deck SET titulo = '${titulo}' WHERE idDeck = ${idDeck}`
+
+  console.log('Executanto a instrução SQL: \n' + instrucaoSql)
+  return database.executar(instrucaoSql)
+}
+
 
 // INSERT INTO deck (titulo, fkUsuario) VALUES (titulo, idUsuario)
 
 module.exports = {
   buscarDeckPorUsuario,
   cadastrar,
-  deletar
+  deletar,
+  atualizar
 }
 

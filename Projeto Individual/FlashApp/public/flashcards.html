@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital@1&display=swap" rel="stylesheet" />
+  <!-- Imports -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="./scripts/sessao.js"></script>
+  <link rel="stylesheet" href="./styles/mainPage.css" />
+  <link rel="stylesheet" href="./styles/flashcard.css">
+
+  <script src="./scripts/decks.js" defer></script>
+  <title>Decks</title>
+</head>
+
+<body>
+  <main class="main">
+    <div class="sideBar">
+      <div class="sideBar-logo"></div>
+      <div class="welcome">
+        <p>Olá, <span id="b_usuario"></span></p>
+      </div>
+
+      <ul>
+        <li>
+          <a href="#"><i class="fa-regular fa-square"></i>Decks</a>
+        </li>
+        <li>
+          <a href="#"><i class="fa-solid fa-chart-simple"></i>Dashboard</a>
+        </li>
+        <li>
+          <a href="#"><i class="fa-solid fa-user"></i>Minha conta</a>
+        </li>
+        <li>
+          <a href="#" id="exitBtn"><i class="fa-solid fa-right-from-bracket"></i>Sair</a>
+        </li>
+      </ul>
+    </div>
+    <div class="mainContent">
+      <section class="title">
+        <h1>Deck - JavaScript</h1>
+        <hr />
+      </section>
+      <p>Nesta página temos todos os flashcards de acordo com cada deck</p>
+
+      <section class="createFlashcard">
+        <p>Criar um flashcard</p>
+        <section class="bodyCreateFlashcard">
+          <div class="inpTitulo">
+            <label for="inpFlashcard">Titulo</label>
+            <input type="text" id="inpFlashcard" />
+          </div>
+          <div class="inpPergunta">
+            <label for="inpPergunta">Pergunta</label>
+            <input type="text" id="inpPergunta">
+          </div>
+          <div class="inpResposta">
+            <label for="inpResposta">Resposta</label>
+            <input type="text" id="inpResposta">
+          </div>
+          <div class="createBtnContainer">
+            <button>Criar </button>
+          </div>
+        </section>
+      </section>
+
+      <div id="containerFlashcards">
+        <div id="containerFlashCards-frente">
+          <div class="containerFlashcard-frente">
+            <h2>Nome flashcard</h2>
+            <div>
+              <i class="fa-solid fa-pen-to-square"></i>
+              <i class="fa-solid fa-trash"></i>
+            </div>
+          </div>
+          <div>
+            <p>Pergunta: <span id="perguntaContainer">O que é um for?</span></p>
+          </div>
+          <div class="containerBtn-frente"><button>Resposta</button></div>
+        </div>
+
+        <div id="containerFlashCards-verso">
+          <div class="containerFlashcard-verso">
+            <h2>Nome flashcard</h2>
+            <div>
+              <i class="fa-solid fa-chevron-left"></i>
+              <i class="fa-solid fa-pen-to-square"></i>
+              <i class="fa-solid fa-trash"></i>
+            </div>
+          </div>
+          <div>
+            <p>Resposta: <span id="respostaContainer">Uma estrutura de repetição</span></p>
+          </div>
+          <div class="containerBtn-verso">
+            <button id="btnBom">Bom</button>
+            <button id="btnRuim">Ruim</button>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+  </main>
+</body>
+
+</html>
+
+<script>
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const urlParams = new URLSearchParams(window.location.search)
+    const idDeck = sessionStorage.getItem('selectedDeckId')
+
+
+    if (idDeck) {
+      carregarFlashcards(idDeck)
+    } else {
+      console.error("ID do deck não encontrado na URL")
+    }
+  })
+
+  function carregarFlashcards(idDeck) {
+    fetch(`/flashcard/deck/${idDeck}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("Erro ao buscar flashcards")
+        }
+        return response.json()
+      })
+      .then(flashcards => {
+        const flashcardsContainer = document.getElementById("containerFlashcards")
+        flashcardsContainer.innerHTML = "" // Limpa o container antes de adicionar os novos flashcards
+
+        flashcards.forEach(flashcard => {
+          flashcardsContainer.innerHTML += `
+          <div class="flashcard">
+            <h2>${flashcard.titulo}</h2>
+            <p>${flashcard.pergunta}</p>
+          </div>
+        `
+        })
+      })
+      .catch(error => {
+        console.error("Erro ao buscar flashcards:", error)
+      })
+  }
+
+
+  function cadastrarFlashcards() {
+    var idUsuario = sessionStorage.ID_USUARIO
+    var titulo = document.getElementById("inpFlashcard").value
+    var pergunta = document.getElementById("inpPergunta").value
+    var resposta = document.getElementById("inpResposta").value
+
+    if (!idUsuario) {
+      console.error("ID do usuário não encontrado no sessionStorage")
+      return
+    }
+
+    fetch(`/decks/cadastrar`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        titulo: titulo,
+        pergunta: pergunta,
+        resposta: resposta,
+        idDeck: deck,
+        idUsuario: idUsuario,
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Erro ao cadastrar decks")
+        }
+        return response.json()
+      })
+      .then((decks) => {
+        var containerDecks = document.getElementById("containerDecks")
+        exibirDecks() // Renderiza os decks na tela
+
+        if (decks.length > 0) {
+          decks.forEach((item) => {
+            containerDecks.innerHTML += `
+            <div class="containerDeck">
+              <h2>${item.titulo}</h2>
+              <div>
+                <i class="fa-solid fa-pen-to-square" id='updateBtn'></i>
+                <i class="fa-solid fa-trash"></i>
+              </div>
+            </div>`
+          })
+        }
+      })
+      .catch((error) => {
+        console.error("Erro ao buscar decks:", error)
+      })
+  }
+
+
+
+</script>

@@ -15,4 +15,8 @@ router.delete("/deletar/:idDeck", function (req, res) {
   deckController.deletar(req, res);
 })
 
+router.put("/atualizar/:idDeck", function (req, res) {
+  deckController.atualizar(req, res);
+})
+
 module.exports = router;

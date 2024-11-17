@@ -1,24 +1,45 @@
-var deckModel = require("../models/deckModel");
+var flashcardModel = require("../models/flashcardModel");
 
-function buscarDeckPorUsuario(req, res) {
-  var idUsuario = req.params.idUsuario;
+// function buscarCardPorUsuario(req, res) {
+//   var idDeck = req.params.idUsuario;
 
-  if (idUsuario == undefined) {
-    res.status(400).send("idUsuario está undefined!");
-    return;
-  }
+//   if (idDeck == undefined) {
+//     res.status(400).send("idUsuario está undefined!");
+//     return;
+//   }
 
-  deckModel.buscarDeckPorUsuario(idUsuario).then((resultado) => {
-    if (resultado.length > 0) {
-      res.status(200).json(resultado);
-    } else {
-      res.status(204).json([]);
-    }
-  }).catch(function (erro) {
-    console.log(erro);
-    console.log("Houve um erro ao buscar os decks: ", erro.sqlMessage);
-    res.status(500).json(erro.sqlMessage);
-  });
+//   flashcardModel.buscarCardPorUsuario(idDeck).then((resultado) => {
+//     if (resultado.length > 0) {
+//       res.status(200).json(resultado);
+//     } else {
+//       res.status(204).json([]);
+//     }
+//   }).catch(function (erro) {
+//     console.log(erro);
+//     console.log("Houve um erro ao buscar os decks: ", erro.sqlMessage);
+//     res.status(500).json(erro.sqlMessage);
+//   });
+// }
+
+
+function buscarFlashcardsPorDeck(req, res) {
+  var idDeck = req.params.idDeck;
+
+  flashcardModel.buscarFlashcardsPorDeck(idDeck)
+    .then(function (resultado) {
+      // res.json(resultado);
+
+      if(resultado.length === 0){
+        res.status(204).json([])
+      }else{
+      res.status(200).json(resultado)
+      }
+    })
+    .catch(function (erro) {
+      // console.log(erro);
+      console.log("Erro ao buscar flashcards:", erro.sqlMessage);
+      res.status(500).json(erro.sqlMessage);
+    });
 }
 
 
@@ -34,7 +55,7 @@ function cadastrar(req, res) {
   } else {
 
 
-    deckModel.cadastrar(idUsuario,titulo)
+    flashcardModel.cadastrar(idUsuario,titulo)
       .then((resultado) => {
         res.status(201).json(resultado);
       }
@@ -95,8 +116,8 @@ function atualizar(req, res){
 }
 
 module.exports = {
-  buscarDeckPorUsuario,
-  cadastrar,
-  deletar,
-  atualizar
+  buscarFlashcardsPorDeck
+  // cadastrar,
+  // deletar,
+  // atualizar
 }

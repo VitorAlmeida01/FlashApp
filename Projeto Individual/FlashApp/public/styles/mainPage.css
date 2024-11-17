@@ -81,6 +81,7 @@ a{
 .createDeck {
     background-color: #5C9CBD;
     width: 25%;
+    min-width: 350px;
     height: 15%;
     display: flex;
     flex-direction: column;
@@ -156,6 +157,7 @@ transition: 0.2s;
 
 .containerDeck{
     width: 26.5%;
+    min-width: 350px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -178,6 +180,33 @@ transition: 0.2s;
     cursor:pointer;
     font-size: 20px;
     
+}
+
+.containerDeck button{
+    background-color: transparent;
+    padding: 5px;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    border-color: #fff;
+}
+
+.containerDeck button:hover{
+    color: black;
+    background-color: #fff;
+    border-color: black;
+    transition: 0.2s;
+}
+
+.containerDeck input{
+    border-radius: 10px;
+    border: none;
+    padding: 5px;
+}
+
+.containerDeck input:focus{
+    padding: 5px;
+    outline: none;
 }
 
 #b_usuario{

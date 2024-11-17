@@ -90,14 +90,14 @@
           setTimeout(limparCampos, 1000);
 
           limparFormulario()
-          finalizarAguardar()
+          // finalizarAguardar()
         } else {
           throw "Houve um erro ao tentar realizar o cadastro!"
         }
       })
       .catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`)
-        finalizarAguardar()
+        // finalizarAguardar()
       })
 
     return false
@@ -122,14 +122,17 @@
     var emailVar = inpEmail.value;
     var senhaVar = inpSenha.value;
 
-    if (emailVar == "" || senhaVar == "") {
-        cardErro.style.display = "block"
-        mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
-        finalizarAguardar();
+    if (emailVar == '' || senhaVar == '') {
+        cardErroLogin.style.display = "block"
+        mensagem_erro_login.style.color = 'red'
+        mensagem_erro_login.innerHTML = "Preencha todos os campos";
+        
+
+        // finalizarAguardar();
         return false;
     }
     else {
-        setInterval(sumirMensagem, 5000)
+        // setInterval(sumirMensagem, 5000)
     }
 
     console.log("FORM LOGIN: ", emailVar);
@@ -157,6 +160,7 @@
                 sessionStorage.EMAIL_USUARIO = json.email;
                 sessionStorage.NOME_USUARIO = json.nome;
                 sessionStorage.DECKS = JSON.stringify(json.decks || [])
+                setInterval(sumirMensagem, 500)
 
                 setTimeout(function () {
                     window.location = "../decks.html";
@@ -170,6 +174,9 @@
 
             resposta.text().then(texto => {
                 console.error(texto);
+                cardErroLogin.style.display = "block"
+                mensagem_erro_login.style.color = 'red'
+                mensagem_erro_login.innerHTML = "Email ou senha incorretos";
                 // finalizarAguardar(texto);
             });
         }
@@ -183,6 +190,7 @@
 
 function sumirMensagem() {
     cardErro.style.display = "none"
+    cardErroLogin.style.display = "none"
 }
 
 

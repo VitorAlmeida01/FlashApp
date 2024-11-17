@@ -2,7 +2,7 @@ var database = require("../database/config");
 
 function buscarFlashcardsUltimos5Dias(idUsuario) {
   var instrucaoSql = `
-    SELECT 
+      SELECT 
       DATE(f.dtCriacao) as dataCriacao,
       COUNT(*) as quantidade
     FROM 
@@ -12,7 +12,7 @@ function buscarFlashcardsUltimos5Dias(idUsuario) {
     INNER JOIN 
       usuario u ON d.fkUsuario = u.idUsuario
     WHERE 
-      u.idUsuario = ${idUsuario} AND DATE(f.dtCriacao) <= CURDATE() 
+      u.idUsuario = ${idUsuario} AND DATE(f.dtCriacao) >= CURDATE() - INTERVAL 6 DAY AND DATE(f.dtCriacao) < CURDATE() + INTERVAL 1 DAY
     GROUP BY 
       DATE(f.dtCriacao)
     ORDER BY 

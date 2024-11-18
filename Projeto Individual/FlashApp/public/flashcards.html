@@ -120,6 +120,11 @@
     carregarFlashcards(idDeck)
     const titulo = sessionStorage.tituloDeck
 
+    var nome = sessionStorage.NOME_USUARIO
+
+    var b_usuario = document.getElementById("b_usuario")
+    b_usuario.innerText = nome
+
     if (idDeck) {
       document.getElementById('deckTitle').innerText = titulo
       carregarFlashcards(idDeck)
@@ -174,8 +179,8 @@
             <p>Resposta: <span id="respostaContainer">${flashcard.resposta}</span></p>
           </div>
           <div class="containerBtn-verso">
-            <button id="btnBom">Bom</button>
-            <button id="btnRuim">Ruim</button>
+            <button class="btnLembrei" value='1' data-idCard="${flashcard.idFlashCard}">Lembrei</button>
+            <button class="btnEsqueci" value='0' data-idCard="${flashcard.idFlashCard}">Esqueci</button>
           </div>
         </div>
       </div>
@@ -195,6 +200,20 @@
               flashcard.querySelector("#containerFlashCards-frente").style.display = "flex"
               flashcard.querySelector("#containerFlashCards-verso").style.display = "none"
             })
+          })
+        })
+
+        document.querySelectorAll('.btnLembrei').forEach(button => {
+          button.addEventListener('click', function () {
+            let valor = button.value
+            avaliarFlashcard(button.getAttribute("data-idCard"), valor)
+          })
+        })
+
+        document.querySelectorAll('.btnEsqueci').forEach(button => {
+          button.addEventListener('click', function () {
+            let valor = button.value
+            avaliarFlashcard(button.getAttribute("data-idCard"), valor)
           })
         })
 
@@ -218,6 +237,9 @@
 
   })
 
+ 
+
+
 
   function cadastrarFlashcards() {
     var idDeck = sessionStorage.selectedDeckId
@@ -227,37 +249,41 @@
 
     console.log(idDeck)
 
-    if (!idDeck) {
-      console.error("ID do deck não encontrado no sessionStorage")
-      return
-    }
+    if (titulo == '' || pergunta == '' || resposta == '') {
+      alert('Preencha todos os campos')
+    } else {
 
-    fetch(`/flashcard/cadastrar`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        titulo: titulo,
-        pergunta: pergunta,
-        resposta: resposta,
-        idDeck: idDeck
-      }),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          console.log(response)
-          throw new Error("Erro ao cadastrar flashcards")
-        }
-        return response.json()
+      if (!idDeck) {
+        console.error("ID do deck não encontrado no sessionStorage")
+        return
+      }
+
+      fetch(`/flashcard/cadastrar`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          titulo: titulo,
+          pergunta: pergunta,
+          resposta: resposta,
+          idDeck: idDeck
+        }),
       })
-      .then((cards) => {
-        const flashcardsContainer = document.getElementById("containerFlashcards")
-        carregarFlashcards(idDeck) // Renderiza os flashcards na tela
+        .then((response) => {
+          if (!response.ok) {
+            console.log(response)
+            throw new Error("Erro ao cadastrar flashcards")
+          }
+          return response.json()
+        })
+        .then((cards) => {
+          const flashcardsContainer = document.getElementById("containerFlashcards")
+          carregarFlashcards(idDeck) // Renderiza os flashcards na tela
 
-        if (cards.length > 0) {
-          cards.forEach((item) => {
-            flashcardsContainer.innerHTML += `
+          if (cards.length > 0) {
+            cards.forEach((item) => {
+              flashcardsContainer.innerHTML += `
     <div class='flashcards'>
       <div id="containerFlashCards-frente">
           <div class="containerFlashcard-frente">
@@ -293,13 +319,42 @@
           </div>
         </div>
       </div>`
-          })
-        }
-      })
-      .catch((error) => {
-        console.error("Erro ao buscar decks:", error)
-      })
+            })
+          }
+        })
+        .catch((error) => {
+          console.error("Erro ao buscar decks:", error)
+        })
+    }
   }
+
+  function avaliarFlashcard(idFlashcard, avaliacao){
+    // let idFlashcard = element.getAttribute('data-idCard')
+    // let idDeck = sessionStorage.selectedDeckId
+    
+
+    fetch(`flashcard/avaliar/${idFlashcard}`, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        statusAvaliacao: avaliacao
+      })
+    }).then((response) => {
+      if(!response.ok) {
+        throw new Error('Erro ao avaliar o flashcard')
+      }
+      return response.json()
+    }).then((item) => {
+      item.idFlashCard = idFlashcard
+      item.statusAvaliacao = avaliacao 
+       })
+    .catch((error) => {
+        console.error("Erro ao avaliar o flashcard: ", error)
+      })
+}
+
 
 
   function deletarFlashcards(element) {

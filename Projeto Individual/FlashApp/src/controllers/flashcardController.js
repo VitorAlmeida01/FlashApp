@@ -118,9 +118,32 @@ function atualizar(req, res){
 
 }
 
+function avaliar(req, res){
+
+  // var {idFlashCard, avaliacao} = req.body
+  var idFlashCard = req.params.idFlashcard
+  var avaliacao = req.body.statusAvaliacao
+
+
+  if(idFlashCard == undefined){
+    res.status(400).json({erro: 'Id do flashcard selecionado não encontrado'})
+  }else{
+    flashcardModel.avaliar(idFlashCard, avaliacao)
+    .then((resultado) => {
+      res.status(200).json(resultado)
+    })
+    .catch((erro) => {
+      console.log(erro)
+      console.log('\n Erro ao avaliar o flashcard: ', erro.sqlMessage)
+      res.status(500).json({erro: erro.sqlMessage})
+    })
+  }
+}
+
 module.exports = {
   buscarFlashcardsPorDeck,
   cadastrar,
-  deletar
+  deletar,
+  avaliar
   // atualizar
 }

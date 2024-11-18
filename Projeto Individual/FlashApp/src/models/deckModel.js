@@ -33,6 +33,29 @@ function atualizar(idDeck, titulo){
   return database.executar(instrucaoSql)
 }
 
+function contarDecks(idUsuario) {
+  var instrucao = `
+    SELECT COUNT(*) AS totalDecks FROM deck WHERE fkUsuario = ${idUsuario};
+  `;
+  return database.executar(instrucao);
+}
+
+// function contarFlashcards(idDeck) {
+//   var instrucao = `
+//     SELECT COUNT(*) AS totalFlashcards FROM flashcard WHERE fkDeck = ${idDeck};`;
+//   return database.executar(instrucao);
+// }
+
+function contarFlashcards(idUsuario) {
+  var instrucao = `
+  
+    SELECT COUNT(*) AS totalFlashcards FROM flashCard f JOIN deck d ON f.fkDeck = d.idDeck JOIN usuario u ON d.fkUsuario = u.idUsuario WHERE u.idUsuario = ${idUsuario};
+    `;
+  return database.executar(instrucao);
+}
+// SELECT COUNT(*) AS totalFlashcards FROM flashcard WHERE fkDeck = ${idUsuario};
+
+// 'SELECT COUNT(*) FROM flashCard f JOIN deck d ON f.fkDeck = d.idDeck JOIN usuario u ON d.fkUsuario = u.idUsuario WHERE u.idUsuario = 1'
 
 // INSERT INTO deck (titulo, fkUsuario) VALUES (titulo, idUsuario)
 
@@ -40,6 +63,8 @@ module.exports = {
   buscarDeckPorUsuario,
   cadastrar,
   deletar,
-  atualizar
+  atualizar,
+  contarDecks,
+  contarFlashcards
 }
 

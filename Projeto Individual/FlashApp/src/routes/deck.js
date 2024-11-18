@@ -19,4 +19,18 @@ router.put("/atualizar/:idDeck", function (req, res) {
   deckController.atualizar(req, res);
 })
 
+
+router.get("/contagemDecks/:idUsuario", function (req, res) {
+  deckController.contarDecks(req, res);
+});
+
+// Rota para buscar a contagem de flashcards por usuário
+// router.get("/contagemFlashcards/:idDeck", function (req, res) {
+//   deckController.contarFlashcards(req, res);
+// });
+
+router.get("/contagemFlashcards/:idUsuario", function (req, res) {
+    deckController.contarFlashcards(req, res);
+  });
+
 module.exports = router;

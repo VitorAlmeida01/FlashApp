@@ -19,5 +19,12 @@ router.delete("/deletar/:idFlashcard", function (req, res) {
   flashcardController.deletar(req, res);
 })
 
+router.post("/avaliar/:idFlashcard", function (req, res){
+  flashcardController.avaliar(req,res)
+})
+
+router.put("/avaliarExistente/:idFlashcard", function (req, res){
+  flashcardController.avaliarExistente(req,res)
+})
 
 module.exports = router

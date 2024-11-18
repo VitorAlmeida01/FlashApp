@@ -6,6 +6,7 @@ function validarSessao() {
 
 
 
+
     var b_usuario = document.getElementById("b_usuario");
     // var c_cpf = document.getElementById("c_cpf");
 

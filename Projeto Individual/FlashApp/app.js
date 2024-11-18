@@ -19,6 +19,7 @@ var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
 var deckRouter = require("./src/routes/deck");
 var flashcardRouter = require("./src/routes/flashcard");
+var dashboardRouter = require('./src/routes/dashboard')
 // var avisosRouter = require("./src/routes/avisos");
 // var medidasRouter = require("./src/routes/medidas");
 // var empresasRouter = require("./src/routes/empresas");
@@ -35,6 +36,7 @@ app.use("/usuarios", usuarioRouter);
 // app.use("/medidas", medidasRouter);
 app.use("/decks", deckRouter);
 app.use("/flashcard", flashcardRouter);
+app.use('/dashboard', dashboardRouter)
 // app.use("/empresas", empresasRouter);
 
 app.listen(PORTA_APP, function () {

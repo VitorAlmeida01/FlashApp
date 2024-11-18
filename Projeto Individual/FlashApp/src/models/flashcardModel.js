@@ -26,9 +26,19 @@ function deletar(idFlashCard) {
   return database.executar(instrucaoSql);
 }
 
+
+function avaliar(idFlashCard, avaliacao){
+  var instrucaoSql  = `INSERT INTO avaliacao (statusAvaliacao, fkFlashCard) VALUES
+	(${avaliacao}, ${idFlashCard});`
+
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+}
+
 module.exports = {
   buscarFlashcardsPorDeck,
   cadastrar,
-  deletar
+  deletar,
+  avaliar
   // atualizar
 }

@@ -146,15 +146,6 @@ transition: 0.2s;
     border: 1px solid black;
 }
 
-i{
-    transition: 0.2s;
-}
-
-i:hover{
-    color: #fff;
-    transition: 0.2s;
-}
-
 a{
     transition: 0.2s;
 }
@@ -187,6 +178,16 @@ a:hover{
     box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
     border: 1px solid black;
     margin-bottom: 2%;
+}
+
+.containerDeck div:nth-child(2) i{
+    color: #000;
+    transition: 0.2s;
+}
+
+.containerDeck div:nth-child(2) i:hover{
+    color: #fff;
+    transition: 0.2s;
 }
 
 .containerDeck h2{

@@ -148,34 +148,37 @@
     var idUsuario = sessionStorage.ID_USUARIO
     var titulo = document.getElementById("inpDeck").value
 
-    if (!idUsuario) {
-      console.error("ID do usuário não encontrado no sessionStorage")
-      return
-    }
+    if (titulo == '') {
+      alert('Insira um título')
+    } else {
+      if (!idUsuario) {
+        console.error("ID do usuário não encontrado no sessionStorage")
+        return
+      }
 
-    fetch(`/decks/cadastrar`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        titulo: titulo,
-        idUsuario: idUsuario
-      }),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Erro ao cadastrar decks")
-        }
-        return response.json()
+      fetch(`/decks/cadastrar`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          titulo: titulo,
+          idUsuario: idUsuario
+        }),
       })
-      .then((decks) => {
-        var containerDecks = document.getElementById("containerDecks")
-        exibirDecks() // Renderiza os decks na tela
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Erro ao cadastrar decks")
+          }
+          return response.json()
+        })
+        .then((decks) => {
+          var containerDecks = document.getElementById("containerDecks")
+          exibirDecks() // Renderiza os decks na tela
 
-        if (decks.length > 0) {
-          decks.forEach((item) => {
-            containerDecks.innerHTML += `
+          if (decks.length > 0) {
+            decks.forEach((item) => {
+              containerDecks.innerHTML += `
             <div class="containerDeck">
               <h2>${item.titulo}</h2>
               <div>
@@ -183,12 +186,15 @@
                 <i class="fa-solid fa-trash"></i>
               </div>
             </div>`
-          })
-        }
-      })
-      .catch((error) => {
-        console.error("Erro ao buscar decks:", error)
-      })
+            })
+          }
+        })
+        .catch((error) => {
+          console.error("Erro ao buscar decks:", error)
+        })
+    }
+
+
   }
 
   function deckId(element) {

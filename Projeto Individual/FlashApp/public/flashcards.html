@@ -347,8 +347,16 @@
       }
       return response.json()
     }).then((item) => {
-      item.idFlashCard = idFlashcard
-      item.statusAvaliacao = avaliacao 
+      // item.idFlashCard = idFlashcard
+      // item.statusAvaliacao = avaliacao 
+
+      console.log('statusAvaliacao: ',avaliacao)
+
+      if(avaliacao == '1'){
+        alert(`Parabéns continue assim.`)
+      }else{
+        alert(`Não desista, voce está evoluindo.`)
+      }
        })
     .catch((error) => {
         console.error("Erro ao avaliar o flashcard: ", error)

@@ -7,9 +7,9 @@ function buscarFlashcardsUltimos5Dias(idUsuario) {
       COUNT(*) as quantidade
     FROM 
       flashCard f
-    INNER JOIN 
+    JOIN 
       deck d ON f.fkDeck = d.idDeck
-    INNER JOIN 
+    JOIN 
       usuario u ON d.fkUsuario = u.idUsuario
     WHERE 
       u.idUsuario = ${idUsuario} AND DATE(f.dtCriacao) >= CURDATE() - INTERVAL 6 DAY AND DATE(f.dtCriacao) < CURDATE() + INTERVAL 1 DAY

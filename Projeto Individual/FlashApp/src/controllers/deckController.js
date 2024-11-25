@@ -121,11 +121,25 @@ function contarFlashcards(req, res) {
     });
 }
 
+function estudoPorDeck(req, res){
+  var idDeck = req.body.idDeck
+  var qtdEstudo = req.body.qtdEstudo
+
+  deckModel.estudoPorDeck(idDeck, qtdEstudo)
+  .then(function (result){
+    res.json(result)
+  }).catch((error) =>{
+    console.log(error)
+    res.status(500).json(error.sqlMessage)
+  })
+}
+
 module.exports = {
   buscarDeckPorUsuario,
   cadastrar,
   deletar,
   atualizar,
   contarDecks,
-  contarFlashcards
+  contarFlashcards,
+  estudoPorDeck
 }

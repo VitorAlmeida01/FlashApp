@@ -6,7 +6,9 @@ router.get('/ultimos5dias/:idUsuario', function (req,res){
   dashboardController.buscarFlashcardsUltimos5Dias (req, res);
 })
 
-router.get('/avaliacaoPorDeck/')
+router.get('/avaliacaoPorUsuario/:idUsuario', function (req, res){
+  dashboardController.buscarAvaliacao (req, res)
+})
 
 
 // router.get('/flashcards/ultimos5dias/:idUsuario', (req, res) => {

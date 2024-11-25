@@ -27,6 +27,15 @@ CREATE TABLE deck(
     fkUsuario INT,
     CONSTRAINT chkUsuario FOREIGN KEY (fkUsuariO) REFERENCES usuario(idUsuario)
 );
+
+ALTER TABLE deck
+ADD COLUMN qtdEstudada INT;
+
+ALTER TABLE deck
+ADD COLUMN dtEstudo DATE;
+
+DESC deck;
+
 DROP TABLE flashCard;
 CREATE TABLE flashCard(
 	idFlashCard INT PRIMARY KEY AUTO_INCREMENT,
@@ -61,5 +70,19 @@ INSERT INTO avaliacao (statusAvaliacao, fkFlashCard) VALUES
     
 SELECT deck.titulo Titulo, deck.dtCriacao Data_de_criacao, usuario.nome Usuario, usuario.email email_usuario FROM deck 
 JOIN usuario ON deck.fkUsuario = usuario.idUsuario;
+
+
+SELECT * FROM avaliacao;
+
+SELECT COUNT(CASE WHEN statusAvaliacao = 0 THEN 1 END) AS quantidade_zero,
+	   COUNT(CASE WHEN statusAvaliacao = 1 THEN 1 END) AS quantidade_um,
+       COUNT(*),
+       fkFlashCard
+ FROM avaliacao 
+JOIN flashcard on fkFlashCard = idFlashCard
+JOIN deck ON fkDeck = idDeck
+JOIN usuario ON fkUsuario = idUsuario
+WHERE idUsuario = 1
+GROUP BY fkFlashCard;
     
     

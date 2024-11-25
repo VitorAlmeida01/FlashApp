@@ -33,4 +33,8 @@ router.get("/contagemFlashcards/:idUsuario", function (req, res) {
     deckController.contarFlashcards(req, res);
   });
 
+router.post('/estudoPorDeck/:idDeck', function (req, res){
+  deckController.estudoPorDeck(req, res)
+})
+
 module.exports = router;

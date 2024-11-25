@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="./styles/mainPage.css" />
   <!-- ChartJS -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
   <link rel="stylesheet" href="./styles/dashboard.css">
   <script src="./scripts/decks.js" defer></script>
   <title>Decks</title>
@@ -123,6 +124,7 @@
     var idUsuario = sessionStorage.getItem('ID_USUARIO')
     var nome = sessionStorage.NOME_USUARIO
     plotChart()
+    plotPieChart()
 
 
     var b_usuario = document.getElementById("b_usuario")
@@ -208,10 +210,23 @@
   function fetchFlashcardsData() {
     var idUsuario = sessionStorage.ID_USUARIO
 
-
     return fetch(`/dashboard/ultimos5dias/${idUsuario}`) // Substitua 1 pelo idUsuario real
       .then(response => response.json())
   }
+
+  function fetchAvaliacoesData() {
+    var idUsuario = sessionStorage.ID_USUARIO
+
+    return fetch(`/dashboard/avaliacaoPorUsuario/${idUsuario}`)
+      .then(resposta => resposta.json())
+
+  }
+
+  Chart.defaults.set('plugins.datalabels', {
+    color: '#FE777B'
+  })
+
+
 
   // Função para plotar o gráfico
   function plotChart() {
@@ -276,30 +291,72 @@
     }
   })
 
-  const ctx3 = document.getElementById('doughnutChart')
 
-  var data = {
-    data: [12, 19, 3, 5, 2, 3]
+
+  function plotPieChart() {
+    fetchAvaliacoesData().then(avaliacoesData => {
+      // Processar os resultados para gerar labels e dados
+      var dados1 = avaliacoesData.map(item => ((item.quantidade_um / item.qtdTotal) * 100).toFixed(0))
+      var dados0 = avaliacoesData.map(item => ((item.quantidade_zero / item.qtdTotal) * 100).toFixed(0))
+
+      console.log(avaliacoesData)
+      console.log('dados2', dados1[0])
+
+      const dataValues = [dados1[0], dados0[0]]
+      const labelValues = ['Lembrei']
+
+
+
+      const ctx3 = document.getElementById('doughnutChart')
+
+
+      new Chart(ctx3, {
+        type: 'pie',
+        data: {
+          labels: [
+            'Lembrei',
+            'Esqueci'
+          ],
+          datasets: [{
+            label: labelValues,
+            data: dataValues,
+            backgroundColor: [
+              'rgb(255, 99, 132)',
+              'rgb(54, 162, 235)'
+            ],
+            hoverOffset: 4
+          }]
+        },
+        plugins: [ChartDataLabels],
+        options: {
+          responsive: true,
+          plugins: {
+            datalabels: {
+              formatter: function (value, context) {
+                return Math.round(value) + '%'
+              },
+              color: '#fff',
+              labels: {
+                title: {
+                  font: {
+                    size: 30,
+                    weight: 'bold'
+                  }
+                }
+              }
+            },
+
+            tooltip: {
+              callbacks: {
+                label: function (tooltipItem) {
+                  return `${tooltipItem.label}: ${tooltipItem.raw}%`
+                }
+              }
+            }
+          }
+        }
+      })
+    })
   }
-
-  new Chart(ctx3, {
-    type: 'pie',
-    data: {
-      labels: [
-        'Red',
-        'Blue'
-      ],
-      datasets: [{
-        label: 'My First Dattesteaset',
-        data: [60, 40],
-        backgroundColor: [
-          'rgb(255, 99, 132)',
-          'rgb(54, 162, 235)'
-        ],
-        hoverOffset: 4
-      }]
-    }
-  });
-
 
 </script>

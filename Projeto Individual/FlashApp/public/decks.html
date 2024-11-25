@@ -73,6 +73,7 @@
 </html>
 
 <script>
+  var qtdEstudo = 0
   document.addEventListener("DOMContentLoaded", function () {
     exibirDecks()
     validarSessao()
@@ -131,6 +132,9 @@
         document.querySelectorAll(".fa-graduation-cap").forEach((button) => {
           button.addEventListener("click", function () {
             deckId(this)
+            qtdEstudo++
+            console.log('estudo', qtdEstudo)
+            estudoPorDeck(button.getAttribute("data-id"), qtdEstudo)
           })
         })
       })
@@ -212,6 +216,36 @@
     } else {
       console.error('idDeck não econtrado')
     }
+  }
+
+
+  function estudoPorDeck(idDeck, qtdEstudo) {
+    // let idFlashcard = element.getAttribute('data-idCard')
+    // let idDeck = sessionStorage.selectedDeckId
+    // var idDeck = element.getAttribute('data-id')
+
+    console.log('qtdEstudo: ', qtdEstudo)
+
+    fetch(`/decks/estudoPorDeck/${idDeck}`, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        qtdEstudo: qtdEstudo,
+        idDeck: idDeck
+      })
+    }).then((response) => {
+      if (!response.ok) {
+        throw new Error('Erro ao estudar o deck')
+      }
+      return response.json()
+    }).then((item) => {
+      console.log('qtdEstudo: ', item.qtdEstudo)
+    })
+      .catch((error) => {
+        console.error("Erro ao avaliar o flashcard: ", error)
+      })
   }
 
   function deletarDecks(element) {

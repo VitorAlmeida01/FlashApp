@@ -17,6 +17,21 @@ function buscarFlashcardsUltimos5Dias(req, res) {
   });
 }
 
+function buscarAvaliacao(req, res){
+  var idUsuario = req.params.idUsuario;
+
+  dashboardModel.buscarAvaliacao(idUsuario).then((resultado) => {
+    res.status(200).json(resultado)
+  }).catch(function (erro) {
+    console.log(erro)
+    console.log('Houve um erro ao buscar as avaliações ', erro.sqlMessage)
+    res.status(500).json(erro.sqlMessage)
+  })
+}
+
+
+
 module.exports = {
-  buscarFlashcardsUltimos5Dias
+  buscarFlashcardsUltimos5Dias,
+  buscarAvaliacao
 }

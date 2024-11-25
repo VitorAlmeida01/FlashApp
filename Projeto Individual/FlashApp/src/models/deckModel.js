@@ -48,16 +48,36 @@ function contarDecks(idUsuario) {
 
 function contarFlashcards(idUsuario) {
   var instrucao = `
-  
     SELECT COUNT(*) AS totalFlashcards FROM flashCard f JOIN deck d ON f.fkDeck = d.idDeck JOIN usuario u ON d.fkUsuario = u.idUsuario WHERE u.idUsuario = ${idUsuario};
     `;
   return database.executar(instrucao);
 }
-// SELECT COUNT(*) AS totalFlashcards FROM flashcard WHERE fkDeck = ${idUsuario};
 
-// 'SELECT COUNT(*) FROM flashCard f JOIN deck d ON f.fkDeck = d.idDeck JOIN usuario u ON d.fkUsuario = u.idUsuario WHERE u.idUsuario = 1'
+function estudoPorDeck(idDeck, qtdEstudo){
+  var instrucaoVerificar = `SELECT * FROM estudo WHERE fkDeck = ${idDeck}`
 
-// INSERT INTO deck (titulo, fkUsuario) VALUES (titulo, idUsuario)
+  return database.executar(instrucaoVerificar)
+  .then((resultado) => {
+    if(resultado.length === 0){
+      var instrucao = `
+      INSERT INTO estudo (qtdEstudo, dtEstudo, fkDeck) VALUES
+    (${qtdEstudo}, CURRENT_TIMESTAMP, ${idDeck});
+    `
+    return database.executar(instrucao)
+    }else{
+      var instrucaoUpdate = `
+        UPDATE estudo SET 
+          qtdEstudo = qtdEstudo + ${qtdEstudo},
+          dtEstudo = CURRENT_TIMESTAMP
+          WHERE fkDeck = ${idDeck}
+      `
+      console.log(instrucaoUpdate)
+      return database.executar(instrucaoUpdate)
+    }
+  })
+
+}
+
 
 module.exports = {
   buscarDeckPorUsuario,
@@ -65,6 +85,7 @@ module.exports = {
   deletar,
   atualizar,
   contarDecks,
-  contarFlashcards
+  contarFlashcards,
+  estudoPorDeck
 }
 

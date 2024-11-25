@@ -280,7 +280,8 @@
         const date = new Date(item.dataEstudo) // Converter para objeto Date
         return date.toLocaleDateString('pt-BR')
       })
-      var dados = estudoPorDia.map(item => item.totalEstudado)
+      var dados = estudoPorDia.map(item => item.totalEstudado)  
+      console.log('BarChart', dados)
 
       const ctx2 = document.getElementById('barChart')
 

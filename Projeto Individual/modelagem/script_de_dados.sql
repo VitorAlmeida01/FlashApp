@@ -34,20 +34,52 @@ CREATE TABLE estudo (
     qtdEstudo INT,
     dtEstudo TIMESTAMP,
     fkDeck INT,
-    CONSTRAINT chkFkDeck FOREIGN KEY (fkDeck) REFERENCES deck(idDeck),
+    CONSTRAINT FkDeck FOREIGN KEY (fkDeck) REFERENCES deck(idDeck),
     PRIMARY KEY(idEstudo, fkDeck)
 );
+
 DROP TABLE estudo;
 INSERT INTO estudo (qtdEstudo, dtEstudo, fkDeck) VALUES
 	(2, CURRENT_TIMESTAMP, 1);
     
 SELECT * FROM estudo;
+DROP TABLE estudo;
+delete from estudo where idEstudo = 4;
+
+INSERT INTO estudo (qtdEstudo, dtEstudo, fkDeck) VALUES
+			(1, '2024-11-24 23:20:04' , 39);
+            
+UPDATE estudo 
+SET qtdEstudo = 2
+WHERE fkDeck = 44 AND DATE(dtEstudo) = '2024-11-23';
+            
+SELECT * FROM estudo;
+select * from deck;
 
 SELECT DATE(dtEstudo) AS dataEstudo ,SUM(qtdEstudo) AS totalEstudado FROM estudo
 JOIN deck on fkDeck = idDeck
 JOIN usuario on fkUsuario = idUsuario
-WHERE idUsuario = 50 AND DATE(dtEstudo) >= current_date() - INTERVAL 6 DAY AND DATE(dtEstudo) < current_date() + INTERVAL 1 DAY
-ORDER BY dtEstudo;
+WHERE idUsuario = 11 AND dtEstudo >= CURDATE() - INTERVAL 6 DAY AND dtEstudo < CURDATE() + INTERVAL 1 DAY
+GROUP BY dataEstudo
+ORDER BY dataEstudo;
+
+select * from estudo;
+
+      SELECT 
+      DATE(f.dtCriacao) as dataCriacao,
+      COUNT(*) as quantidade
+    FROM 
+      flashCard f
+    JOIN 
+      deck d ON f.fkDeck = d.idDeck
+    JOIN 
+      usuario u ON d.fkUsuario = u.idUsuario
+    WHERE 
+      u.idUsuario = 50 AND DATE(f.dtCriacao) >= CURDATE() - INTERVAL 6 DAY AND DATE(f.dtCriacao) < CURDATE() + INTERVAL 1 DAY
+    GROUP BY 
+      DATE(f.dtCriacao)
+    ORDER BY 
+      DATE(f.dtCriacao);
 
 -- >= CURDATE() - INTERVAL 6 DAY AND DATE(f.dtCriacao) < CURDATE() + INTERVAL 1 DAY
 -- DATE(f.dtCriacao) <= curdate() group by DATE(f.dtCriacao)
@@ -55,7 +87,9 @@ ORDER BY dtEstudo;
 SELECT qtdEstudo, dtEstudo FROM estudo
 JOIN deck on fkDeck = idDeck
 JOIN usuario on fkUsuario = idUsuario
-WHERE idUsuario = 50 AND DATE(dtEstudo) = current_date();
+WHERE idUsuario = 1 AND DATE(dtEstudo) = current_date();
+
+select * from deck join usuario on fkUsuario = idUsuario where fkUsuario = 1;
 
 DESC deck;
 
@@ -71,6 +105,12 @@ CREATE TABLE flashCard(
     fKDeck INT,
     CONSTRAINT chkDeck FOREIGN KEY (fkDeck) REFERENCES deck(idDeck)
 );
+
+select * from flashCard;
+
+insert into flashCard (titulo, pergunta, resposta, dtCriacao, fkDeck) values
+		('teste2', '1', '1222', '2024-11-23 00:00:00', 36),
+        ('test3', '1', '1222', '2024-11-22 00:00:00', 36);
 
 desc flashCard;
 DROP TABLE avaliacao;

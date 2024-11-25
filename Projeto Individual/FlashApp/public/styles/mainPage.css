@@ -29,6 +29,10 @@ body{
     gap: 5%;
 }
 
+.sideBar p {
+    margin-left: 5%;
+}
+
 ul{
     /* align-self: center; */
     margin: 0 auto;
@@ -162,6 +166,7 @@ a:hover{
     display: flex;
     gap: 2%;    
     flex-wrap: wrap;
+    overflow-y: scroll;
 }
 
 .containerDeck{

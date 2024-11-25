@@ -105,7 +105,7 @@
 
 
         <div class="barChartContainer">
-          <h1>Usuarios</h1>
+          <h1>Decks estudados por dia</h1>
           <canvas id="barChart" height="45" width="250"></canvas>
         </div>
 
@@ -125,6 +125,7 @@
     var nome = sessionStorage.NOME_USUARIO
     plotChart()
     plotPieChart()
+    plotBarChart()
 
 
     var b_usuario = document.getElementById("b_usuario")
@@ -222,6 +223,13 @@
 
   }
 
+  function fetchEstudoPorDia() {
+    var idUsuario = sessionStorage.ID_USUARIO
+
+    return fetch(`/dashboard/estudoDeckPorDia/${idUsuario}`)
+      .then(resposta => resposta.json())
+  }
+
   Chart.defaults.set('plugins.datalabels', {
     color: '#FE777B'
   })
@@ -265,33 +273,38 @@
   }
   // Chamar a função para plotar o gráfico
 
+  function plotBarChart() {
+    fetchEstudoPorDia().then(estudoPorDia => {
+      // Processar os resultados para gerar labels e dados
+      var labels = estudoPorDia.map(item => {
+        const date = new Date(item.dataEstudo) // Converter para objeto Date
+        return date.toLocaleDateString('pt-BR')
+      })
+      var dados = estudoPorDia.map(item => item.totalEstudado)
 
+      const ctx2 = document.getElementById('barChart')
 
-
-
-
-  const ctx2 = document.getElementById('barChart')
-
-  new Chart(ctx2, {
-    type: 'bar',
-    data: {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-      datasets: [{
-        label: '# of Votes',
-        data: [12, 19, 3, 5, 2, 3],
-        borderWidth: 1,
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
+      new Chart(ctx2, {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Decks estudados',
+            data: dados,
+            borderWidth: 1,
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
         }
-      }
-    }
-  })
+      })
 
-
+    })
+  }
 
   function plotPieChart() {
     fetchAvaliacoesData().then(avaliacoesData => {

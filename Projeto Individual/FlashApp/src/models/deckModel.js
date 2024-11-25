@@ -54,7 +54,7 @@ function contarFlashcards(idUsuario) {
 }
 
 function estudoPorDeck(idDeck, qtdEstudo){
-  var instrucaoVerificar = `SELECT * FROM estudo WHERE fkDeck = ${idDeck}`
+  var instrucaoVerificar = `SELECT * FROM estudo WHERE fkDeck = ${idDeck} AND DATE(dtEstudo) = CURDATE()`
 
   return database.executar(instrucaoVerificar)
   .then((resultado) => {
@@ -69,7 +69,7 @@ function estudoPorDeck(idDeck, qtdEstudo){
         UPDATE estudo SET 
           qtdEstudo = qtdEstudo + ${qtdEstudo},
           dtEstudo = CURRENT_TIMESTAMP
-          WHERE fkDeck = ${idDeck}
+          WHERE fkDeck = ${idDeck} AND DATE(dtEstudo) = CURDATE();
       `
       console.log(instrucaoUpdate)
       return database.executar(instrucaoUpdate)

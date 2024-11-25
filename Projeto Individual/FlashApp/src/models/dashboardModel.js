@@ -40,7 +40,23 @@ function buscarAvaliacao(idUsuario){
   return database.executar(instrucaoSql)
 }
 
+
+function estudoDeckPorDia(idUsuario){
+
+  var instrucaoSql = `
+SELECT DATE(dtEstudo) AS dataEstudo ,SUM(qtdEstudo) AS totalEstudado FROM estudo
+  JOIN deck on fkDeck = idDeck
+  JOIN usuario on fkUsuario = idUsuario
+WHERE idUsuario = ${idUsuario} AND DATE(dtEstudo) >= CURDATE() - INTERVAL 6 DAY AND DATE(dtEstudo) < CURDATE() + INTERVAL 1 DAY
+GROUP BY DATE(dtEstudo)
+ORDER BY DATE(dtEstudo);
+` 
+
+return database.executar(instrucaoSql)
+}
+
 module.exports = {
   buscarFlashcardsUltimos5Dias,
-  buscarAvaliacao
+  buscarAvaliacao,
+  estudoDeckPorDia
 }

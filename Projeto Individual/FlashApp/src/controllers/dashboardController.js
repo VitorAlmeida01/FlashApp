@@ -29,9 +29,20 @@ function buscarAvaliacao(req, res){
   })
 }
 
+function estudoDeckPorDia(req, res){
+  var idUsuario = req.params.idUsuario
+
+  dashboardModel.estudoDeckPorDia(idUsuario).then((resultado) => {
+    res.status(200).json(resultado)
+  }).catch(function (erro) {
+    res.status(500).json(erro.sqlMessage)
+  })
+
+}
 
 
 module.exports = {
   buscarFlashcardsUltimos5Dias,
-  buscarAvaliacao
+  buscarAvaliacao,
+  estudoDeckPorDia
 }

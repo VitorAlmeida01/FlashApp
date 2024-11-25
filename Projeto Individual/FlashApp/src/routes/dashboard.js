@@ -10,6 +10,10 @@ router.get('/avaliacaoPorUsuario/:idUsuario', function (req, res){
   dashboardController.buscarAvaliacao (req, res)
 })
 
+router.get('/estudoDeckPorDia/:idUsuario', function (req, res){
+  dashboardController.estudoDeckPorDia(req, res)
+})
+
 
 // router.get('/flashcards/ultimos5dias/:idUsuario', (req, res) => {
 //   const { idUsuario } = req.params;

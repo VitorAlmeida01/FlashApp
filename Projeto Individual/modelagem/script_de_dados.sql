@@ -28,11 +28,6 @@ CREATE TABLE deck(
     CONSTRAINT chkUsuario FOREIGN KEY (fkUsuariO) REFERENCES usuario(idUsuario)
 );
 
-ALTER TABLE deck
-DROP COLUMN qtdEstudada;
-
-ALTER TABLE deck
-DROP COLUMN dtEstudo;
 
 CREATE TABLE estudo (
 	idEstudo INT AUTO_INCREMENT,
@@ -47,6 +42,20 @@ INSERT INTO estudo (qtdEstudo, dtEstudo, fkDeck) VALUES
 	(2, CURRENT_TIMESTAMP, 1);
     
 SELECT * FROM estudo;
+
+SELECT DATE(dtEstudo) AS dataEstudo ,SUM(qtdEstudo) AS totalEstudado FROM estudo
+JOIN deck on fkDeck = idDeck
+JOIN usuario on fkUsuario = idUsuario
+WHERE idUsuario = 50 AND DATE(dtEstudo) >= current_date() - INTERVAL 6 DAY AND DATE(dtEstudo) < current_date() + INTERVAL 1 DAY
+ORDER BY dtEstudo;
+
+-- >= CURDATE() - INTERVAL 6 DAY AND DATE(f.dtCriacao) < CURDATE() + INTERVAL 1 DAY
+-- DATE(f.dtCriacao) <= curdate() group by DATE(f.dtCriacao)
+
+SELECT qtdEstudo, dtEstudo FROM estudo
+JOIN deck on fkDeck = idDeck
+JOIN usuario on fkUsuario = idUsuario
+WHERE idUsuario = 50 AND DATE(dtEstudo) = current_date();
 
 DESC deck;
 

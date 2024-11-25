@@ -7,7 +7,7 @@
     "start": "node app.js",
     "dev": "nodemon --exec node app.js"
   },
-  "author": "Feito pelos desenvolvedores @ São Paulo Tech School / Bandtec Digital School",
+  "author": "Feito pelo desenvolvedor Vitor Almeida / São Paulo Tech School",
   "license": "MIT",
   "dependencies": {
     "chartjs-plugin-datalabels": "^2.2.0",

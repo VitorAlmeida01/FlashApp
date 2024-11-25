@@ -29,12 +29,28 @@ CREATE TABLE deck(
 );
 
 ALTER TABLE deck
-ADD COLUMN qtdEstudada INT;
+DROP COLUMN qtdEstudada;
 
 ALTER TABLE deck
-ADD COLUMN dtEstudo DATE;
+DROP COLUMN dtEstudo;
+
+CREATE TABLE estudo (
+	idEstudo INT AUTO_INCREMENT,
+    qtdEstudo INT,
+    dtEstudo TIMESTAMP,
+    fkDeck INT,
+    CONSTRAINT chkFkDeck FOREIGN KEY (fkDeck) REFERENCES deck(idDeck),
+    PRIMARY KEY(idEstudo, fkDeck)
+);
+DROP TABLE estudo;
+INSERT INTO estudo (qtdEstudo, dtEstudo, fkDeck) VALUES
+	(2, CURRENT_TIMESTAMP, 1);
+    
+SELECT * FROM estudo;
 
 DESC deck;
+
+select * from flashCard;
 
 DROP TABLE flashCard;
 CREATE TABLE flashCard(
@@ -42,10 +58,12 @@ CREATE TABLE flashCard(
     titulo VARCHAR(45),
     pergunta VARCHAR(200),
     resposta VARCHAR(200),
-    dtCriacao DATE,
+    dtCriacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     fKDeck INT,
     CONSTRAINT chkDeck FOREIGN KEY (fkDeck) REFERENCES deck(idDeck)
 );
+
+desc flashCard;
 DROP TABLE avaliacao;
 CREATE TABLE avaliacao(
 	idAvaliacao INT PRIMARY KEY AUTO_INCREMENT,

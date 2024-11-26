@@ -130,7 +130,7 @@ a{
     font-size: 20px;
 }
 
-.bodyCreateDeck i{
+/* .bodyCreateDeck i{
 margin-left: 30PX;
 border: 2px solid black;
 border-radius: 50%;
@@ -139,7 +139,7 @@ cursor: pointer;
 color: #fff;
 border-color: #fff;
 
-}
+} */
 .bodyCreateDeck i:hover{
 background-color: #229ad6;
 transition: 0.2s;
@@ -185,9 +185,25 @@ a:hover{
     margin-bottom: 2%;
 }
 
-.containerDeck div:nth-child(2) i{
+
+
+/* .containerDeck div:nth-child(2) i{
     color: #000;
     transition: 0.2s;
+} */
+
+.deckConcluido{
+    color: #fff;
+    font-size: 30px;
+}
+
+.deckNaoConcluido{
+    color: #000;
+}
+
+.containerSelect{
+    margin: 2% 2% 2% 0;
+    font-size: 20px;
 }
 
 .containerDeck div:nth-child(2) i:hover{

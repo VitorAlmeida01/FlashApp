@@ -37,4 +37,8 @@ router.post('/estudoPorDeck/:idDeck', function (req, res){
   deckController.estudoPorDeck(req, res)
 })
 
+router.put('/concluirDeck/:idDeck', function (req, res) {
+  deckController.concluirDeck(req, res)
+})
+
 module.exports = router;

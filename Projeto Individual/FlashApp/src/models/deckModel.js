@@ -2,8 +2,8 @@ var database = require("../database/config");
 
 function buscarDeckPorUsuario(usuarioId) {
 
-  var instrucaoSql = `SELECT idDeck, titulo FROM deck WHERE fkUsuario = ${usuarioId}`;
-
+  var instrucaoSql = `SELECT idDeck, titulo FROM deck WHERE fkUsuario = ${usuarioId} `;
+//AND (statusDeck = 0 OR statusDeck IS NULL)
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
 }
@@ -75,6 +75,12 @@ function estudoPorDeck(idDeck, qtdEstudo){
       return database.executar(instrucaoUpdate)
     }
   })
+}
+
+function concluirDeck(idDeck, statusDeck){
+
+      var instrucaoUpdate = `UPDATE deck SET statusDeck = ${statusDeck} WHERE idDeck = ${idDeck}`
+      return database.executar(instrucaoUpdate)
 
 }
 
@@ -86,6 +92,7 @@ module.exports = {
   atualizar,
   contarDecks,
   contarFlashcards,
-  estudoPorDeck
+  estudoPorDeck,
+  concluirDeck
 }
 

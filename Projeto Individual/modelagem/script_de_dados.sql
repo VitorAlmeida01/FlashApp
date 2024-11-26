@@ -24,10 +24,12 @@ CREATE TABLE deck(
 	idDeck INT PRIMARY KEY AUTO_INCREMENT,
     titulo varchar(45) NOT NULL,
     dtCriacao DATE,
+    statusDeck INT DEFAULT 0,
     fkUsuario INT,
-    CONSTRAINT chkUsuario FOREIGN KEY (fkUsuariO) REFERENCES usuario(idUsuario)
+    CONSTRAINT chkUsuario FOREIGN KEY (fkUsuariO) REFERENCES usuario(idUsuario),
+    CONSTRAINT chkStatusDeck CHECK (statusDeck IN (0, 1))
 );
-
+select * from deck;
 
 CREATE TABLE estudo (
 	idEstudo INT AUTO_INCREMENT,
@@ -37,6 +39,45 @@ CREATE TABLE estudo (
     CONSTRAINT FkDeck FOREIGN KEY (fkDeck) REFERENCES deck(idDeck),
     PRIMARY KEY(idEstudo, fkDeck)
 );
+
+CREATE TABLE flashCard(
+	idFlashCard INT PRIMARY KEY AUTO_INCREMENT,
+    titulo VARCHAR(45),
+    pergunta VARCHAR(200),
+    resposta VARCHAR(200),
+    dtCriacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    fKDeck INT,
+    CONSTRAINT chkDeck FOREIGN KEY (fkDeck) REFERENCES deck(idDeck)
+);
+
+CREATE TABLE avaliacao(
+	idAvaliacao INT PRIMARY KEY AUTO_INCREMENT,
+    statusAvaliacao TINYINT,
+    fkFlashCard INT,
+    CONSTRAINT chkFlashCard FOREIGN KEY (fkFlashCard) REFERENCES flashCard(idFlashCard) ON DELETE CASCADE,
+    CONSTRAINT chkAvaliacao CHECK (statusAvaliacao IN (0, 1))
+);
+
+CREATE TABLE deckConcluido(
+	idDeckConcluido INT AUTO_INCREMENT,
+    statusDeck INT,
+    fkDeck INT UNIQUE NOT NULL,
+    CONSTRAINT chkDeckConcluido FOREIGN KEY (fkDeck) REFERENCES deck(idDeck) ON DELETE CASCADE,
+    CONSTRAINT chkStatus CHECK (statusDeck IN (0, 1)),
+    PRIMARY KEY(idDeckConcluido ,fkDeck)
+);
+
+ALTER TABLE deck 
+modify COLUMN statusDeck INT DEFAULT 0;
+
+ALTER TABLE deck
+ADD CONSTRAINT chkStatusDeck CHECK (statusDeck IN (0, 1));
+
+INSERT INTO deckConcluido (statusDeck, fkDeck) VALUES
+		(1, 1);
+drop table deckConcluido;
+        
+SELECT * FROM deckConcluido;
 
 DROP TABLE estudo;
 INSERT INTO estudo (qtdEstudo, dtEstudo, fkDeck) VALUES
@@ -89,22 +130,8 @@ JOIN deck on fkDeck = idDeck
 JOIN usuario on fkUsuario = idUsuario
 WHERE idUsuario = 1 AND DATE(dtEstudo) = current_date();
 
-select * from deck join usuario on fkUsuario = idUsuario where fkUsuario = 1;
 
-DESC deck;
 
-select * from flashCard;
-
-DROP TABLE flashCard;
-CREATE TABLE flashCard(
-	idFlashCard INT PRIMARY KEY AUTO_INCREMENT,
-    titulo VARCHAR(45),
-    pergunta VARCHAR(200),
-    resposta VARCHAR(200),
-    dtCriacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    fKDeck INT,
-    CONSTRAINT chkDeck FOREIGN KEY (fkDeck) REFERENCES deck(idDeck)
-);
 
 select * from flashCard;
 
@@ -114,14 +141,13 @@ insert into flashCard (titulo, pergunta, resposta, dtCriacao, fkDeck) values
 
 desc flashCard;
 DROP TABLE avaliacao;
-CREATE TABLE avaliacao(
-	idAvaliacao INT PRIMARY KEY AUTO_INCREMENT,
-    statusAvaliacao TINYINT,
-    fkFlashCard INT,
-    CONSTRAINT chkFlashCard FOREIGN KEY (fkFlashCard) REFERENCES flashCard(idFlashCard),
-    CONSTRAINT chkAvaliacao CHECK (statusAvaliacao IN (0, 1))
-);
 
+
+ALTER TABLE avaliacao
+DROP CONSTRAINT chkFlashCard;
+
+ALTER TABLE avaliacao
+ADD CONSTRAINT chkFlashCard FOREIGN KEY (fkFlashCard) REFERENCES flashCard(idFlashCard) ON DELETE CASCADE;
 
 INSERT INTO deck (titulo, dtCriacao, fkUsuario) VALUES
 	('Java Script', '2024-11-11', 1),

@@ -57,6 +57,15 @@
           <i class="fa-solid fa-plus" id="addDeck"></i>
         </section>
       </section>
+      <div class="containerSelect">
+        <label for="sltDecks">Decks</label>
+        <select name="sltDecks" id="sltDecks">
+          <option value="0">Selecione</option>
+          <option value="1">Concluidos</option>
+          <option value="2">Estudando</option>
+        </select>
+      </div>
+
       <div id="containerDecks">
         <!-- <div class="containerDeck">
             <h2></h2>
@@ -99,19 +108,21 @@
       })
       .then((decks) => {
         var containerDecks = document.getElementById("containerDecks")
-        containerDecks.innerHTML = "" // Limpa o container antes de adicionar os novos decks
+        containerDecks.innerHTML = ""
 
         decks.forEach((item) => {
           containerDecks.innerHTML += `
-            <div class="containerDeck" data-id="${item.idDeck}">
+            <div class="containerDeck" data-id="${item.idDeck}" data-status='${item.statusDeck}'>
               <h2>${item.titulo}</h2>
               <div>
+                <i  class="fa-solid fa-check ${(item.status === 1) ? " deckConcluido" : "deckNaoConcluido"}" data-id='${item.idDeck}'></i>
                 <i class="fa-solid fa-graduation-cap" data-id='${item.idDeck}'></i>
                 <i class="fa-solid fa-pen-to-square" data-id='${item.idDeck}'></i>
                 <i class="fa-solid fa-trash" data-id='${item.idDeck}'></i>
               </div>
             </div>
           `
+
         })
 
         document.querySelectorAll(".fa-pen-to-square").forEach((button) => {
@@ -135,6 +146,18 @@
             qtdEstudo++
             console.log('estudo', qtdEstudo)
             estudoPorDeck(button.getAttribute("data-id"), qtdEstudo)
+          })
+        })
+
+
+
+        document.querySelectorAll('.fa-check').forEach((button) => {
+          button.addEventListener('click', function () {
+            const deckContainer = this.closest(".containerDeck")
+            let statusDeck = parseInt(deckContainer.getAttribute("data-status"))
+            statusDeck = statusDeck === 1 ? 0 : 1
+            concluirDeck(button.getAttribute("data-id"), statusDeck)
+            deckContainer.setAttribute("data-status", statusDeck)
           })
         })
       })
@@ -238,7 +261,7 @@
       }
       return response.json()
     }).then((item) => {
-      console.log('qtdEstudo: ', item.qtdEstudo)
+      console.log('qtdEstudo: ', item)
     })
       .catch((error) => {
         console.error("Erro ao avaliar o flashcard: ", error)
@@ -266,6 +289,43 @@
       })
       .catch((error) => {
         console.error("Erro ao deletar deck:", error)
+      })
+  }
+
+  function concluirDeck(idDeck, statusDeck) {
+    // var idDeck = element.getAttribute("data-id")
+
+    fetch(`/decks/concluirDeck/${idDeck}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        idDeck: idDeck,
+        statusDeck: statusDeck
+      })
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Erro ao concluir deck")
+        }
+        return response.json()
+
+      })
+      .then((item) => {
+
+        if (item.statusDeck === 1) {
+          item.statusDeck = 0
+        } else {
+          item.statusDeck = 1
+        }
+
+        // Atualiza a classe do container para concluído
+        console.log(item)
+        alert('Deck concluído')
+      })
+      .catch((error) => {
+        console.error("Erro ao concluir deck: ", error)
       })
   }
 

@@ -134,6 +134,19 @@ function estudoPorDeck(req, res){
   })
 }
 
+function concluirDeck(req, res){
+  var idDeck = req.body.idDeck
+  var statusDeck = req.body.statusDeck
+  
+  deckModel.concluirDeck(idDeck, statusDeck)
+  .then(function (result){
+    res.json({idDeck: idDeck, statusDeck: statusDeck})
+  }).catch((error) => {
+    console.log(error)
+    res.status(500).json(error.sqlMessage)
+  })
+}
+
 module.exports = {
   buscarDeckPorUsuario,
   cadastrar,
@@ -141,5 +154,6 @@ module.exports = {
   atualizar,
   contarDecks,
   contarFlashcards,
-  estudoPorDeck
+  estudoPorDeck,
+  concluirDeck
 }

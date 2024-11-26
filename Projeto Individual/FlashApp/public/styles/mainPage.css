@@ -257,3 +257,30 @@ a:hover{
 #b_usuario{
     font-size: 80%;
 }
+
+
+
+.selectDecks{
+    border: 1px solid black;
+    border-radius: 5px;
+    height: 30px;
+    width: 100px;
+}
+
+.btnFiltrar{
+    border-radius: 5px;
+    padding: 5px 5px;
+    cursor: pointer;
+    background-color: #5C9CBD;
+    color: #fff;
+    border-color: #c2c2c2;
+    font-size: 15px;
+
+}
+
+.btnFiltrar:hover{
+    background-color: #fff;
+    transition: 0.2s;
+    color: #000;
+    border-color: #000000;
+}

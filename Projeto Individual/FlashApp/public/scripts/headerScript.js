@@ -1,6 +1,6 @@
 let home = document.getElementById('headerHome')
 let aboutMe = document.getElementById('headerAboutMe')
-let benefits = document.getElementById('')
+let benefits = document.getElementById('headerBenefits')
 
 home.addEventListener('click', () => {
     window.location.href = '#home'
@@ -8,6 +8,10 @@ home.addEventListener('click', () => {
 
 aboutMe.addEventListener('click', () => {
     window.location.href = '#aboutMe'   
+})
+
+benefits.addEventListener('click', () => {
+    window.location.href = '#benefits'
 })
 
 let relogio = document.querySelectorAll('.clock')

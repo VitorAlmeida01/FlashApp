@@ -147,6 +147,30 @@ function concluirDeck(req, res){
   })
 }
 
+function decksConcluidos(req, res){
+  var idUsuario = req.params.idUsuario
+
+  deckModel.decksConcluidos(idUsuario)
+  .then(function (resultado) {
+    res.status(200).json(resultado)
+  }).catch((error) => {
+    res.status(500).json(error.sqlMessage)
+  })
+}
+
+function decksEmAndamento(req, res){
+  var idUsuario = req.params.idUsuario
+
+  deckModel.decksEmAndamento(idUsuario)
+  .then(function (resultado) {
+    res.status(200).json(resultado)
+  }).catch((error) => {
+    res.status(500).json(error.sqlMessage)
+  })
+}
+
+
+
 module.exports = {
   buscarDeckPorUsuario,
   cadastrar,
@@ -155,5 +179,7 @@ module.exports = {
   contarDecks,
   contarFlashcards,
   estudoPorDeck,
-  concluirDeck
+  concluirDeck,
+  decksConcluidos,
+  decksEmAndamento
 }

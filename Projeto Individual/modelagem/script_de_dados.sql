@@ -68,7 +68,15 @@ CREATE TABLE deckConcluido(
 );
 
 ALTER TABLE deck 
-modify COLUMN statusDeck INT DEFAULT 0;
+ADD COLUMN statusDeck INT DEFAULT 0;
+
+select * from deck WHERE fkUsuario = 11;
+
+SELECT COUNT(*) AS decksConcluidos FROM deck WHERE fkUsuario = 11 AND statusDeck = 1;
+
+SELECT idDeck, titulo FROM deck WHERE fkUsuario = 11 AND statusDeck = 1;
+SELECT idDeck, titulo FROM deck WHERE fkUsuario = 11 AND statusDeck = 0 ;
+
 
 ALTER TABLE deck
 ADD CONSTRAINT chkStatusDeck CHECK (statusDeck IN (0, 1));

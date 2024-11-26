@@ -41,4 +41,14 @@ router.put('/concluirDeck/:idDeck', function (req, res) {
   deckController.concluirDeck(req, res)
 })
 
+router.get(`/decksConcluidos/:idUsuario`, function (req, res){
+  deckController.decksConcluidos(req, res)
+})
+
+router.get(`/decksEmAndamento/:idUsuario`, function (req, res){
+  deckController.decksEmAndamento(req, res)
+})
+
+
+
 module.exports = router;

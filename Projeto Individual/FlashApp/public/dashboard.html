@@ -80,7 +80,7 @@
           <div class="containerDecks kpi">
             <h2>Decks Concluídos</h2>
             <hr>
-            <h3>103</h3>
+            <h3 id="decksConcluidos">103</h3>
           </div>
 
 
@@ -126,10 +126,29 @@
     plotChart()
     plotPieChart()
     plotBarChart()
+    totalDecksConcluidos()
 
 
     var b_usuario = document.getElementById("b_usuario")
     b_usuario.innerText = nome
+
+
+    function totalDecksConcluidos(){
+      var idUsuario = sessionStorage.ID_USUARIO
+
+
+      fetch(`/dashboard/decksConcluidosTotal/${idUsuario}`)
+    .then((response => {
+      if(!response.ok){
+        throw new Error('Erro')
+      }
+      return response.json()
+    })).then(data => {
+      console.log(data)
+      document.getElementById('decksConcluidos').innerText = data[0].decksConcluidos
+    })
+    }
+
 
     fetch('/usuarios/contagem')
       .then(response => {

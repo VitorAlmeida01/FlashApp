@@ -14,6 +14,9 @@ router.get('/estudoDeckPorDia/:idUsuario', function (req, res){
   dashboardController.estudoDeckPorDia(req, res)
 })
 
+router.get(`/decksConcluidosTotal/:idUsuario`, function (req, res){
+  dashboardController.decksConcluidosTotal(req, res)
+})
 
 // router.get('/flashcards/ultimos5dias/:idUsuario', (req, res) => {
 //   const { idUsuario } = req.params;

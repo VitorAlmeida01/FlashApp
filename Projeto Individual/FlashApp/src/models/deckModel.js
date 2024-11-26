@@ -80,9 +80,25 @@ function estudoPorDeck(idDeck, qtdEstudo){
 function concluirDeck(idDeck, statusDeck){
 
       var instrucaoUpdate = `UPDATE deck SET statusDeck = ${statusDeck} WHERE idDeck = ${idDeck}`
+      console.log(instrucaoUpdate)
       return database.executar(instrucaoUpdate)
 
 }
+
+function decksConcluidos(idUsuario){
+  var instrucao = `SELECT idDeck, titulo FROM deck WHERE fkUsuario = ${idUsuario} AND statusDeck = 1 `
+  console.log(instrucao)
+  return database.executar(instrucao)
+}
+
+function decksEmAndamento(idUsuario){
+  var instrucao = `SELECT idDeck, titulo FROM deck WHERE fkUsuario = ${idUsuario} AND statusDeck = 0 `
+  console.log(instrucao)
+  return database.executar(instrucao)
+
+}
+
+
 
 
 module.exports = {
@@ -93,6 +109,8 @@ module.exports = {
   contarDecks,
   contarFlashcards,
   estudoPorDeck,
-  concluirDeck
+  concluirDeck,
+  decksConcluidos,
+  decksEmAndamento
 }
 

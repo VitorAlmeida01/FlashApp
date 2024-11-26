@@ -40,9 +40,20 @@ function estudoDeckPorDia(req, res){
 
 }
 
+function decksConcluidosTotal(req, res){
+  var idUsuario = req.params.idUsuario
+
+  dashboardModel.decksConcluidosTotal(idUsuario)
+  .then(function (resultado) {
+    res.status(200).json(resultado)
+  }).catch((error) => {
+    res.status(500).json(error.sqlMessage)
+  })
+}
 
 module.exports = {
   buscarFlashcardsUltimos5Dias,
   buscarAvaliacao,
-  estudoDeckPorDia
+  estudoDeckPorDia,
+  decksConcluidosTotal
 }

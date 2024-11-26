@@ -55,8 +55,15 @@ ORDER BY DATE(dtEstudo);
 return database.executar(instrucaoSql)
 }
 
+function decksConcluidosTotal(idUsuario){
+  var instrucao = `SELECT COUNT(*) AS decksConcluidos FROM deck WHERE fkUsuario = ${idUsuario} AND statusDeck = 1`
+  console.log(instrucao)
+  return database.executar(instrucao)
+}
+
 module.exports = {
   buscarFlashcardsUltimos5Dias,
   buscarAvaliacao,
-  estudoDeckPorDia
+  estudoDeckPorDia,
+  decksConcluidosTotal
 }

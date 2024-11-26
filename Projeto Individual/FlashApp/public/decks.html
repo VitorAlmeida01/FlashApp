@@ -1,186 +1,449 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital@1&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Imports -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="./scripts/sessao.js"></script>
+    <link rel="stylesheet" href="./styles/mainPage.css" />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital@1&display=swap" rel="stylesheet" />
-  <!-- Imports -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <script src="./scripts/sessao.js"></script>
-  <link rel="stylesheet" href="./styles/mainPage.css" />
+    <script src="./scripts/decks.js" defer></script>
+    <title>Decks</title>
+  </head>
 
-  <script src="./scripts/decks.js" defer></script>
-  <title>Decks</title>
-</head>
+  <body onload="exibirDecks()">
+    <main class="main">
+      <div class="sideBar">
+        <div class="sideBar-logo"></div>
+        <div class="welcome">
+          <p>Olá, <span id="b_usuario"></span></p>
+        </div>
 
-<body onload="exibirDecks()">
-  <main class="main">
-    <div class="sideBar">
-      <div class="sideBar-logo"></div>
-      <div class="welcome">
-        <p>Olá, <span id="b_usuario"></span></p>
+        <ul>
+          <li>
+            <a href="#"><i class="fa-regular fa-square"></i>Decks</a>
+          </li>
+          <li>
+            <a href="./dashboard.html"
+              ><i class="fa-solid fa-chart-simple"></i>Dashboard</a
+            >
+          </li>
+          <li>
+            <a href="#"><i class="fa-solid fa-user"></i>Minha conta</a>
+          </li>
+          <li>
+            <a href="#" id="exitBtn"
+              ><i class="fa-solid fa-right-from-bracket"></i>Sair</a
+            >
+          </li>
+        </ul>
       </div>
-
-      <ul>
-        <li>
-          <a href="#"><i class="fa-regular fa-square"></i>Decks</a>
-        </li>
-        <li>
-          <a href="./dashboard.html"><i class="fa-solid fa-chart-simple"></i>Dashboard</a>
-        </li>
-        <li>
-          <a href="#"><i class="fa-solid fa-user"></i>Minha conta</a>
-        </li>
-        <li>
-          <a href="#" id="exitBtn"><i class="fa-solid fa-right-from-bracket"></i>Sair</a>
-        </li>
-      </ul>
-    </div>
-    <div class="mainContent">
-      <section class="title">
-        <h1>Decks</h1>
-        <hr />
-      </section>
-      <p>Nesta página temos todos os decks de flashcards criados</p>
-
-      <section class="createDeck">
-        <p>Criar um deck</p>
-        <section class="bodyCreateDeck">
-          <label for="inpDeck">Titulo</label>
-          <input type="text" id="inpDeck" />
-          <i class="fa-solid fa-plus" id="addDeck"></i>
+      <div class="mainContent">
+        <section class="title">
+          <h1>Decks</h1>
+          <hr />
         </section>
-      </section>
-      <div class="containerSelect">
-        <label for="sltDecks">Decks</label>
-        <select name="sltDecks" id="sltDecks">
-          <option value="0">Selecione</option>
-          <option value="1">Concluidos</option>
-          <option value="2">Estudando</option>
-        </select>
-      </div>
+        <p>Nesta página temos todos os decks de flashcards criados</p>
 
-      <div id="containerDecks">
-        <!-- <div class="containerDeck">
+        <section class="createDeck">
+          <p>Criar um deck</p>
+          <section class="bodyCreateDeck">
+            <label for="inpDeck">Titulo</label>
+            <input type="text" id="inpDeck" />
+            <i class="fa-solid fa-plus" id="addDeck"></i>
+          </section>
+        </section>
+        <div class="containerSelect">
+          <h3>Filtros</h3>
+          <label for="sltDecks">Decks</label>
+          <select name="sltDecks" id="sltDecks">
+            <option value="0">Todos</option>
+            <option value="1">Concluidos</option>
+            <option value="2">Estudando</option>
+          </select>
+          <button onclick="filtrar()">Filtrar</button>
+        </div>
+
+        <div id="containerDecks">
+          <!-- <div class="containerDeck">
             <h2></h2>
             <div>
               <i class="fa-solid fa-pen-to-square"></i>
               <i class="fa-solid fa-trash"></i>
             </div>
           </div> -->
+        </div>
       </div>
-    </div>
-  </main>
-</body>
-
+    </main>
+  </body>
 </html>
 
 <script>
-  var qtdEstudo = 0
+  var qtdEstudo = 0;
   document.addEventListener("DOMContentLoaded", function () {
-    exibirDecks()
-    validarSessao()
-  })
+    exibirDecks();
+    validarSessao();
+  });
 
 
 
+  function filtrar() {
+    let select = document.getElementById("sltDecks");
 
-  function exibirDecks() {
-    var idUsuario = sessionStorage.ID_USUARIO
+    var idUsuario = sessionStorage.ID_USUARIO;
 
-    if (!idUsuario) {
-      console.error("ID do usuário não encontrado no sessionStorage")
-      return
-    }
+    if (Number(select.value) === 1) {
+      fetch(`/decks/decksConcluidos/${idUsuario}`)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Erro ao buscar decks concluidos");
+            console.log(response)
+          }
+          return response.json();
+        })
+        .then((decks) => {
+          var containerDecks = document.getElementById("containerDecks");
+          containerDecks.innerHTML = "";
 
-    fetch(`/decks/${idUsuario}`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Erro ao buscar decks")
-        }
-        return response.json()
-      })
-      .then((decks) => {
-        var containerDecks = document.getElementById("containerDecks")
-        containerDecks.innerHTML = ""
-
-        decks.forEach((item) => {
-          containerDecks.innerHTML += `
-            <div class="containerDeck" data-id="${item.idDeck}" data-status='${item.statusDeck}'>
+          decks.forEach((item) => {
+            containerDecks.innerHTML += `
+            <div class="containerDeck" data-id="${item.idDeck}" data-status='${
+              item.statusDeck
+            }'>
               <h2>${item.titulo}</h2>
               <div>
-                <i  class="fa-solid fa-check ${(item.status === 1) ? " deckConcluido" : "deckNaoConcluido"}" data-id='${item.idDeck}'></i>
-                <i class="fa-solid fa-graduation-cap" data-id='${item.idDeck}'></i>
-                <i class="fa-solid fa-pen-to-square" data-id='${item.idDeck}'></i>
+                <i  class="fa-solid fa-check ${
+                  item.status === 1 ? " deckConcluido" : "deckNaoConcluido"
+                }" data-id='${item.idDeck}'></i>
+                <i class="fa-solid fa-graduation-cap" data-id='${
+                  item.idDeck
+                }'></i>
+                <i class="fa-solid fa-pen-to-square" data-id='${
+                  item.idDeck
+                }'></i>
                 <i class="fa-solid fa-trash" data-id='${item.idDeck}'></i>
               </div>
             </div>
-          `
+          `;
+          });
+
+          document.querySelectorAll(".fa-pen-to-square").forEach((button) => {
+          button.addEventListener("click", function () {
+            editarDeck(
+              button.getAttribute("data-id"),
+              button.closest(".containerDeck").querySelector("h2").innerText
+            );
+          });
+        });
+
+        document.querySelectorAll(".fa-trash").forEach((button) => {
+          button.addEventListener("click", function () {
+            deletarDecks(this);
+          });
+        });
+
+        document.querySelectorAll(".fa-graduation-cap").forEach((button) => {
+          button.addEventListener("click", function () {
+            deckId(this);
+            qtdEstudo++;
+            console.log("estudo", qtdEstudo);
+            estudoPorDeck(button.getAttribute("data-id"), qtdEstudo);
+          });
+        });
+
+        document.querySelectorAll(".fa-check").forEach((button) => {
+          button.addEventListener("click", function () {
+            const deckContainer = this.closest(".containerDeck");
+            let statusDeck = parseInt(
+              deckContainer.getAttribute("data-status")
+            );
+            statusDeck = 0
+            concluirDeck(button.getAttribute("data-id"), statusDeck);
+            deckContainer.setAttribute("data-status", statusDeck);
+
+            alert('Bora estudar o deck novamente...')
+          });
+        });
 
         })
+        .catch((error) => {
+          console.error("Erro ao buscar decks concluidos:", error);
+        });
+    } else if (Number(select.value) === 2) {
+      fetch(`/decks/decksEmAndamento/${idUsuario}`)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Erro ao buscar decks em andamento");
+          }
+          return response.json();
+        })
+        .then((decks) =>{
+          var containerDecks = document.getElementById("containerDecks");
+          containerDecks.innerHTML = "";
+
+          decks.forEach((item) => {
+            containerDecks.innerHTML += `
+            <div class="containerDeck" data-id="${item.idDeck}" data-status='${
+              item.statusDeck
+            }'>
+              <h2>${item.titulo}</h2>
+              <div>
+                <i  class="fa-solid fa-check ${
+                  item.status === 1 ? " deckConcluido" : "deckNaoConcluido"
+                }" data-id='${item.idDeck}'></i>
+                <i class="fa-solid fa-graduation-cap" data-id='${
+                  item.idDeck
+                }'></i>
+                <i class="fa-solid fa-pen-to-square" data-id='${
+                  item.idDeck
+                }'></i>
+                <i class="fa-solid fa-trash" data-id='${item.idDeck}'></i>
+              </div>
+            </div>
+          `;
+          });
+
+          document.querySelectorAll(".fa-pen-to-square").forEach((button) => {
+          button.addEventListener("click", function () {
+            editarDeck(
+              button.getAttribute("data-id"),
+              button.closest(".containerDeck").querySelector("h2").innerText
+            );
+          });
+        });
+
+        document.querySelectorAll(".fa-trash").forEach((button) => {
+          button.addEventListener("click", function () {
+            deletarDecks(this);
+          });
+        });
+
+        document.querySelectorAll(".fa-graduation-cap").forEach((button) => {
+          button.addEventListener("click", function () {
+            deckId(this);
+            qtdEstudo++;
+            console.log("estudo", qtdEstudo);
+            estudoPorDeck(button.getAttribute("data-id"), qtdEstudo);
+          });
+        });
+
+        document.querySelectorAll(".fa-check").forEach((button) => {
+          button.addEventListener("click", function () {
+            const deckContainer = this.closest(".containerDeck");
+            let statusDeck = parseInt(
+              deckContainer.getAttribute("data-status")
+            );
+            statusDeck = statusDeck === 1 ? 0 : 1;
+            concluirDeck(button.getAttribute("data-id"), statusDeck);
+            deckContainer.setAttribute("data-status", statusDeck);
+            alert("Deck concluído");
+          });
+        });
+
+        })
+        .catch((error) => {
+          console.error("Erro ao buscar decks em andamento:", error);
+        })
+    }else if (Number(select.value) === 0){
+      fetch(`/decks/${idUsuario}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Erro ao buscar decks");
+        }
+        return response.json();
+      })
+      .then((decks) => {
+        var containerDecks = document.getElementById("containerDecks");
+        containerDecks.innerHTML = "";
+
+        decks.forEach((item) => {
+          containerDecks.innerHTML += `
+            <div class="containerDeck" data-id="${item.idDeck}" data-status='${
+            item.statusDeck
+          }'>
+              <h2>${item.titulo}</h2>
+              <div>
+                <i  class="fa-solid fa-check ${
+                  item.status === 1 ? " deckConcluido" : "deckNaoConcluido"
+                }" data-id='${item.idDeck}'></i>
+                <i class="fa-solid fa-graduation-cap" data-id='${
+                  item.idDeck
+                }'></i>
+                <i class="fa-solid fa-pen-to-square" data-id='${
+                  item.idDeck
+                }'></i>
+                <i class="fa-solid fa-trash" data-id='${item.idDeck}'></i>
+              </div>
+            </div>
+          `;
+        });
 
         document.querySelectorAll(".fa-pen-to-square").forEach((button) => {
           button.addEventListener("click", function () {
             editarDeck(
               button.getAttribute("data-id"),
               button.closest(".containerDeck").querySelector("h2").innerText
-            )
-          })
-        })
+            );
+          });
+        });
 
         document.querySelectorAll(".fa-trash").forEach((button) => {
           button.addEventListener("click", function () {
-            deletarDecks(this)
-          })
-        })
+            deletarDecks(this);
+          });
+        });
 
         document.querySelectorAll(".fa-graduation-cap").forEach((button) => {
           button.addEventListener("click", function () {
-            deckId(this)
-            qtdEstudo++
-            console.log('estudo', qtdEstudo)
-            estudoPorDeck(button.getAttribute("data-id"), qtdEstudo)
-          })
-        })
+            deckId(this);
+            qtdEstudo++;
+            console.log("estudo", qtdEstudo);
+            estudoPorDeck(button.getAttribute("data-id"), qtdEstudo);
+          });
+        });
 
+        document.querySelectorAll(".fa-check").forEach((button) => {
+          button.addEventListener("click", function () {
+            const deckContainer = this.closest(".containerDeck");
+            let statusDeck = parseInt(
+              deckContainer.getAttribute("data-status")
+            );
+            statusDeck = statusDeck === 1 ? 0 : 1;
+            concluirDeck(button.getAttribute("data-id"), statusDeck);
+            deckContainer.setAttribute("data-status", statusDeck);
 
-
-        document.querySelectorAll('.fa-check').forEach((button) => {
-          button.addEventListener('click', function () {
-            const deckContainer = this.closest(".containerDeck")
-            let statusDeck = parseInt(deckContainer.getAttribute("data-status"))
-            statusDeck = statusDeck === 1 ? 0 : 1
-            concluirDeck(button.getAttribute("data-id"), statusDeck)
-            deckContainer.setAttribute("data-status", statusDeck)
-          })
-        })
+            if(statusDeck === 1){
+              alert("Deck concluído");
+            }else{
+              alert("Continuar estudando...");
+            }
+          });
+        });
       })
       .catch((error) => {
-        console.error("Erro ao buscar decks:", error)
+        console.error("Erro ao buscar decks:", error);
+      });
+  }
+
+    }
+
+  function exibirDecks() {
+    var idUsuario = sessionStorage.ID_USUARIO;
+
+    if (!idUsuario) {
+      console.error("ID do usuário não encontrado no sessionStorage");
+      return;
+    }
+
+    fetch(`/decks/${idUsuario}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Erro ao buscar decks");
+        }
+        return response.json();
       })
+      .then((decks) => {
+        var containerDecks = document.getElementById("containerDecks");
+        containerDecks.innerHTML = "";
+
+        decks.forEach((item) => {
+          containerDecks.innerHTML += `
+            <div class="containerDeck" data-id="${item.idDeck}" data-status='${
+            item.statusDeck
+          }'>
+              <h2>${item.titulo}</h2>
+              <div>
+                <i  class="fa-solid fa-check ${
+                  item.status === 1 ? " deckConcluido" : "deckNaoConcluido"
+                }" data-id='${item.idDeck}'></i>
+                <i class="fa-solid fa-graduation-cap" data-id='${
+                  item.idDeck
+                }'></i>
+                <i class="fa-solid fa-pen-to-square" data-id='${
+                  item.idDeck
+                }'></i>
+                <i class="fa-solid fa-trash" data-id='${item.idDeck}'></i>
+              </div>
+            </div>
+          `;
+        });
+
+        document.querySelectorAll(".fa-pen-to-square").forEach((button) => {
+          button.addEventListener("click", function () {
+            editarDeck(
+              button.getAttribute("data-id"),
+              button.closest(".containerDeck").querySelector("h2").innerText
+            );
+          });
+        });
+
+        document.querySelectorAll(".fa-trash").forEach((button) => {
+          button.addEventListener("click", function () {
+            deletarDecks(this);
+          });
+        });
+
+        document.querySelectorAll(".fa-graduation-cap").forEach((button) => {
+          button.addEventListener("click", function () {
+            deckId(this);
+            qtdEstudo++;
+            console.log("estudo", qtdEstudo);
+            estudoPorDeck(button.getAttribute("data-id"), qtdEstudo);
+          });
+        });
+
+        document.querySelectorAll(".fa-check").forEach((button) => {
+          button.addEventListener("click", function () {
+            const deckContainer = this.closest(".containerDeck");
+            let statusDeck = parseInt(
+              deckContainer.getAttribute("data-status")
+            );
+            statusDeck = statusDeck === 1 ? 0 : 1;
+            concluirDeck(button.getAttribute("data-id"), statusDeck);
+            deckContainer.setAttribute("data-status", statusDeck);
+
+            if(statusDeck === 1){
+              alert("Deck concluído");
+            }else{
+              alert("Continuar estudando...");
+            }
+          });
+        });
+      })
+      .catch((error) => {
+        console.error("Erro ao buscar decks:", error);
+      });
   }
 
   document.getElementById("addDeck").addEventListener("click", function () {
-    cadastrarDecks()
-    document.getElementById("inpDeck").value = ""
-  })
+    cadastrarDecks();
+    document.getElementById("inpDeck").value = "";
+  });
 
   function cadastrarDecks() {
-    var idUsuario = sessionStorage.ID_USUARIO
-    var titulo = document.getElementById("inpDeck").value
+    var idUsuario = sessionStorage.ID_USUARIO;
+    var titulo = document.getElementById("inpDeck").value;
 
-    if (titulo == '') {
-      alert('Insira um título')
+    if (titulo == "") {
+      alert("Insira um título");
     } else {
       if (!idUsuario) {
-        console.error("ID do usuário não encontrado no sessionStorage")
-        return
+        console.error("ID do usuário não encontrado no sessionStorage");
+        return;
       }
 
       fetch(`/decks/cadastrar`, {
@@ -190,18 +453,18 @@
         },
         body: JSON.stringify({
           titulo: titulo,
-          idUsuario: idUsuario
+          idUsuario: idUsuario,
         }),
       })
         .then((response) => {
           if (!response.ok) {
-            throw new Error("Erro ao cadastrar decks")
+            throw new Error("Erro ao cadastrar decks");
           }
-          return response.json()
+          return response.json();
         })
         .then((decks) => {
-          var containerDecks = document.getElementById("containerDecks")
-          exibirDecks() // Renderiza os decks na tela
+          var containerDecks = document.getElementById("containerDecks");
+          exibirDecks(); // Renderiza os decks na tela
 
           if (decks.length > 0) {
             decks.forEach((item) => {
@@ -212,84 +475,84 @@
                 <i class="fa-solid fa-pen-to-square" id='updateBtn'></i>
                 <i class="fa-solid fa-trash"></i>
               </div>
-            </div>`
-            })
+            </div>`;
+            });
           }
         })
         .catch((error) => {
-          console.error("Erro ao buscar decks:", error)
-        })
+          console.error("Erro ao buscar decks:", error);
+        });
     }
-
-
   }
 
   function deckId(element) {
-    var idDeck = element.getAttribute("data-id")
-    var tituloDeck = element.closest('.containerDeck').querySelector('h2').innerText
+    var idDeck = element.getAttribute("data-id");
+    var tituloDeck = element
+      .closest(".containerDeck")
+      .querySelector("h2").innerText;
     // alert('se ta aq')
     // console.log('Voce clicou no deck: ', idDeck)
 
     if (idDeck) {
       // sessionStorage.setItem('selectedDeckId', idDeck) -- Outra forma de setar
-      sessionStorage.tituloDeck = tituloDeck
-      sessionStorage.selectedDeckId = idDeck
-      console.log('armazenado no local storage')
-      window.location.href = `./flashcards.html`
+      sessionStorage.tituloDeck = tituloDeck;
+      sessionStorage.selectedDeckId = idDeck;
+      console.log("armazenado no local storage");
+      window.location.href = `./flashcards.html`;
     } else {
-      console.error('idDeck não econtrado')
+      console.error("idDeck não econtrado");
     }
   }
 
-
   function estudoPorDeck(idDeck, qtdEstudo) {
-
-    console.log('qtdEstudo: ', qtdEstudo)
+    console.log("qtdEstudo: ", qtdEstudo);
 
     fetch(`/decks/estudoPorDeck/${idDeck}`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         qtdEstudo: qtdEstudo,
-        idDeck: idDeck
-      })
-    }).then((response) => {
-      if (!response.ok) {
-        throw new Error('Erro ao estudar o deck')
-      }
-      return response.json()
-    }).then((item) => {
-      console.log('qtdEstudo: ', item)
+        idDeck: idDeck,
+      }),
     })
-      .catch((error) => {
-        console.error("Erro ao avaliar o flashcard: ", error)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Erro ao estudar o deck");
+        }
+        return response.json();
       })
+      .then((item) => {
+        console.log("qtdEstudo: ", item);
+      })
+      .catch((error) => {
+        console.error("Erro ao avaliar o flashcard: ", error);
+      });
   }
 
   function deletarDecks(element) {
-    var idDeck = element.getAttribute("data-id")
+    var idDeck = element.getAttribute("data-id");
 
     fetch(`/decks/deletar/${idDeck}`, {
       method: "DELETE",
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error("Erro ao deletar deck")
+          throw new Error("Erro ao deletar deck");
         }
-        return response.json()
+        return response.json();
       })
       .then(() => {
         // exibirDecks(); // Atualiza a lista de decks após deletar
-        const deckContainer = element.closest(".containerDeck")
+        const deckContainer = element.closest(".containerDeck");
         if (deckContainer) {
-          deckContainer.remove()
+          deckContainer.remove();
         }
       })
       .catch((error) => {
-        console.error("Erro ao deletar deck:", error)
-      })
+        console.error("Erro ao deletar deck:", error);
+      });
   }
 
   function concluirDeck(idDeck, statusDeck) {
@@ -298,39 +561,41 @@
     fetch(`/decks/concluirDeck/${idDeck}`, {
       method: "PUT",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         idDeck: idDeck,
-        statusDeck: statusDeck
-      })
+        statusDeck: statusDeck,
+      }),
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error("Erro ao concluir deck")
+          throw new Error("Erro ao concluir deck");
         }
-        return response.json()
-
+        return response.json();
       })
       .then((item) => {
-
-        if (item.statusDeck === 1) {
-          item.statusDeck = 0
-        } else {
-          item.statusDeck = 1
-        }
+        // if (item.statusDeck === 1) {
+        //   item.statusDeck = 0;
+        //   alert("De volta aos estudos...");
+        // } else {
+        //   item.statusDeck = 1;
+        //   alert("Deck concluído");
+        // }
 
         // Atualiza a classe do container para concluído
-        console.log(item)
-        alert('Deck concluído')
+        console.log(item);
+
       })
       .catch((error) => {
-        console.error("Erro ao concluir deck: ", error)
-      })
+        console.error("Erro ao concluir deck: ", error);
+      });
   }
 
   function editarDeck(idDeck, tituloAtual) {
-    var containerDeck = document.querySelector(`.containerDeck[data-id='${idDeck}']`)
+    var containerDeck = document.querySelector(
+      `.containerDeck[data-id='${idDeck}']`
+    );
 
     containerDeck.innerHTML = `
         <input type="text" id="inpTituloAtt" value="${tituloAtual}">
@@ -338,11 +603,13 @@
             <button id="salvarAttBtn">Salvar</button>
             <i class="fa-solid fa-trash" data-id="${idDeck}"></i>
         </div>
-    `
+    `;
 
-    document.getElementById('salvarAttBtn').addEventListener('click', function () {
-      salvarAtualizacao(idDeck)
-    })
+    document
+      .getElementById("salvarAttBtn")
+      .addEventListener("click", function () {
+        salvarAtualizacao(idDeck);
+      });
 
     // document.querySelector(`.fa-trash[data-id='${idDeck}']`).addEventListener('click', function () {
     //   deletarDeck(idDeck, this)
@@ -350,38 +617,39 @@
   }
 
   function salvarAtualizacao(idDeck) {
-    var novoTitulo = document.getElementById('inpTituloAtt').value
+    var novoTitulo = document.getElementById("inpTituloAtt").value;
 
     fetch(`/decks/atualizar/${idDeck}`, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        titulo: novoTitulo
-      })
+        titulo: novoTitulo,
+      }),
     })
-      .then(response => {
+      .then((response) => {
         if (!response.ok) {
-          throw new Error("Erro ao atualizar deck")
+          throw new Error("Erro ao atualizar deck");
         }
-        return response.json()
-      }).then((json) => {
+        return response.json();
+      })
+      .then((json) => {
         // Atualiza o título do deck no sessionStorage
-        let decks = JSON.parse(sessionStorage.DECKS)
-        let deckIndex = decks.findIndex(deck => deck.idDeck == idDeck)
+        let decks = JSON.parse(sessionStorage.DECKS);
+        let deckIndex = decks.findIndex((deck) => deck.idDeck == idDeck);
         if (deckIndex !== -1) {
-          decks[deckIndex].titulo = novoTitulo
-          sessionStorage.DECKS = JSON.stringify(decks)
+          decks[deckIndex].titulo = novoTitulo;
+          sessionStorage.DECKS = JSON.stringify(decks);
         }
-        exibirDecks()
+        exibirDecks();
       })
       .then(() => {
-        exibirDecks() // Atualiza a lista de decks após a atualização
+        exibirDecks(); // Atualiza a lista de decks após a atualização
       })
-      .catch(error => {
-        console.error("Erro ao atualizar deck:", error)
-      })
+      .catch((error) => {
+        console.error("Erro ao atualizar deck:", error);
+      });
   }
 
   // function exibirDecks() {

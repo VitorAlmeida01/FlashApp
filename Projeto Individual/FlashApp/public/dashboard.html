@@ -58,7 +58,7 @@
         <div class="containerKpis">
 
           <div class="containerUser kpi">
-            <h2>Total de usuários</h2>
+            <h2>Deck mais estudado</h2>
             <hr>
             <h3 id="totalUsuarios">103</h3>
           </div>
@@ -127,6 +127,7 @@
     plotPieChart()
     plotBarChart()
     totalDecksConcluidos()
+    deckMaisEstudado()
 
 
     var b_usuario = document.getElementById("b_usuario")
@@ -150,7 +151,11 @@
     }
 
 
-    fetch('/usuarios/contagem')
+    function deckMaisEstudado(){
+      var idUsuario = sessionStorage.ID_USUARIO
+
+
+      fetch(`/dashboard/deckMaisEstudado/${idUsuario}`)
       .then(response => {
         if (!response.ok) {
           throw new Error("Erro ao buscar contagem de usuários")
@@ -158,11 +163,13 @@
         return response.json()
       })
       .then(data => {
-        document.getElementById('totalUsuarios').innerText = data[0].totalUsuarios
+        console.log('titulossss', data)
+        document.getElementById('totalUsuarios').innerText = data[0].titulo
       })
       .catch(error => {
         console.error("Erro ao buscar contagem de usuários:", error)
       })
+    }
 
     if (idUsuario) {
       // Buscar contagem de decks

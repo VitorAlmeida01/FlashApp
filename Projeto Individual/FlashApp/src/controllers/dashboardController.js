@@ -51,9 +51,23 @@ function decksConcluidosTotal(req, res){
   })
 }
 
+function deckMaisEstudado(req, res) {
+  var idUsuario = req.params.idUsuario
+
+  dashboardModel.deckMaisEstudado(idUsuario)
+    .then(function (resultado) {
+      res.json(resultado);
+    })
+    .catch(function (erro) {
+      console.log(erro);
+      res.status(500).json(erro.sqlMessage);
+    });
+}
+
 module.exports = {
   buscarFlashcardsUltimos5Dias,
   buscarAvaliacao,
   estudoDeckPorDia,
-  decksConcluidosTotal
+  decksConcluidosTotal,
+  deckMaisEstudado
 }

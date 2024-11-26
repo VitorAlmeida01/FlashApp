@@ -12,9 +12,7 @@ router.post("/autenticar", function (req, res) {
     usuarioController.autenticar(req, res);
 });
 
-router.get("/contagem", function (req, res) {
-    usuarioController.contarUsuarios(req, res);
-  });
+
 
   
 

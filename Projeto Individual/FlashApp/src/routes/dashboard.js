@@ -18,6 +18,10 @@ router.get(`/decksConcluidosTotal/:idUsuario`, function (req, res){
   dashboardController.decksConcluidosTotal(req, res)
 })
 
+router.get("/deckMaisEstudado/:idUsuario", function (req, res) {
+  dashboardController.deckMaisEstudado(req, res);
+});
+
 // router.get('/flashcards/ultimos5dias/:idUsuario', (req, res) => {
 //   const { idUsuario } = req.params;
 // })

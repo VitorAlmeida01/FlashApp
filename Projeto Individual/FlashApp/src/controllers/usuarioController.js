@@ -85,33 +85,23 @@ function cadastrar(req, res) {
     }
 }
 
-function contarUsuarios(req, res) {
-    usuarioModel.contarUsuarios()
-      .then(function (resultado) {
-        res.json(resultado);
-      })
-      .catch(function (erro) {
-        console.log(erro);
-        res.status(500).json(erro.sqlMessage);
-      });
-  }
 
-  function contarDecks(idUsuario) {
-    var instrucao = `
-      SELECT COUNT(*) AS totalDecks FROM decks WHERE fkUsuario = ${idUsuario};
-    `;
-    return database.executar(instrucao);
-  }
+
+//   function contarDecks(idUsuario) {
+//     var instrucao = `
+//       SELECT COUNT(*) AS totalDecks FROM decks WHERE fkUsuario = ${idUsuario};
+//     `;
+//     return database.executar(instrucao);
+//   }
   
-  function contarFlashcards(idUsuario) {
-    var instrucao = `
-      SELECT COUNT(*) AS totalFlashcards FROM flashcards WHERE fkUsuario = ${idUsuario};
-    `;
-    return database.executar(instrucao);
-  }
+//   function contarFlashcards(idUsuario) {
+//     var instrucao = `
+//       SELECT COUNT(*) AS totalFlashcards FROM flashcards WHERE fkUsuario = ${idUsuario};
+//     `;
+//     return database.executar(instrucao);
+//   }
 
 module.exports = {
     autenticar,
-    cadastrar,
-    contarUsuarios
+    cadastrar
 }

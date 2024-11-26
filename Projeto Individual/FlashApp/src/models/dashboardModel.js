@@ -61,9 +61,20 @@ function decksConcluidosTotal(idUsuario){
   return database.executar(instrucao)
 }
 
+
+function deckMaisEstudado(idUsuario) {
+  var instrucao = `
+    SELECT  titulo  FROM estudo JOIN deck ON fkDeck = idDeck
+      WHERE fkUsuario = ${idUsuario}
+      ORDER BY qtdEstudo desc limit 1;
+  `;
+  return database.executar(instrucao);
+}
+
 module.exports = {
   buscarFlashcardsUltimos5Dias,
   buscarAvaliacao,
   estudoDeckPorDia,
-  decksConcluidosTotal
+  decksConcluidosTotal,
+  deckMaisEstudado
 }

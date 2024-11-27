@@ -72,7 +72,17 @@ ADD COLUMN statusDeck INT DEFAULT 0;
 
 select * from deck WHERE fkUsuario = 11;
 
+SELECT * FROM estudo;
+
+update estudo set qtdEstudo = 20 where idEstudo = 8;
+
 SELECT COUNT(*) AS decksConcluidos FROM deck WHERE fkUsuario = 11 AND statusDeck = 1;
+
+
+
+SELECT  titulo , qtdEstudo FROM estudo JOIN deck ON fkDeck = idDeck
+WHERE fkUsuario = 11
+ORDER BY qtdEstudo desc limit 1;
 
 SELECT idDeck, titulo FROM deck WHERE fkUsuario = 11 AND statusDeck = 1;
 SELECT idDeck, titulo FROM deck WHERE fkUsuario = 11 AND statusDeck = 0 ;

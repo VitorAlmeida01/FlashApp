@@ -10,7 +10,6 @@ function buscarDeckPorUsuario(usuarioId) {
 
 function cadastrar(idUsuario, titulo) {
   
-  // var instrucaoSql = `INSERT INTO (descricao, fk_empresa) aquario VALUES (${descricao}, ${empresaId})`;
 
   var instrucaoSql = `INSERT INTO deck (titulo, fkUsuario) VALUES ('${titulo}', ${idUsuario})`;
 

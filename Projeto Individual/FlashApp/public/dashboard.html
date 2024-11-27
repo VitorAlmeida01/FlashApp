@@ -134,41 +134,41 @@
     b_usuario.innerText = nome
 
 
-    function totalDecksConcluidos(){
+    function totalDecksConcluidos() {
       var idUsuario = sessionStorage.ID_USUARIO
 
 
       fetch(`/dashboard/decksConcluidosTotal/${idUsuario}`)
-    .then((response => {
-      if(!response.ok){
-        throw new Error('Erro')
-      }
-      return response.json()
-    })).then(data => {
-      console.log(data)
-      document.getElementById('decksConcluidos').innerText = data[0].decksConcluidos
-    })
+        .then((response => {
+          if (!response.ok) {
+            throw new Error('Erro')
+          }
+          return response.json()
+        })).then(data => {
+          console.log('decksConcluidos function ', data[0].decksConcluidos)
+          document.getElementById('decksConcluidos').innerText = data[0].decksConcluidos
+        })
     }
 
 
-    function deckMaisEstudado(){
+    function deckMaisEstudado() {
       var idUsuario = sessionStorage.ID_USUARIO
 
 
       fetch(`/dashboard/deckMaisEstudado/${idUsuario}`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error("Erro ao buscar contagem de usuários")
-        }
-        return response.json()
-      })
-      .then(data => {
-        console.log('titulossss', data)
-        document.getElementById('totalUsuarios').innerText = data[0].titulo
-      })
-      .catch(error => {
-        console.error("Erro ao buscar contagem de usuários:", error)
-      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error("Erro ao buscar contagem de usuários")
+          }
+          return response.json()
+        })
+        .then(data => {
+          console.log('titulossss', data)
+          document.getElementById('totalUsuarios').innerText = data[0].titulo
+        })
+        .catch(error => {
+          console.error("Erro ao buscar contagem de usuários:", error)
+        })
     }
 
     if (idUsuario) {
@@ -306,7 +306,7 @@
         const date = new Date(item.dataEstudo) // Converter para objeto Date
         return date.toLocaleDateString('pt-BR')
       })
-      var dados = estudoPorDia.map(item => item.totalEstudado)  
+      var dados = estudoPorDia.map(item => item.totalEstudado)
       console.log('BarChart', dados)
 
       const ctx2 = document.getElementById('barChart')

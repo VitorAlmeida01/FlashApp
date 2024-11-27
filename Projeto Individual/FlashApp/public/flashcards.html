@@ -144,12 +144,13 @@
         return response.text().then(text => text ? JSON.parse(text) : [])
       })
       .then(flashcards => {
+        console.log('Resposta do servidor flashcards: ', flashcards)
         const flashcardsContainer = document.getElementById("containerFlashcards")
-        flashcardsContainer.innerHTML = "" // Limpa o container antes de adicionar os novos flashcards
+        flashcardsContainer.innerHTML = ""
 
         flashcards.forEach(flashcard => {
           flashcardsContainer.innerHTML += `
-    <div data-idCard="${flashcard.idFlashCard}"  class='flashcards' >
+    <div data-idCard="${flashcard.idFlashCard}"  class='flashcards'>
       <div  id="containerFlashCards-frente">
           <div class="containerFlashcard-frente">
             <h2>${flashcard.titulo}</h2>
@@ -237,7 +238,7 @@
 
   })
 
- 
+
 
 
 
@@ -275,9 +276,11 @@
             console.log(response)
             throw new Error("Erro ao cadastrar flashcards")
           }
+          console.log('Resposta ao cadastrar um flashcard ', response)
           return response.json()
         })
         .then((cards) => {
+          console.log(cards.titulo)
           const flashcardsContainer = document.getElementById("containerFlashcards")
           carregarFlashcards(idDeck) // Renderiza os flashcards na tela
 
@@ -328,10 +331,10 @@
     }
   }
 
-  function avaliarFlashcard(idFlashcard, avaliacao){
+  function avaliarFlashcard(idFlashcard, avaliacao) {
     // let idFlashcard = element.getAttribute('data-idCard')
     // let idDeck = sessionStorage.selectedDeckId
-    
+
 
     fetch(`flashcard/avaliar/${idFlashcard}`, {
       method: 'POST',
@@ -342,7 +345,7 @@
         statusAvaliacao: avaliacao
       })
     }).then((response) => {
-      if(!response.ok) {
+      if (!response.ok) {
         throw new Error('Erro ao avaliar o flashcard')
       }
       return response.json()
@@ -350,18 +353,18 @@
       // item.idFlashCard = idFlashcard
       // item.statusAvaliacao = avaliacao 
 
-      console.log('statusAvaliacao: ',avaliacao)
+      console.log('statusAvaliacao: ', avaliacao)
 
-      if(avaliacao == '1'){
+      if (avaliacao == '1') {
         alert(`Parabéns continue assim.`)
-      }else{
+      } else {
         alert(`Não desista, voce está evoluindo.`)
       }
-       })
-    .catch((error) => {
+    })
+      .catch((error) => {
         console.error("Erro ao avaliar o flashcard: ", error)
       })
-}
+  }
 
 
 

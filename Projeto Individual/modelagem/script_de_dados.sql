@@ -36,9 +36,15 @@ CREATE TABLE estudo (
     qtdEstudo INT,
     dtEstudo TIMESTAMP,
     fkDeck INT,
-    CONSTRAINT FkDeck FOREIGN KEY (fkDeck) REFERENCES deck(idDeck),
+    CONSTRAINT FkDeck FOREIGN KEY (fkDeck) REFERENCES deck(idDeck) ON DELETE CASCADE,
     PRIMARY KEY(idEstudo, fkDeck)
 );
+
+ALTER TABLE estudo
+DROP CONSTRAINT FkDeck;
+
+ALTER TABLE estudo 
+ADD CONSTRAINT	FkDeck FOREIGN KEY (fkDeck) REFERENCES deck(idDeck) ON DELETE CASCADE;
 
 CREATE TABLE flashCard(
 	idFlashCard INT PRIMARY KEY AUTO_INCREMENT,
@@ -47,8 +53,19 @@ CREATE TABLE flashCard(
     resposta VARCHAR(200),
     dtCriacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     fKDeck INT,
-    CONSTRAINT chkDeck FOREIGN KEY (fkDeck) REFERENCES deck(idDeck)
+    CONSTRAINT chkFkDeck FOREIGN KEY (fkDeck) REFERENCES deck(idDeck) ON DELETE CASCADE
 );
+
+SELECT CONSTRAINT_NAME, CONSTRAINT_TYPE
+FROM information_schema.TABLE_CONSTRAINTS
+WHERE TABLE_SCHEMA = 'flashapp' -- Substitua pelo nome do banco
+  AND TABLE_NAME = 'flashCard'; -- Substitua pelo nome da tabela
+
+ALTER TABLE flashCard
+DROP CONSTRAINT chkFkDeck;
+
+ALTER TABLE flashCard
+ADD CONSTRAINT chkFkDeck FOREIGN KEY (fkDeck) REFERENCES deck(idDeck) ON DELETE CASCADE;
 
 CREATE TABLE avaliacao(
 	idAvaliacao INT PRIMARY KEY AUTO_INCREMENT,
@@ -58,14 +75,17 @@ CREATE TABLE avaliacao(
     CONSTRAINT chkAvaliacao CHECK (statusAvaliacao IN (0, 1))
 );
 
-CREATE TABLE deckConcluido(
-	idDeckConcluido INT AUTO_INCREMENT,
-    statusDeck INT,
-    fkDeck INT UNIQUE NOT NULL,
-    CONSTRAINT chkDeckConcluido FOREIGN KEY (fkDeck) REFERENCES deck(idDeck) ON DELETE CASCADE,
-    CONSTRAINT chkStatus CHECK (statusDeck IN (0, 1)),
-    PRIMARY KEY(idDeckConcluido ,fkDeck)
-);
+SELECT * FROM estudo;
+desc flashCard;
+
+SELECT CONSTRAINT_NAME, CONSTRAINT_TYPE
+FROM information_schema.TABLE_CONSTRAINTS
+WHERE TABLE_SCHEMA = 'flashapp' -- Substitua pelo nome do banco
+  AND TABLE_NAME = 'avaliacao'; -- Substitua pelo nome da tabela
+
+
+ALTER TABLE deckConcluido
+DROP CONSTRAINT chkStatus;
 
 ALTER TABLE deck 
 ADD COLUMN statusDeck INT DEFAULT 0;

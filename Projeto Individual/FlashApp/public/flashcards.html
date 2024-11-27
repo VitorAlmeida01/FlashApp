@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" href="./img/FlashAppLogo2.png" type="image/x-icon">
   <script src="./scripts/sessao.js"></script>
   <link rel="stylesheet" href="./styles/mainPage.css" />
   <link rel="stylesheet" href="./styles/flashcard.css">
@@ -159,7 +160,7 @@
               <i class="fa-solid fa-trash" data-idCard="${flashcard.idFlashCard}"></i>
             </div>
           </div>
-          <div>
+          <div class='divPergunta'>
             <p>Pergunta: <span id="perguntaContainer">${flashcard.pergunta}</span></p>
           </div>
           <div class="containerBtn-frente"><button class="btnResposta">Resposta</button></div>
@@ -176,7 +177,7 @@
               <i class="fa-solid fa-trash"></i>
             </div>
           </div>
-          <div>
+          <div class='divResposta'>
             <p>Resposta: <span id="respostaContainer">${flashcard.resposta}</span></p>
           </div>
           <div class="containerBtn-verso">
@@ -252,7 +253,10 @@
 
     if (titulo == '' || pergunta == '' || resposta == '') {
       alert('Preencha todos os campos')
-    } else {
+    } else if(titulo.length > 45 || pergunta.length > 200 || resposta.length > 200){
+      alert('Limite de caracteres excedido')
+      return
+    }else{
 
       if (!idDeck) {
         console.error("ID do deck não encontrado no sessionStorage")
@@ -296,7 +300,7 @@
               <i class="fa-solid fa-trash"></i>
             </div>
           </div>
-          <div>
+          <div class='divPergunta'>
             <p>Pergunta: <span id="perguntaContainer">${item.pergunta}</span></p>
           </div>
           <div class="containerBtn-frente"><button class="btnResposta">Resposta</button></div>
@@ -313,7 +317,7 @@
               <i class="fa-solid fa-trash"></i>
             </div>
           </div>
-          <div>
+          <div class='divResposta'>
             <p>Resposta: <span id="respostaContainer">${item.resposta}</span></p>
           </div>
           <div class="containerBtn-verso">

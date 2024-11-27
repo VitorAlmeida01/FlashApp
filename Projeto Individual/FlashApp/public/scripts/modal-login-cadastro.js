@@ -2,6 +2,7 @@ const btnOpen = document.querySelectorAll('.loginBtn')
 const btnClose = document.getElementById('btnClose')
 
 let cadastroClicked
+let loginClicked
 
 const btnOpen2 = document.querySelectorAll('.cadastroBtn')
 const btnClose2 = document.getElementById('btnClose2')
@@ -11,12 +12,14 @@ btnOpen.forEach(button => {
     button.addEventListener('click', () => {
     const modalId = button.getAttribute('data-login')
     const modal  = document.getElementById(modalId)
+    loginClicked = modal
 
     if(cadastroClicked){
         cadastroClicked.close()
     }
     
     modal.showModal()
+    return loginClicked
     })
 })
 
@@ -34,6 +37,11 @@ btnOpen2.forEach(button => {
         const modalId = button.getAttribute('data-cadastro')
         const modal  = document.getElementById(modalId)
         cadastroClicked = modal
+
+        if(loginClicked){
+            loginClicked.close()
+        }
+
         modal.showModal()
         return cadastroClicked
         })
@@ -46,20 +54,20 @@ btnClose2.addEventListener('click', () => {
     modal.close()
 })
 
-function cadastroTransform(){
-    let btnCadastro = document.getElementById('btnModal')
+// function cadastroTransform(){
+//     let btnCadastro = document.getElementById('btnModal')
     
-        btnCadastro.setAttribute('data-login', 'modal-login')
+//         btnCadastro.setAttribute('data-login', 'modal-login')
 
-        const modalId = btnCadastro.getAttribute('data-login')
-        const modal  = document.getElementById(modalId)
+//         const modalId = btnCadastro.getAttribute('data-login')
+//         const modal  = document.getElementById(modalId)
 
-        if(cadastroClicked){
-            cadastroClicked.close()
-        }
+//         if(cadastroClicked){
+//             cadastroClicked.close()
+//         }
 
-        modal.showModal()
-}
+//         modal.showModal()
+// }
 
 // function cadastroTransform() {
 //     let btnCadastro = document.getElementsByClassName('btnModal');

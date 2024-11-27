@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" href="./img/FlashAppLogo2.png" type="image/x-icon">
   <script src="./scripts/sessao.js"></script>
   <link rel="stylesheet" href="./styles/mainPage.css" />
 
@@ -298,12 +299,14 @@
           document.querySelectorAll(".fa-check").forEach((button) => {
             button.addEventListener("click", function () {
               const deckContainer = this.closest(".containerDeck")
-              let statusDeck = parseInt(
+              let statusDeck = Number(
                 deckContainer.getAttribute("data-status")
               )
               statusDeck = statusDeck === 1 ? 0 : 1
               concluirDeck(button.getAttribute("data-id"), statusDeck)
               deckContainer.setAttribute("data-status", statusDeck)
+
+              console.log('Status do deck - estou na funcao do fa-check ',statusDeck)
 
               if (statusDeck === 1) {
                 alert("Deck concluído")

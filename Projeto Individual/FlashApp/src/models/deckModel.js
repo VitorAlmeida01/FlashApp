@@ -47,7 +47,7 @@ function contarDecks(idUsuario) {
 
 function contarFlashcards(idUsuario) {
   var instrucao = `
-    SELECT COUNT(*) AS totalFlashcards FROM flashCard f JOIN deck d ON f.fkDeck = d.idDeck JOIN usuario u ON d.fkUsuario = u.idUsuario WHERE u.idUsuario = ${idUsuario};
+    SELECT COUNT(*) AS totalFlashcards FROM flashcard f JOIN deck d ON f.fkDeck = d.idDeck JOIN usuario u ON d.fkUsuario = u.idUsuario WHERE u.idUsuario = ${idUsuario};
     `;
   return database.executar(instrucao);
 }

@@ -418,7 +418,10 @@
 
     if (titulo == "") {
       alert("Insira um título")
-    } else {
+    } else if(titulo.length > 20){
+      alert('Limite de caracteres excedido')
+
+    }else{
       if (!idUsuario) {
         console.error("ID do usuário não encontrado no sessionStorage")
         return

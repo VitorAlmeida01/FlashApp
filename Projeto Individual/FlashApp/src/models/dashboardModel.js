@@ -6,7 +6,7 @@ function buscarFlashcardsUltimos5Dias(idUsuario) {
       DATE(f.dtCriacao) as dataCriacao,
       COUNT(*) as quantidade
     FROM 
-      flashCard f
+      flashcard f
     JOIN 
       deck d ON f.fkDeck = d.idDeck
     JOIN 
@@ -16,7 +16,7 @@ function buscarFlashcardsUltimos5Dias(idUsuario) {
     GROUP BY 
       DATE(f.dtCriacao)
     ORDER BY 
-      DATE(f.dtCriacao);
+      DATE(f.dtCriacao) DESC;
   `;
 
   console.log("Executando a instrução SQL: \n" + instrucaoSql);

@@ -54,20 +54,20 @@ btnClose2.addEventListener('click', () => {
     modal.close()
 })
 
-// function cadastroTransform(){
-//     let btnCadastro = document.getElementById('btnModal')
+function cadastroTransform(){
+    let btnCadastro = document.getElementById('btnModal')
     
-//         btnCadastro.setAttribute('data-login', 'modal-login')
+        btnCadastro.setAttribute('data-login', 'modal-login')
 
-//         const modalId = btnCadastro.getAttribute('data-login')
-//         const modal  = document.getElementById(modalId)
+        const modalId = btnCadastro.getAttribute('data-login')
+        const modal  = document.getElementById(modalId)
 
-//         if(cadastroClicked){
-//             cadastroClicked.close()
-//         }
+        if(cadastroClicked){
+            cadastroClicked.close()
+        }
 
-//         modal.showModal()
-// }
+        modal.showModal()
+}
 
 // function cadastroTransform() {
 //     let btnCadastro = document.getElementsByClassName('btnModal');

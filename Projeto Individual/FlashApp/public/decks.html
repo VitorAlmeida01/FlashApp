@@ -390,6 +390,7 @@
             let statusDeck = parseInt(
               deckContainer.getAttribute("data-status")
             )
+            console.log('DeckContainer', deckContainer)
             statusDeck = statusDeck === 1 ? 0 : 1
             concluirDeck(button.getAttribute("data-id"), statusDeck)
             deckContainer.setAttribute("data-status", statusDeck)
@@ -537,7 +538,6 @@
   }
 
   function concluirDeck(idDeck, statusDeck) {
-    // var idDeck = element.getAttribute("data-id")
 
     fetch(`/decks/concluirDeck/${idDeck}`, {
       method: "PUT",

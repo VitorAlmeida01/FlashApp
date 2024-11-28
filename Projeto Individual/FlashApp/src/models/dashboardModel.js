@@ -16,7 +16,7 @@ function buscarFlashcardsUltimos5Dias(idUsuario) {
     GROUP BY 
       DATE(f.dtCriacao)
     ORDER BY 
-      DATE(f.dtCriacao) DESC;
+      DATE(f.dtCriacao);
   `;
 
   console.log("Executando a instrução SQL: \n" + instrucaoSql);

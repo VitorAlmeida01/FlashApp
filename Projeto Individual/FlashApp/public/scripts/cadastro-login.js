@@ -25,6 +25,7 @@
     }
 
     let cardErro = document.getElementById('cardErro')
+    let caracteresEspeciais = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')']
 
     // Verificando se há algum campo em branco
     if (
@@ -34,13 +35,24 @@
       confirmacaoSenhaVar == ""
     ) {
       cardErro.style.display = "block"
-      cardErro.style.color = 'rgba(255, 0, 0, 0.726)'
+      mensagem_erro.style.color = 'rgba(255, 0, 0, 0.726)'
       mensagem_erro.innerHTML =
         "Preencha todos os campos"
 
       // finalizarAguardar()
       return false
-    } else {
+    } else if(!(emailVar.includes('@'))){
+      cardErro.style.display = "block"
+      cardErro.style.color = 'rgba(255, 0, 0, 0.726)'
+      mensagem_erro.style.color = 'rgba(255, 0, 0, 0.726)'
+      mensagem_erro.innerHTML = 'Email inválido'
+      return false
+    }else if((senhaVar.length < 8 || confirmacaoSenhaVar.length < 8)){
+            mensagem_erro.style.color = 'rgba(255, 0, 0, 0.726)'
+            cardErro.style.display = 'block'
+            mensagem_erro.innerHTML = 'Senha deve conter no minimo 8 caracteres'
+      return false
+    }else{
       setInterval(sumirMensagem, 3000);
     }
 
@@ -128,7 +140,6 @@
         mensagem_erro_login.innerHTML = "Preencha todos os campos";
         
 
-        // finalizarAguardar();
         return false;
     }
     else {

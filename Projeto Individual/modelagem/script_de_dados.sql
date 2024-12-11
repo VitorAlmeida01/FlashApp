@@ -154,7 +154,7 @@ select * from estudo;
     JOIN 
       usuario u ON d.fkUsuario = u.idUsuario
     WHERE 
-      u.idUsuario = 50 AND DATE(f.dtCriacao) >= CURDATE() - INTERVAL 6 DAY AND DATE(f.dtCriacao) < CURDATE() + INTERVAL 1 DAY
+      u.idUsuario = 1 AND DATE(f.dtCriacao) >= CURDATE() - INTERVAL 6 DAY AND DATE(f.dtCriacao) < CURDATE() + INTERVAL 1 DAY
     GROUP BY 
       DATE(f.dtCriacao)
     ORDER BY 
